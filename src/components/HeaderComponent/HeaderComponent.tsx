@@ -1,12 +1,15 @@
 import React from "react";
 import './HeaderStyle.css';
 import { firebase } from "../../plugins/firebase";
-import{ useDispatch } from "react-redux";
-import { actions } from "../../store/store";
+import {useDispatch, useSelector} from "react-redux";
+import {actions} from "../../store/store";
+import DrawerComponent from "../DrawerComponent/DrawerComponent";
+
 
 export default function HeaderComponent () {
 
     const dispatch = useDispatch();
+    const enter: boolean = useSelector(state => (state as any).boolshit.logged)
 
     async function logoutUser() {
         await firebase.auth().signOut()
@@ -19,12 +22,19 @@ export default function HeaderComponent () {
         dispatch(actions.changeDrawer(drawer));
     }
 
-    return <header className={"header"}>
-        <div onClick={() => openDrawer(true)} className={"header-menu-icon"}>
+    return <div>
+        <header className={"header"}>
+            <div onClick={() => openDrawer(true)} className={"header-menu-icon"}>
 
-        </div>
-        <button className={"header-logout-button"} onClick={logoutUser}>
-            X
-        </button>
-    </header>
+            </div>
+            {enter &&
+            <div className={"header-logout-button"} onClick={logoutUser}>
+
+            </div>
+            }
+        </header>
+        <DrawerComponent/>
+    </div>
+
+
 }

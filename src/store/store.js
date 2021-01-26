@@ -1,11 +1,12 @@
-import { createSlice, configureStore} from '@reduxjs/toolkit'
+import { createSlice} from '@reduxjs/toolkit';
+import {createStore, combineReducers} from 'redux';
 
 export const BoolShit = createSlice({
     name: 'boolshit',
     initialState: {
         dark: false,
         drawer: false,
-        enterSuccess: false,
+        logged: true,
         isMobile: false,
         inDialog: false,
         upDialog: false
@@ -18,7 +19,7 @@ export const BoolShit = createSlice({
             state.drawer = !state.drawer;
         },
         enterChanges: (state, action) => {
-            state.enterSuccess = action.payload;
+            state.logged = action.payload;
         },
         setMobile: (state, action) => {
             state.isMobile = [...state.isMobile, action.payload];
@@ -32,11 +33,24 @@ export const BoolShit = createSlice({
     }
 })
 
-const store =configureStore({
-    reducer: {
-        boolshit: BoolShit.reducer
+export const User = createSlice({
+    name: 'user',
+    initialState: {
+        email: '',
+        photoURL: '',
+        uid: ''
+    },
+    reducers: {
+
     }
 })
+
+const reducer = combineReducers({
+    boolshit: BoolShit.reducer,
+    user: User.reducer
+})
+
+const store = createStore(reducer)
 
 export default store;
 export const actions = BoolShit.actions;

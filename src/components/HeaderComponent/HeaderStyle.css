@@ -11,12 +11,17 @@
 .header-menu-icon {
     height: 24px;
     width: 24px;
-    background-image: url("../../assets/menu.svg");
+    background-image: url("../../assets/icons/menu.svg");
+    margin: 20px;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 .header-logout-button {
     height: 24px;
     width: 24px;
+    margin: 20px;
     cursor: pointer;
     justify-self: flex-end;
+    background-image: url("../../assets/icons/logout.svg");
 }
