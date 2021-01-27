@@ -9,7 +9,8 @@ export const BoolShit = createSlice({
         logged: true,
         isMobile: false,
         inDialog: false,
-        upDialog: false
+        upDialog: false,
+        bottomMenu: false
     },
     reducers: {
         changeTheme: (state, action) => {
@@ -22,13 +23,16 @@ export const BoolShit = createSlice({
             state.logged = action.payload;
         },
         setMobile: (state, action) => {
-            state.isMobile = [...state.isMobile, action.payload];
+            state.isMobile = action.payload;
         },
         changeInDialog: (state, action) => {
-            state.inDialog = [...state.inDialog, action.payload];
+            state.inDialog = action.payload;
         },
         changeUpDialog: (state, action) => {
-            state.upDialog = [...state.upDialog, action.payload];
+            state.upDialog = action.payload;
+        },
+        changeBottomMenu: (state, action) => {
+            state.bottomMenu = action.payload;
         }
     }
 })

@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {actions} from "../../store/store";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 
-
 export default function HeaderComponent () {
 
     const dispatch = useDispatch();
@@ -21,12 +20,18 @@ export default function HeaderComponent () {
     function openDrawer(drawer: boolean) {
         dispatch(actions.changeDrawer(drawer));
     }
+    function oop(s: boolean) {
+        dispatch(actions.changeBottomMenu(s));
+    }
 
     return <div>
         <header className={"header"}>
             <div onClick={() => openDrawer(true)} className={"header-menu-icon"}>
 
             </div>
+            <button onClick={()=> oop(true)}>
+
+            </button>
             {enter &&
             <div className={"header-logout-button"} onClick={logoutUser}>
 
