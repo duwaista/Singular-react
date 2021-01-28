@@ -31,16 +31,5 @@
     border-radius: 12px;
     background-color: #9c9c9c;
 }
-.basic-element-bottom-container{
-    display: flex;
-    width: 100%;
-    align-content: center;
-    justify-self: center;
-    cursor: pointer;
-}
-span {
-    padding-left: 14px;
-    padding-bottom: 14px;
-    padding-top: 14px;
-    font-size: 14px;
-}
+
+

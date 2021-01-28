@@ -17,6 +17,10 @@
     position: relative;
     z-index: 1;
 }
+.header-menu-icon:hover {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.2);
+}
 .header-logout-button {
     height: 24px;
     width: 24px;
@@ -24,4 +28,8 @@
     cursor: pointer;
     justify-self: flex-end;
     background-image: url("../../assets/icons/logout.svg");
+}
+.header-logout-button:hover {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.2);
 }
