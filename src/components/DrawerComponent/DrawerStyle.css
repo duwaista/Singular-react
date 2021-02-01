@@ -4,7 +4,9 @@
     background-color: #F7F7F7;
     transition: all 0.2s ease-in-out;
     transform: translate(-250px);
-    position: relative;
+    position: fixed;
+    z-index: 3;
+    top: 0;
 }
 .drawer-open {
     transform: translate(0);

@@ -13,15 +13,15 @@ export default function HeaderComponent () {
     async function logoutUser() {
         await firebase.auth().signOut()
             .then(() => {
-                dispatch(actions.enterChanges(false));
+                dispatch(actions.BoolShit.enterChanges(false));
             })
     }
 
     function openDrawer(drawer: boolean) {
-        dispatch(actions.changeDrawer(drawer));
+        dispatch(actions.BoolShit.changeDrawer(drawer));
     }
     function oop(s: boolean) {
-        dispatch(actions.changeBottomMenu(s));
+        dispatch(actions.BoolShit.changeBottomMenu(s));
     }
 
     return <div>

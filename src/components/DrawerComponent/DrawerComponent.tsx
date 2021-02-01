@@ -9,7 +9,7 @@ export default function DrawerComponent() {
     const dispatch = useDispatch()
 
     function closeDrawer() {
-        dispatch(actions.changeDrawer(false));
+        dispatch(actions.BoolShit.changeDrawer(false));
     }
 
     function DrawerContent() {

@@ -12,7 +12,7 @@ export default function BottomMenuComponent() {
     const bottom: boolean = useSelector(state => (state as any).boolshit.bottomMenu);
 
     function closeBottomMenu() {
-        dispatch(actions.changeBottomMenu(false));
+        dispatch(actions.BoolShit.changeBottomMenu(false));
     }
 
     function BottomMenuContent() {
