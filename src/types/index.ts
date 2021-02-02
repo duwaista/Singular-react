@@ -11,3 +11,7 @@ export type FeedProps = {
     index: number;
     feed: FeedTypes;
 }
+export type BasicElementProps = {
+    text: string;
+    icon: string;
+}

@@ -67,13 +67,13 @@ export const Feed = createSlice({
     },
     reducers: {
          getData: (state, action) => {
-             state.all = action.payload
-             console.log(action.payload)
+             state.all = action.payload;
         }
     },
     extraReducers: {
         [fetchFeed.fulfilled]: (state, actions) => {
             state.all= [...actions.payload];
+            state.all.reverse();
         }
     },
 })

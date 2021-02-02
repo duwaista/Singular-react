@@ -20,18 +20,12 @@ export default function HeaderComponent () {
     function openDrawer(drawer: boolean) {
         dispatch(actions.BoolShit.changeDrawer(drawer));
     }
-    function oop(s: boolean) {
-        dispatch(actions.BoolShit.changeBottomMenu(s));
-    }
-
+    
     return <div>
         <header className={"header"}>
             <div onClick={() => openDrawer(true)} className={"header-menu-icon"}>
 
             </div>
-            <button onClick={()=> oop(true)}>
-
-            </button>
             {enter &&
             <div className={"header-logout-button"} onClick={logoutUser}>
 
