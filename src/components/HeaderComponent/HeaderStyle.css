@@ -35,3 +35,9 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.2);
 }
+.header-scroll-top-button {
+    height: 99%;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}

@@ -20,10 +20,21 @@ export default function HeaderComponent () {
     function openDrawer(drawer: boolean) {
         dispatch(actions.BoolShit.changeDrawer(drawer));
     }
+
+    function scrollOnTop() {
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        })
+    }
     
     return <div>
-        <header className={"header"}>
+        <header className={"header"} >
             <div onClick={() => openDrawer(true)} className={"header-menu-icon"}>
+
+            </div>
+            <div className={"header-scroll-top-button"} onClick={()=> scrollOnTop()}>
 
             </div>
             {enter &&

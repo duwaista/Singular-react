@@ -4,6 +4,9 @@ import './FeedComponentSyle.css';
 import {useDispatch} from "react-redux";
 import {FeedProps} from '../../types'
 import dots from '../../assets/icons/dots-vertical.svg'
+import BottomMenuContent from "../BottomMenuComponent/BottomMenuContent";
+import BasicElementBottom from "../BasicComponents/BasicElementBottom/BasicElementBottom";
+import BottomMenuComponent from "../BottomMenuComponent/BottomMenuComponent";
 
 export default function FeedComponent( {index, feed}: FeedProps) {
 
@@ -12,6 +15,10 @@ export default function FeedComponent( {index, feed}: FeedProps) {
 
     function openBottom(s: boolean) {
         dispatch(actions.BoolShit.changeBottomMenu(s));
+
+        return <BottomMenuComponent>
+            <BasicElementBottom text={"test"} icon={dots}/>
+        </BottomMenuComponent>
     }
 
     return <div className={"feed-container"}>

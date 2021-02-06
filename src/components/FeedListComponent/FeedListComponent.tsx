@@ -13,6 +13,7 @@ export const FeedListComponent = () => {
     useEffect(()=>{
         dispatch(fetchFeed())
     }, [dispatch])
+
     const all: FeedTypes[] = useSelector(state => (state as any).feed.all);
 
     return <div className={"feed-list-container"}>

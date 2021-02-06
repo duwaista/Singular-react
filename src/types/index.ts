@@ -15,3 +15,6 @@ export type BasicElementProps = {
     text: string;
     icon: string;
 }
+export type BottomChildProps = {
+    children?: JSX.Element | JSX.Element[] | undefined | string | null;
+}
