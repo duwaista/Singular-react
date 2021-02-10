@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchFeed} from '../../store/store'
 
 
-export const FeedListComponent = () => {
+export function FeedListComponent() {
 
     const dispatch = useDispatch();
 
@@ -18,8 +18,5 @@ export const FeedListComponent = () => {
 
     return <div className={"feed-list-container"}>
         {all.map((feed:FeedTypes, index:number )=> <FeedComponent key={feed._id} index={index} feed={feed}/>)}
-        <div>
-
-        </div>
     </div>
 }

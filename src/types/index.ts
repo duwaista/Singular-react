@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface FeedTypes {
     _id: string,
     id: string,
@@ -14,7 +16,7 @@ export type FeedProps = {
 export type BasicElementProps = {
     text: string;
     icon: string;
+    onClick: React.MouseEventHandler<HTMLDivElement>;
 }
-export type BottomChildProps = {
-    children?: JSX.Element | JSX.Element[] | undefined | string | null;
-}
+
+

@@ -63,11 +63,16 @@ export const User = createSlice({
 export const Feed = createSlice({
     name: 'feed',
     initialState: {
-        all: []
+        all: [],
+        bottom: {}
     },
     reducers: {
-         getData: (state, action) => {
+        getData: (state, action) => {
              state.all = action.payload;
+        },
+        setBottom: (state, action) => {
+            state.bottom = action.payload;
+            console.log(state.bottom);
         }
     },
     extraReducers: {
