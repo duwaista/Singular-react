@@ -25,23 +25,23 @@ export default function HeaderComponent () {
         window.scroll({
             top: 0,
             left: 0,
-            behavior: "smooth"
         })
     }
     
     return <div>
         <header className={"header"} >
-            <div onClick={() => openDrawer(true)} className={"header-menu-icon"}>
-
+            <div className='header-title-text'>
+                <b>Главная</b>
             </div>
             <div className={"header-scroll-top-button"} onClick={()=> scrollOnTop()}>
-
             </div>
-            {enter &&
-            <div className={"header-logout-button"} onClick={logoutUser}>
+            {/*{enter &&*/}
+            {/*<div className={"header-logout-button"} onClick={logoutUser}>*/}
 
+            {/*</div>*/}
+            {/*}*/}
+            <div onClick={() => openDrawer(true)} className={"header-menu-icon"}>
             </div>
-            }
         </header>
         <DrawerComponent/>
     </div>

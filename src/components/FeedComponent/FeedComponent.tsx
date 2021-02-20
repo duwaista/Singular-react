@@ -17,16 +17,14 @@ export default function FeedComponent({index, feed}: FeedProps) {
 
     return <div className="feed-container">
         <div className="feed-info-container">
-            <img className="feed-avatar" src={feed.avatarUrl}/>
-            <h3 className="feed-email">
-                {feed.email}
-            </h3>
-            <div className="dots-menu-icon" onClick={() => {
-                openBottom(true)
-            }}>
-                <img src={dots}/>
+            <img alt={feed.avatarUrl} className="feed-avatar" src={feed.avatarUrl}/>
+            <div className="feed-email">
+                <b>{feed.email}</b>
+            </div>
+            <div className="dots-menu-icon" onClick={() => { openBottom(true) }}>
+                <img alt='icon' src={dots}/>
             </div>
         </div>
-        <img loading={"lazy"} className="feed-picture" src={feed.posts}/>
+        <img alt={feed.posts} loading="lazy" className="feed-picture" src={feed.posts}/>
     </div>
 }

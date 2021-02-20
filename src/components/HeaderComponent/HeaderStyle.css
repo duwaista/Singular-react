@@ -6,15 +6,22 @@
     height: 48px;
     position: fixed;
     z-index: 2;
-    top: 0;
-    background-color: #F7F7F7;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    top: -1px;
+    background-color: #ffff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+.header-title-text {
+    align-self: center;
+    margin-left: 24px;
+    font-size: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 .header-menu-icon {
     height: 24px;
-    width: 24px;
+    width: 22px;
     background-image: url("../../assets/icons/menu.svg");
-    margin: 20px;
+    align-self: center;
+    margin-right: 20px;
     cursor: pointer;
     position: relative;
     z-index: 1;

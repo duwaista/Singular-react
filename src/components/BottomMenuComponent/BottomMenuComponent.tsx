@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './BottomMenuStyle.css';
 import {useDispatch, useSelector} from "react-redux";
 import {actions} from "../../store/store";
@@ -17,10 +17,16 @@ export default function BottomMenuComponent() {
         dispatch(actions.BoolShit.changeBottomMenu(false));
     }
 
+    useEffect(()=>{
+        if (bottom) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [bottom]);
+
     async function sharePic() {
         const shareData = {
-            title: "MDN",
-            text: 'Share',
             url: feed.posts
         }
         try {
@@ -31,7 +37,7 @@ export default function BottomMenuComponent() {
         }
     }
 
-    return <div onClick={closeBottomMenu} className={`bottom-menu ${bottom && 'bottom-menu-open'}`}>
+    return <div onClick={closeBottomMenu} className={`bottom-menu${bottom && '-open'}`}>
         {bottom && <div className={"bottom-menu-content"}>
             <div className={"bottom-line-container"}>
                 <div className={"small-button-line"}>

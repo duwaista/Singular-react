@@ -11,7 +11,6 @@ export const fetchFeed = createAsyncThunk(
         const response = await axios.get(url);
         return response.data;
     }
-
 )
 
 export const BoolShit = createSlice({
@@ -30,7 +29,7 @@ export const BoolShit = createSlice({
             state.dark = action.payload;
         },
         changeDrawer: (state, action) => {
-            state.drawer = !state.drawer;
+            state.drawer = action.payload;
         },
         enterChanges: (state, action) => {
             state.logged = action.payload;
@@ -72,7 +71,6 @@ export const Feed = createSlice({
         },
         setBottom: (state, action) => {
             state.bottom = action.payload;
-            console.log(state.bottom);
         }
     },
     extraReducers: {
