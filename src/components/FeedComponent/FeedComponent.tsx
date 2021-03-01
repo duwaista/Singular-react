@@ -3,7 +3,7 @@ import {actions} from "../../store/store";
 import './FeedComponentSyle.css';
 import {useDispatch} from "react-redux";
 import {FeedProps} from '../../types';
-import dots from '../../assets/icons/dots-vertical.svg'
+import dots from '../../assets/icons/dots-vertical.svg';
 
 export default function FeedComponent({index, feed}: FeedProps) {
 
@@ -21,7 +21,7 @@ export default function FeedComponent({index, feed}: FeedProps) {
             <div className="feed-email">
                 <b>{feed.email}</b>
             </div>
-            <div className="dots-menu-icon" onClick={() => { openBottom(true) }}>
+            <div className="icon dots-menu" onClick={() => { openBottom(true) }}>
                 <img alt='icon' src={dots}/>
             </div>
         </div>

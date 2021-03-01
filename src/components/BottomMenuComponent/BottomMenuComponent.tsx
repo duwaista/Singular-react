@@ -37,7 +37,7 @@ export default function BottomMenuComponent() {
         }
     }
 
-    return <div onClick={closeBottomMenu} className={`bottom-menu${bottom && '-open'}`}>
+    return <div onClick={closeBottomMenu} className={`bottom-menu ${bottom && 'bottom-menu-open'}`}>
         {bottom && <div className={"bottom-menu-content"}>
             <div className={"bottom-line-container"}>
                 <div className={"small-button-line"}>

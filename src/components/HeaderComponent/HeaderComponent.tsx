@@ -30,7 +30,7 @@ export default function HeaderComponent () {
     
     return <div>
         <header className={"header"} >
-            <div className='header-title-text'>
+            <div onClick={()=> scrollOnTop()} className='header-title-text'>
                 <b>Главная</b>
             </div>
             <div className={"header-scroll-top-button"} onClick={()=> scrollOnTop()}>
@@ -40,7 +40,7 @@ export default function HeaderComponent () {
 
             {/*</div>*/}
             {/*}*/}
-            <div onClick={() => openDrawer(true)} className={"header-menu-icon"}>
+            <div onClick={() => openDrawer(true)} className={"icon header-menu"}>
             </div>
         </header>
         <DrawerComponent/>
