@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 import axios from "axios";
 const url = 'https://quiet-ridge-83792.herokuapp.com/api/feed/';
 
-
 export const fetchFeed = createAsyncThunk(
     'fetchFeed',
     async () => {

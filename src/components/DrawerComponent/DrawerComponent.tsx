@@ -13,7 +13,16 @@ export default function DrawerComponent() {
     }
 
     function DrawerContent() {
-        return <div className={'drawer-content'}>
+        return <div className='drawer-content'>
+            <div className='buttons-container'>
+                <div className='buttons'>
+                    <span className='drawer-auth-text'>Sign-in</span>
+                </div>
+                <div className='buttons'>
+                    <span className='drawer-auth-text'>Sign-up</span>
+                </div>
+            </div>
+
         </div>
     }
     return <div onClick={closeDrawer} className={`drawer ${drawer && "drawer-open"}`}>
