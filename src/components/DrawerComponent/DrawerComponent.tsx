@@ -2,6 +2,7 @@ import React from "react";
 import './DrawerStyle.css'
 import {useDispatch, useSelector} from "react-redux";
 import {actions} from "../../store/store";
+import {Link} from "react-router-dom";
 
 export default function DrawerComponent() {
 
@@ -13,18 +14,33 @@ export default function DrawerComponent() {
     }
 
     function DrawerContent() {
+
+        if (drawer) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
         return <div className='drawer-content'>
             <div className='buttons-container'>
-                <div className='buttons'>
-                    <span className='drawer-auth-text'>Sign-in</span>
-                </div>
-                <div className='buttons'>
-                    <span className='drawer-auth-text'>Sign-up</span>
-                </div>
+                <Link to='/sign-in'>
+                    <div className='buttons'>
+                        <span className='drawer-auth-text'>
+                            Sign-in
+                        </span>
+                    </div>
+                </Link>
+                <Link to='/'>
+                    <div className='buttons'>
+                        <span className='drawer-auth-text'>Sign-up</span>
+                    </div>
+                </Link>
+
             </div>
 
         </div>
     }
+
     return <div onClick={closeDrawer} className={`drawer ${drawer && "drawer-open"}`}>
         <DrawerContent/>
     </div>

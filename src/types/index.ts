@@ -18,5 +18,7 @@ export type BasicElementProps = {
     icon: string;
     onClick: React.MouseEventHandler<HTMLDivElement>;
 }
-
+export type HeaderTitle = {
+    title: string;
+}
 

@@ -12,7 +12,7 @@ export function FeedListComponent() {
 
     useEffect(() => {
         dispatch(fetchFeed());
-    }, []);
+    }, [dispatch]);
 
     return <div className={"feed-list-container"}>
         {
