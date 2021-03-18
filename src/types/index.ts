@@ -21,4 +21,12 @@ export type BasicElementProps = {
 export type HeaderTitle = {
     title: string;
 }
+export type CustomButtonTypes = {
+    children: React.ReactNode;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    height?: string | '' | undefined;
+    width?: string | '' | undefined;
+    text?: boolean | undefined;
+    icon?: boolean | undefined;
+}
 

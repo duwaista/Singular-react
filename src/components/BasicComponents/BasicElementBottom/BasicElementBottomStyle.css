@@ -9,7 +9,7 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.2);
 }
-.basic-element-bottom-container span {
+.basic-element-bottom-container > span {
     padding-left: 14px;
     padding-bottom: 14px;
     padding-top: 14px;

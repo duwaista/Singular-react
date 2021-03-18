@@ -5,9 +5,9 @@
     cursor: pointer;
 }
 span {
-    font-weight: 400;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+
 a {
     text-decoration: none;
     color: black;
