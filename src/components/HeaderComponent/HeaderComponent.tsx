@@ -4,19 +4,19 @@ import { firebase } from "../../plugins/firebase";
 import {useDispatch, useSelector} from "react-redux";
 import {actions} from "../../store/store";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
-import {HeaderTitle} from "../../types";
+import {HeaderProps} from "../../types";
 
-export default function HeaderComponent ({title}: HeaderTitle) {
+export default function HeaderComponent ({title, icon}: HeaderProps) {
 
     const dispatch = useDispatch();
-    const enter: boolean = useSelector(state => (state as any).boolshit.logged)
-
-    async function logoutUser() {
-        await firebase.auth().signOut()
-            .then(() => {
-                dispatch(actions.BoolShit.enterChanges(false));
-            })
-    }
+    // const enter: boolean = useSelector(state => (state as any).boolshit.logged)
+    //
+    // async function logoutUser() {
+    //     await firebase.auth().signOut()
+    //         .then(() => {
+    //             dispatch(actions.BoolShit.enterChanges(false));
+    //         })
+    // }
 
     function openDrawer(drawer: boolean) {
         dispatch(actions.BoolShit.changeDrawer(drawer));
@@ -41,8 +41,10 @@ export default function HeaderComponent ({title}: HeaderTitle) {
 
             {/*</div>*/}
             {/*}*/}
-            <div onClick={() => openDrawer(true)} className={"icon header-menu"}>
+            {icon && <div onClick={() => openDrawer(true)} className={"icon header-menu"}>
+                <img alt='icon' src={icon}/>
             </div>
+            }
         </header>
         <DrawerComponent/>
     </div>

@@ -1,16 +1,22 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {firebase} from '../plugins/firebase';
 import thunk from 'redux-thunk';
 import axios from "axios";
+
 const url = 'https://quiet-ridge-83792.herokuapp.com/api/feed/';
 
-export const fetchFeed = createAsyncThunk(
-    'fetchFeed',
-    async () => {
+
+export const fetchFeed = createAsyncThunk('fetchFeed', async () => {
         const response = await axios.get(url);
         return response.data;
     }
 )
+
+export const fetchLogin = createAsyncThunk('fetchLogin', async ({email, password}) => {
+    const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+    return response.user;
+});
 
 export const BoolShit = createSlice({
     name: 'boolshit',
@@ -52,10 +58,17 @@ export const User = createSlice({
     name: 'user',
     initialState: {
         email: '',
+        password: '',
         photoURL: '',
         uid: '',
     },
-    reducers: {}
+    reducers: {},
+    extraReducers: {
+        [fetchLogin.fulfilled]: (state, actions) => {
+            state.email = [...actions.payload.email];
+            console.log("thunk", actions.payload);
+        }
+    }
 })
 
 export const Feed = createSlice({
@@ -66,7 +79,7 @@ export const Feed = createSlice({
     },
     reducers: {
         getData: (state, action) => {
-             state.all = action.payload;
+            state.all = action.payload;
         },
         setBottom: (state, action) => {
             state.bottom = action.payload;
@@ -74,7 +87,7 @@ export const Feed = createSlice({
     },
     extraReducers: {
         [fetchFeed.fulfilled]: (state, actions) => {
-            state.all= [...actions.payload];
+            state.all = [...actions.payload];
             state.all.reverse();
         }
     },

@@ -18,8 +18,9 @@ export type BasicElementProps = {
     icon: string;
     onClick: React.MouseEventHandler<HTMLDivElement>;
 }
-export type HeaderTitle = {
+export type HeaderProps = {
     title: string;
+    icon?: string;
 }
 export type CustomButtonTypes = {
     children: React.ReactNode;

@@ -1,8 +1,8 @@
 .feed-container {
-    position: relative;
     width: 98%;
     height: 20%;
     min-height: 200px;
+    position: relative;
     background-color: #ffff;
     justify-self: center;
     margin-right: auto;
@@ -10,6 +10,13 @@
     margin-bottom: 8px;
     border-radius: 6px;
     box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+@media screen and (min-width: 700px){
+    .feed-container {
+        width: 50%;
+        height: 20%;
+        min-height: 200px;
+    }
 }
 .feed-picture {
     object-fit: cover;

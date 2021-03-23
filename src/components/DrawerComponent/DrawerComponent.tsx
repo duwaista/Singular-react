@@ -30,7 +30,7 @@ export default function DrawerComponent() {
                         </span>
                     </div>
                 </Link>
-                <Link to='/'>
+                <Link to='/sign-up'>
                     <div className='buttons'>
                         <span className='drawer-auth-text'>Sign-up</span>
                     </div>
