@@ -2,19 +2,20 @@ import React, {useState} from "react";
 import './Auth.css';
 import HeaderComponent from "../HeaderComponent/HeaderComponent";
 import CustomButton from "../BasicComponents/CustomButton/CustomButton";
-import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {actions, fetchLogin} from "../../store/store";
+import {Link, Redirect} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import { fetchLogin} from "../../store/store";
 
 export default function SignIn() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const logged: boolean = useSelector(state => (state as any).user.logged);
     const dispatch = useDispatch();
 
      async function login() {
         if(email !== '' && password.length >= 6) {
-            dispatch(fetchLogin({email, password}));
+            await dispatch(fetchLogin({email, password}))
         }
     }
 
@@ -35,6 +36,8 @@ export default function SignIn() {
                         Зарегистрироваться
                     </CustomButton>
                 </Link>
+                {logged && <Redirect to='/'>
+                </Redirect> }
             </form>
         </div>
     </>

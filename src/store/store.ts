@@ -1,43 +1,41 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {firebase} from '../plugins/firebase';
 import thunk from 'redux-thunk';
 import axios from "axios";
+import {FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState} from "../types";
 
 const url = 'https://quiet-ridge-83792.herokuapp.com/api/feed/';
 
-
-export const fetchFeed = createAsyncThunk('fetchFeed', async () => {
+export const fetchFeed = createAsyncThunk ('fetchFeed',
+    async () => {
         const response = await axios.get(url);
         return response.data;
     }
 )
 
-export const fetchLogin = createAsyncThunk('fetchLogin', async ({email, password}) => {
-    const response = await firebase.auth().signInWithEmailAndPassword(email, password);
-    return response.user;
-});
+export const fetchLogin = createAsyncThunk('fetchLogin',
+    async ({email, password}: FLogin) => {
+        const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+        return response.user;
+    });
 
 export const BoolShit = createSlice({
     name: 'boolshit',
     initialState: {
         dark: false,
         drawer: false,
-        logged: true,
         isMobile: false,
         inDialog: false,
         upDialog: false,
         bottomMenu: false
-    },
+    } as IBoolShitState,
     reducers: {
         changeTheme: (state, action) => {
             state.dark = action.payload;
         },
         changeDrawer: (state, action) => {
             state.drawer = action.payload;
-        },
-        enterChanges: (state, action) => {
-            state.logged = action.payload;
         },
         setMobile: (state, action) => {
             state.isMobile = action.payload;
@@ -57,17 +55,24 @@ export const BoolShit = createSlice({
 export const User = createSlice({
     name: 'user',
     initialState: {
+        logged: false,
         email: '',
         password: '',
         photoURL: '',
         uid: '',
+    } as IUserState,
+    reducers: {
+        enterChanges: (state, action) => {
+            state.logged = action.payload;
+        },
     },
-    reducers: {},
-    extraReducers: {
-        [fetchLogin.fulfilled]: (state, actions) => {
-            state.email = [...actions.payload.email];
-            console.log("thunk", actions.payload);
-        }
+    extraReducers: builder => {
+        builder.addCase(fetchLogin.fulfilled, (state, action:PayloadAction<any>) => {
+            state.email = action.payload.email;
+            state.photoURL = action.payload.photoURL;
+            state.uid = action.payload.uid;
+            state.logged = true;
+        })
     }
 })
 
@@ -76,7 +81,7 @@ export const Feed = createSlice({
     initialState: {
         all: [],
         bottom: {}
-    },
+    } as IFeedState,
     reducers: {
         getData: (state, action) => {
             state.all = action.payload;
@@ -85,12 +90,12 @@ export const Feed = createSlice({
             state.bottom = action.payload;
         }
     },
-    extraReducers: {
-        [fetchFeed.fulfilled]: (state, actions) => {
-            state.all = [...actions.payload];
+    extraReducers: builder => {
+        builder.addCase(fetchFeed.fulfilled, (state, action:PayloadAction<FeedTypes[]>) => {
+            state.all = [...action.payload];
             state.all.reverse();
-        }
-    },
+        })
+    }
 })
 
 const reducer = combineReducers({

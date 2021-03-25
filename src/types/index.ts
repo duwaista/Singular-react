@@ -22,6 +22,10 @@ export type HeaderProps = {
     title: string;
     icon?: string;
 }
+export type FLogin = {
+    email: string;
+    password: string;
+}
 export type CustomButtonTypes = {
     children: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLDivElement>;
@@ -30,4 +34,23 @@ export type CustomButtonTypes = {
     text?: boolean | undefined;
     icon?: boolean | undefined;
 }
+export interface IBoolShitState {
+    dark: boolean,
+    drawer: boolean,
+    isMobile: boolean,
+    inDialog: boolean,
+    upDialog: boolean,
+    bottomMenu: boolean
+}
+export interface IUserState {
+    logged: boolean,
+    email: string,
+    photoURL: string,
+    uid: string,
+}
+export interface IFeedState {
+    all: FeedTypes[]
+    bottom?: {}
+}
+
 
