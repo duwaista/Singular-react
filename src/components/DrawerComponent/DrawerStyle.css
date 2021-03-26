@@ -1,7 +1,7 @@
 .drawer {
     height: 100%;
     width: 250px;
-    background-color: #F7F7F7;
+    background-color: #ffff;
     transition: all 0.14s ease-in-out;
     transform: translate(+250px);
     position: fixed;
@@ -9,9 +9,15 @@
     top: 0;
     right: 0;
 }
+@media screen and (min-width: 700px) {
+    .drawer {
+        width: 300px;
+        transform: translate(+300px);
+    }
+}
 .drawer-open {
     transform: translate(0);
-    border-left: 1px solid #9c9c9c;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
 }
 .drawer-content {
     display: flex;
@@ -40,6 +46,32 @@
     margin-right: auto;
     margin-bottom: 8px;
 }
+.buttons:hover {
+    background-color: #F7F7F7;
+}
 .drawer-auth-text {
     align-self: center;
+}
+.drawer-user-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-height: 47px;
+    border-bottom: 1px solid #acacac;
+    cursor: pointer;
+}
+.drawer-user-container:hover {
+    background-color: #F7F7F7;
+}
+.drawer-avatar {
+    width: 40px;
+    height: 40px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 3%;
+    border-radius: 40px;
+}
+.drawer-email {
+    margin-left: 10px;
+    font-size: 18px;
 }

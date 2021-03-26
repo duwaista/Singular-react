@@ -44,9 +44,11 @@ export interface IBoolShitState {
 }
 export interface IUserState {
     logged: boolean,
-    email: string,
-    photoURL: string,
-    uid: string,
+    profile: {
+        email: string,
+        photoURL: string,
+        uid: string
+    }
 }
 export interface IFeedState {
     all: FeedTypes[]

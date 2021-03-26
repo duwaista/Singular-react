@@ -1,11 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import {FeedListComponent} from "./components/FeedListComponent/FeedListComponent";
-import BottomMenuComponent from "./components/BottomMenuComponent/BottomMenuComponent";
-import SignIn from "./components/Auth/SignIn";
-import SignUp from "./components/Auth/SignUp";
-import menu from './assets/icons/menu.svg'
-
+import menu from './assets/icons/menu.svg';
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,6 +9,10 @@ import {
 } from "react-router-dom";
 import './assets/styles/main.css';
 import './App.css';
+const SignIn = React.lazy(() => import("./components/Auth/SignIn"));
+const SignUp = React.lazy(() => import("./components/Auth/SignUp"));
+const BottomMenuComponent = React.lazy( () => import("./components/BottomMenuComponent/BottomMenuComponent"));
+
 
 function App() {
     return (
@@ -20,13 +20,21 @@ function App() {
             <Switch>
                 <Route exact path='/'>
                     <div className="App">
+                        <Suspense fallback={<div>
+                            Загрузка...
+                        </div>}>
+                            <BottomMenuComponent/>
+                        </Suspense>
                         <HeaderComponent title='Главная' icon={menu}/>
-                        <BottomMenuComponent/>
                         <FeedListComponent/>
                     </div>
                 </Route>
-                <Route path='/sign-in' component={SignIn} />
-                <Route path='/sign-up' component={SignUp} />
+                <Suspense fallback={<div>
+                    Загрузка...
+                </div>}>
+                    <Route path='/sign-in' component={SignIn} />
+                    <Route path='/sign-up' component={SignUp} />
+                </Suspense>
             </Switch>
         </Router>
     );

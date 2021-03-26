@@ -22,6 +22,7 @@
     object-fit: cover;
     height: 350px;
     width: 98%;
+    cursor: pointer;
 }
 .feed-email {
     align-self: center;

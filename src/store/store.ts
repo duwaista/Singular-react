@@ -56,10 +56,12 @@ export const User = createSlice({
     name: 'user',
     initialState: {
         logged: false,
-        email: '',
-        password: '',
-        photoURL: '',
-        uid: '',
+        profile: {
+            email: '',
+            password: '',
+            photoURL: '',
+            uid: '',
+        }
     } as IUserState,
     reducers: {
         enterChanges: (state, action) => {
@@ -68,9 +70,9 @@ export const User = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(fetchLogin.fulfilled, (state, action:PayloadAction<any>) => {
-            state.email = action.payload.email;
-            state.photoURL = action.payload.photoURL;
-            state.uid = action.payload.uid;
+            state.profile.email = action.payload.email;
+            state.profile.photoURL = action.payload.photoURL;
+            state.profile.uid = action.payload.uid;
             state.logged = true;
         })
     }

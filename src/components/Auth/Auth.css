@@ -7,7 +7,7 @@
 }
 @media screen and (min-width: 600px){
     .auth-container {
-        width: 50%;
+        width: 36%;
         margin: auto;
     }
 }
@@ -38,7 +38,6 @@ input {
 
 .form-text-description {
     font-size: 14px;
-    margin-top: 8px;
     margin-left: 2px;
 }
 

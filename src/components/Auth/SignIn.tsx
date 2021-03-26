@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Auth.css';
 import HeaderComponent from "../HeaderComponent/HeaderComponent";
 import CustomButton from "../BasicComponents/CustomButton/CustomButton";
@@ -13,11 +13,18 @@ export default function SignIn() {
     const logged: boolean = useSelector(state => (state as any).user.logged);
     const dispatch = useDispatch();
 
-     async function login() {
+     function login() {
         if(email !== '' && password.length >= 6) {
-            await dispatch(fetchLogin({email, password}))
+            dispatch(fetchLogin({email, password}));
         }
     }
+
+    useEffect(() => {
+        if (logged) {
+            setPassword('');
+            setEmail('');
+        }
+    }, [logged]);
 
     return <>
         <HeaderComponent title='Вход'/>
