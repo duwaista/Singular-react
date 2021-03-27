@@ -1,7 +1,6 @@
 import React from "react";
 import './HeaderStyle.css';
-import { firebase } from "../../plugins/firebase";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {actions} from "../../store/store";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 import {HeaderProps} from "../../types";

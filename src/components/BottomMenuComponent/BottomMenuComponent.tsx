@@ -6,7 +6,6 @@ import BasicElementBottom from "../BasicComponents/BasicElementBottom/BasicEleme
 import deleteIcon from '../../assets/icons/delete.svg'
 import share from '../../assets/icons/share-variant.svg'
 import {FeedTypes} from "../../types";
-import CustomButton from "../BasicComponents/CustomButton/CustomButton";
 
 export default function BottomMenuComponent() {
 
@@ -46,9 +45,6 @@ export default function BottomMenuComponent() {
             </div>
             <BasicElementBottom onClick={closeBottomMenu} text="Удалить (не работает)" icon={deleteIcon}/>
             <BasicElementBottom onClick={sharePic} text='Поделиться' icon={share}/>
-            <CustomButton text={true} width='100%' height='40px'>
-                Отмена
-            </CustomButton>
         </div>
         }
     </div>

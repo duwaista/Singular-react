@@ -40,7 +40,7 @@ export interface IBoolShitState {
     isMobile: boolean,
     inDialog: boolean,
     upDialog: boolean,
-    bottomMenu: boolean
+    bottomMenu: boolean,
 }
 export interface IUserState {
     logged: boolean,

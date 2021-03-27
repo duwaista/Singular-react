@@ -10,7 +10,7 @@ const url = 'https://quiet-ridge-83792.herokuapp.com/api/feed/';
 export const fetchFeed = createAsyncThunk ('fetchFeed',
     async () => {
         const response = await axios.get(url);
-        return response.data;
+        return await response.data;
     }
 )
 
