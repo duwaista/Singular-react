@@ -20,7 +20,7 @@ export type BasicElementProps = {
 }
 export type HeaderProps = {
     title: string;
-    icon?: string;
+    icon?: boolean;
 }
 export type FLogin = {
     email: string;

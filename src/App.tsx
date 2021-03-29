@@ -1,7 +1,6 @@
 import React, {Suspense} from "react";
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import {FeedListComponent} from "./components/FeedListComponent/FeedListComponent";
-import menu from './assets/icons/menu.svg';
 import {
     BrowserRouter as Router,
     Switch,
@@ -14,6 +13,7 @@ import Loading from "./components/BasicComponents/LoadingBar/LoadingBarComponent
 const SignIn = React.lazy(() => import("./components/Auth/SignIn"));
 const SignUp = React.lazy(() => import("./components/Auth/SignUp"));
 const BottomMenuComponent = React.lazy(() => import("./components/BottomMenuComponent/BottomMenuComponent"));
+const About = React.lazy(()=> import("./components/About/AboutComponent"));
 
 function App() {
     return (
@@ -24,7 +24,7 @@ function App() {
                         <Suspense fallback={<Loading />}>
                             <BottomMenuComponent/>
                         </Suspense>
-                        <HeaderComponent title='Главная' icon={menu}/>
+                        <HeaderComponent title='Главная' icon={true}/>
                         <Suspense fallback={<Loading/>}>
                             <FeedListComponent/>
                         </Suspense>
@@ -33,6 +33,7 @@ function App() {
                 <Suspense fallback={<Loading />}>
                     <Route path='/sign-in' component={SignIn}/>
                     <Route path='/sign-up' component={SignUp}/>
+                    <Route path='/about' component={About}/>
                 </Suspense>
             </Switch>
         </Router>

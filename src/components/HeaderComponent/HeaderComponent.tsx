@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {actions} from "../../store/store";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 import {HeaderProps} from "../../types";
+import menu from '../../assets/icons/menu.svg'
 
 export default function HeaderComponent ({title, icon}: HeaderProps) {
 
@@ -41,7 +42,7 @@ export default function HeaderComponent ({title, icon}: HeaderProps) {
             {/*</div>*/}
             {/*}*/}
             {icon && <div onClick={() => openDrawer(true)} className={"icon header-menu"}>
-                <img alt='icon' src={icon}/>
+                <img alt='icon' src={menu}/>
             </div>
             }
         </header>

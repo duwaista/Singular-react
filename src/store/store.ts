@@ -7,7 +7,7 @@ import {FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState} from "../type
 
 const url = 'https://quiet-ridge-83792.herokuapp.com/api/feed/';
 
-export const fetchFeed = createAsyncThunk ('fetchFeed',
+export const fetchFeed = createAsyncThunk('fetchFeed',
     async () => {
         const response = await axios.get(url);
         return await response.data;
@@ -19,6 +19,12 @@ export const fetchLogin = createAsyncThunk('fetchLogin',
         const response = await firebase.auth().signInWithEmailAndPassword(email, password);
         return response.user;
     });
+
+export const fetchRegister = createAsyncThunk('fetchRegister',
+    async ({email, password}: FLogin) => {
+        const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        return response.user;
+    })
 
 export const BoolShit = createSlice({
     name: 'boolshit',
@@ -69,12 +75,19 @@ export const User = createSlice({
         },
     },
     extraReducers: builder => {
-        builder.addCase(fetchLogin.fulfilled, (state, action:PayloadAction<any>) => {
-            state.profile.email = action.payload.email;
-            state.profile.photoURL = action.payload.photoURL;
-            state.profile.uid = action.payload.uid;
-            state.logged = true;
-        })
+        builder
+            .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<any>) => {
+                state.profile.email = action.payload.email;
+                state.profile.photoURL = action.payload.photoURL;
+                state.profile.uid = action.payload.uid;
+                state.logged = true;
+            })
+            .addCase(fetchRegister.fulfilled, (state, action: PayloadAction<any>) => {
+                state.profile.email = action.payload.email;
+                state.profile.photoURL = action.payload.photoURL;
+                state.profile.uid = action.payload.uid;
+                state.logged = true;
+            })
     }
 })
 
@@ -93,7 +106,7 @@ export const Feed = createSlice({
         }
     },
     extraReducers: builder => {
-        builder.addCase(fetchFeed.fulfilled, (state, action:PayloadAction<FeedTypes[]>) => {
+        builder.addCase(fetchFeed.fulfilled, (state, action: PayloadAction<FeedTypes[]>) => {
             state.all = [...action.payload];
             state.all.reverse();
         })

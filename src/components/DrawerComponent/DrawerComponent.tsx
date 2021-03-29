@@ -25,7 +25,9 @@ export default function DrawerComponent() {
 
         return <div className='drawer-content'>
             {user.logged && <div className='drawer-user-container'>
+                {user.profile.photoURL &&
                 <img alt='user avatar' className='drawer-avatar' src={user.profile.photoURL}/>
+                }
                 <span className='drawer-email'>
                     {user.profile.email}
                 </span>
