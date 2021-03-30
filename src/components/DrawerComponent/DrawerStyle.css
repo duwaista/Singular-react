@@ -17,7 +17,7 @@
 }
 .drawer-open {
     transform: translate(0);
-    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    border-left: 1px solid #9c9c9c;
 }
 .drawer-content {
     display: flex;
@@ -37,17 +37,18 @@
     align-content: center;
     justify-content: center;
     width: 70%;
-    height: 26px;
+    height: 30px;
     border-radius: 16px;
     background-color: #ffff;
-    border: 1px solid #9c9c9c;
+    border: 1px solid #4080FF;
     cursor: pointer;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 8px;
 }
 .buttons:hover {
-    background-color: #F7F7F7;
+    background-color: #4080FF;
+    color: white;
 }
 .drawer-auth-text {
     align-self: center;

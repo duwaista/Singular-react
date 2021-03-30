@@ -15,18 +15,26 @@
 }
 
 .about-content {
+    display: flex;
+    align-items: center;
     border: 1px solid #4080FF;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 18px;
     width: 50%;
     margin: auto auto 10px;
 }
 .about-content-block {
     display: flex;
     width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
     font-size: 17px;
-    justify-content: space-around;
-    margin: auto;
+    justify-content: space-between;
+}
+
+.about-content:hover {
+    color: white;
+    background-color: #4080FF;
 }
 
 @media screen and (max-width: 700px) {

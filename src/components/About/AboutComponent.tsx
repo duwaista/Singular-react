@@ -9,27 +9,41 @@ export default function About() {
         <div className='about-container'>
             <div className='title-container'>
             <span className='about-title center'>
-            Singular
-        </span>
+                Singular
+            </span>
             </div>
-            <div className='about-content center'>
+            <div className='about-content '>
                 <div className='about-content-block'>
-                <span>
-                    Версия
-                </span>
                     <span>
-                    {version.version}
-                </span>
+                        Версия
+                    </span>
+                    <span>
+                        {version.version}
+                    </span>
                 </div>
             </div>
-            <div className='about-content center'>
+            <div className='about-content'>
                 <div className='about-content-block'>
-                <span>
-                    Разработчик
-                </span>
                     <span>
-                    duwaista
-                </span>
+                        Разработчик
+                    </span>
+                    <span>
+                        <a href='https://github.com/duwaista'>
+                            duwaista
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div className='about-content'>
+                <div className='about-content-block'>
+                    <span>
+                        Исходный код
+                    </span>
+                    <span>
+                        <a href='https://github.com/duwaista/Singular-react'>
+                            GitHub
+                        </a>
+                    </span>
                 </div>
             </div>
         </div>

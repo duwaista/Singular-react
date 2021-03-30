@@ -33,17 +33,15 @@ export default function DrawerComponent() {
                 </span>
             </div>}
             {!logged && <div className='buttons-container'>
-                <Link to='/sign-in'>
-                    <div className='buttons'>
-                        <span className='drawer-auth-text'>
-                            Sign-in
-                        </span>
-                    </div>
+                <Link to='/sign-in' className='buttons'>
+                    <span className='drawer-auth-text'>
+                        Sign-in
+                    </span>
                 </Link>
-                <Link to='/sign-up'>
-                    <div className='buttons'>
-                        <span className='drawer-auth-text'>Sign-up</span>
-                    </div>
+                <Link to='/sign-up' className='buttons'>
+                    <span className='drawer-auth-text'>
+                        Sign-up
+                    </span>
                 </Link>
             </div>}
         </div>
