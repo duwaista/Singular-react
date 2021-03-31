@@ -41,6 +41,7 @@ export interface IBoolShitState {
     inDialog: boolean,
     upDialog: boolean,
     bottomMenu: boolean,
+    uploadMenu: boolean
 }
 export interface IUserState {
     logged: boolean,

@@ -17,11 +17,11 @@ export default function BottomMenuComponent() {
         dispatch(actions.BoolShit.changeBottomMenu(false));
     }
 
-    useEffect(()=>{
-        if (bottom) {
-            document.body.style.overflow = 'hidden';
-        } else {
+    useEffect(() => {
+        if (!bottom) {
             document.body.style.overflow = 'auto';
+        } else {
+            document.body.style.overflow = 'hidden';
         }
     }, [bottom]);
 
@@ -31,8 +31,7 @@ export default function BottomMenuComponent() {
         }
         try {
             await navigator.share(shareData);
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
         }
     }

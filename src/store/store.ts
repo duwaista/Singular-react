@@ -34,7 +34,8 @@ export const BoolShit = createSlice({
         isMobile: false,
         inDialog: false,
         upDialog: false,
-        bottomMenu: false
+        bottomMenu: false,
+        uploadMenu: false
     } as IBoolShitState,
     reducers: {
         changeTheme: (state, action) => {
@@ -54,6 +55,9 @@ export const BoolShit = createSlice({
         },
         changeBottomMenu: (state, action) => {
             state.bottomMenu = action.payload;
+        },
+        changeUploadMenu: (state, action) => {
+            state.uploadMenu = action.payload;
         }
     }
 })

@@ -9,6 +9,7 @@ import {
 import './assets/styles/main.css';
 import './App.css';
 import Loading from "./components/BasicComponents/LoadingBar/LoadingBarComponent";
+import Upload from "./components/UploadComponent/Upload";
 
 const SignIn = React.lazy(() => import("./components/Auth/SignIn"));
 const SignUp = React.lazy(() => import("./components/Auth/SignUp"));
@@ -23,6 +24,7 @@ function App() {
                     <div className="App">
                         <Suspense fallback={<Loading />}>
                             <BottomMenuComponent/>
+                            <Upload/>
                         </Suspense>
                         <HeaderComponent title='Главная' icon={true}/>
                         <Suspense fallback={<Loading/>}>

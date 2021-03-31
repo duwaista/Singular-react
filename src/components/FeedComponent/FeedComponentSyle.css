@@ -13,7 +13,7 @@
 }
 @media screen and (min-width: 700px){
     .feed-container {
-        width: 50%;
+        width: 45%;
         height: 20%;
         min-height: 200px;
     }
