@@ -9,21 +9,36 @@ const url = 'https://quiet-ridge-83792.herokuapp.com/api/feed/';
 
 export const fetchFeed = createAsyncThunk('fetchFeed',
     async () => {
-        const response = await axios.get(url);
-        return await response.data;
+        try {
+            const response = await axios.get(url);
+            return await response.data;
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 )
 
 export const fetchLogin = createAsyncThunk('fetchLogin',
     async ({email, password}: FLogin) => {
-        const response = await firebase.auth().signInWithEmailAndPassword(email, password);
-        return response.user;
+        try {
+            const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+            return response.user;
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     });
 
 export const fetchRegister = createAsyncThunk('fetchRegister',
     async ({email, password}: FLogin) => {
-        const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        return response.user;
+        try {
+            const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+            return response.user;
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     })
 
 export const BoolShit = createSlice({
