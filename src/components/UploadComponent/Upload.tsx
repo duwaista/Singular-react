@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './UploadStyle.css'
 import {ReactComponent as Plus} from "../../assets/icons/plus.svg";
 import {useDispatch, useSelector} from "react-redux";
 import {actions} from "../../store/store";
+import plus from '../../assets/icons/plus.svg';
 
 export default function Upload() {
 
@@ -13,16 +14,22 @@ export default function Upload() {
         dispatch(actions.BoolShit.changeUploadMenu(o));
     }
 
+    useEffect(() => {
+        if (!open) {
+            document.body.style.overflow = 'auto';
+        } else {
+            document.body.style.overflow = 'hidden';
+        }
+    }, [open]);
+
     return <>
-        {!open && <div className='upload-button-container'>
-            <div className='upload-button' onClick={() => changeOpen(true)}>
-                <Plus fill='white' className='plus-icon'/>
-            </div>
+        {!open && <div className='upload-button' onClick={() => changeOpen(true)}>
+            <Plus fill='white' className='plus-icon'/>
         </div>}
-        {open && <div className='upload-content-container'>
+        {open && <div onClick={() => changeOpen(false)} className='upload-content-container'>
             <div className='upload-content'>
-                <input type='file'/>
-                <input type='file'/>
+                <input className='upload-file-input' type='file'/>
+                <img onClick={() => changeOpen(false)} alt='close-icon' src={plus} className='close-icon'/>
             </div>
         </div>}
     </>
