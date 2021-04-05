@@ -24,10 +24,10 @@ function App() {
                     <div className="App">
                         <Suspense fallback={<Loading />}>
                             <BottomMenuComponent/>
-                            <Upload/>
                         </Suspense>
                         <HeaderComponent title='Главная' icon={true}/>
                         <Suspense fallback={<Loading/>}>
+                            <Upload/>
                             <FeedListComponent/>
                         </Suspense>
                     </div>

@@ -92,19 +92,23 @@ export const User = createSlice({
         enterChanges: (state, action) => {
             state.logged = action.payload;
         },
+        authBuilder: (state, {payload}) => {
+            state.profile = {
+                email: payload.email,
+                password: payload.password,
+                photoURL: payload.photoURL,
+                uid: payload.uid
+            };
+        }
     },
     extraReducers: builder => {
         builder
             .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<any>) => {
-                state.profile.email = action.payload.email;
-                state.profile.photoURL = action.payload.photoURL;
-                state.profile.uid = action.payload.uid;
+                User.caseReducers.authBuilder(state, action);
                 state.logged = true;
             })
             .addCase(fetchRegister.fulfilled, (state, action: PayloadAction<any>) => {
-                state.profile.email = action.payload.email;
-                state.profile.photoURL = action.payload.photoURL;
-                state.profile.uid = action.payload.uid;
+                User.caseReducers.authBuilder(state, action);
                 state.logged = true;
             })
     }

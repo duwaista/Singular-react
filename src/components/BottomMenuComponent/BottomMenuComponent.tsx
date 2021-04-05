@@ -12,6 +12,7 @@ export default function BottomMenuComponent() {
     const dispatch = useDispatch();
     const bottom: boolean = useSelector(state => (state as any).boolshit.bottomMenu);
     const feed: FeedTypes = useSelector(state => (state as any).feed.bottom);
+    const logged: boolean = useSelector(state => (state as any).user.logged);
 
     function closeBottomMenu() {
         dispatch(actions.BoolShit.changeBottomMenu(false));
@@ -42,7 +43,7 @@ export default function BottomMenuComponent() {
                 <div className={"small-button-line"}>
                 </div>
             </div>
-            <BasicElementBottom onClick={closeBottomMenu} text="Удалить (не работает)" icon={deleteIcon}/>
+            {logged && <BasicElementBottom onClick={closeBottomMenu} text="Удалить (не работает)" icon={deleteIcon}/>}
             <BasicElementBottom onClick={sharePic} text='Поделиться' icon={share}/>
         </div>
         }

@@ -47,8 +47,9 @@ export interface IUserState {
     logged: boolean,
     profile: {
         email: string,
+        password: string,
         photoURL: string,
-        uid: string
+        uid: string,
     }
 }
 export interface IFeedState {
