@@ -5,27 +5,27 @@ import thunk from 'redux-thunk';
 import axios from "axios";
 import {FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState} from "../types";
 
-const url = 'https://quiet-ridge-83792.herokuapp.com/api/feed/';
+export const url = 'https://quiet-ridge-83792.herokuapp.com/api/feed/';
 
 export const fetchFeed = createAsyncThunk('fetchFeed',
     async () => {
         try {
             const response = await axios.get(url);
             return await response.data;
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
             return null;
         }
     }
-)
+);
 
 export const fetchLogin = createAsyncThunk('fetchLogin',
     async ({email, password}: FLogin) => {
         try {
             const response = await firebase.auth().signInWithEmailAndPassword(email, password);
             return response.user;
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
             return null;
         }
     });
@@ -129,10 +129,11 @@ export const Feed = createSlice({
         }
     },
     extraReducers: builder => {
-        builder.addCase(fetchFeed.fulfilled, (state, action: PayloadAction<FeedTypes[]>) => {
-            state.all = [...action.payload];
-            state.all.reverse();
-        })
+        builder
+            .addCase(fetchFeed.fulfilled, (state, action: PayloadAction<FeedTypes[]>) => {
+                state.all = [...action.payload];
+                state.all.reverse();
+            })
     }
 })
 

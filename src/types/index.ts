@@ -48,13 +48,17 @@ export interface IUserState {
     profile: {
         email: string,
         password: string,
-        photoURL: string,
+        photoURL?: string,
         uid: string,
     }
 }
 export interface IFeedState {
     all: FeedTypes[]
     bottom?: {}
+}
+export interface IPost {
+    url: string,
+    type: 'image' | 'video'
 }
 
 

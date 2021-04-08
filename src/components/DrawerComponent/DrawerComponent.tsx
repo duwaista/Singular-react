@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './DrawerStyle.css'
 import {useDispatch, useSelector} from "react-redux";
 import {actions} from "../../store/store";
@@ -16,12 +16,15 @@ export default function DrawerComponent() {
         dispatch(actions.BoolShit.changeDrawer(false));
     }
 
-    function DrawerContent() {
+    useEffect(() => {
         if (drawer) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
         }
+    }, [drawer]);
+
+    function DrawerContent() {
 
         return <div className='drawer-content'>
             {logged && <div className='drawer-user-container'>

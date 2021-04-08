@@ -6,7 +6,7 @@ import DrawerComponent from "../DrawerComponent/DrawerComponent";
 import {HeaderProps} from "../../types";
 import menu from '../../assets/icons/menu.svg'
 
-export default function HeaderComponent ({title, icon}: HeaderProps) {
+export default function HeaderComponent({title, icon}: HeaderProps) {
 
     const dispatch = useDispatch();
     // const enter: boolean = useSelector(state => (state as any).boolshit.logged)
@@ -28,13 +28,13 @@ export default function HeaderComponent ({title, icon}: HeaderProps) {
             left: 0,
         })
     }
-    
+
     return <div>
-        <header className={"header"} >
-            <div onClick={()=> scrollOnTop()} className='header-title-text'>
+        <header className={"header"}>
+            <div onClick={() => scrollOnTop()} className='header-title-text'>
                 <b>{title}</b>
             </div>
-            <div className={"header-scroll-top-button"} onClick={()=> scrollOnTop()}>
+            <div className={"header-scroll-top-button"} onClick={() => scrollOnTop()}>
             </div>
             {/*{enter &&*/}
             {/*<div className={"header-logout-button"} onClick={logoutUser}>*/}
@@ -47,6 +47,9 @@ export default function HeaderComponent ({title, icon}: HeaderProps) {
             }
         </header>
         <DrawerComponent/>
+        <div className='spacer-up'>
+
+        </div>
     </div>
 
 
