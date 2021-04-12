@@ -1,13 +1,12 @@
 import React from "react";
-import './BasicElementBottomStyle.css';
-import {BasicElementProps} from '../../../types'
+import "./BasicElementBottomStyle.css";
+import { BasicElementProps } from "../../../types";
 
-export default function BasicElementBottom({ text, icon, onClick}: BasicElementProps) {
-
-    return <div onClick={onClick} className='basic-element-bottom-container'>
-        <img alt='icon' className='icon basic-element' src={icon}/>
-        <span>
-            {text}
-        </span>
-    </div>
+export default function BasicElementBottom({ text, icon, onClick }: BasicElementProps) {
+	return (
+		<div onClick={onClick} className='basic-element-bottom-container'>
+			<img alt='icon' className='icon basic-element' src={icon} />
+			<span>{text}</span>
+		</div>
+	);
 }

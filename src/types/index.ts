@@ -57,8 +57,11 @@ export interface IFeedState {
     bottom?: {}
 }
 export interface IPost {
-    url: string,
+    URL: string,
     type: 'image' | 'video'
 }
-
+export interface IUpload {
+    file: File,
+    type: 'image' | 'video'
+}
 
