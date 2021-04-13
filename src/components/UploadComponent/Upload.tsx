@@ -2,19 +2,15 @@ import React, { useState } from "react";
 import "./UploadStyle.css";
 import { useSelector, useDispatch } from "react-redux";
 import CustomButton from "../BasicComponents/CustomButton/CustomButton";
-import axios from "axios";
-import { uploadFile, url } from "../../store/store";
-import { IUserState } from "../../types";
+import { uploadFile } from "../../store/store";
 
 export default function Upload() {
 	const logged: boolean = useSelector((state) => (state as any).user.logged);
-	const user: IUserState = useSelector((state) => (state as any).user.profile);
 	const [file, setFile] = useState<File>();
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	function changeHandler(event: any) {
 		setFile(event.target.files[0]);
-		console.log(file);
 	}
 
 	async function addFile() {
@@ -23,52 +19,16 @@ export default function Upload() {
 
 		if (file) {
 			if (file.type.indexOf("image/") === 0 && file.size <= maxImageSize) {
-                dispatch(uploadFile({file, type: "image"}));
-				// await uploadImage.put(file)
-				//     .then(async () => {
-				//         const URL = await uploadImage.getDownloadURL();
-				//         await mongoAddFile(URL, 'image').then(() => setFile([] as any))
-				//             .then(async () => await mongoAddFile(URL, 'video').then(() => setFile([] as any)));
-				//     })
-				//     .catch(error => {
-				//         console.log(error)
-				//     })
+				const res = await dispatch(uploadFile({ file, type: "image" }));
+				console.log("Result: ", res);
 			} else if (file.type.indexOf("video/") === 0 && file.size <= maxVideoSize) {
-                dispatch(uploadFile({file, type: 'video'}));
-				// await uploadVideo.put(file)
-				//     .then(async () => {
-				//         const URL:any = await uploadVideo.getDownloadURL()
-				//             .then(async () => await mongoAddFile(URL, 'video').then(() => setFile([] as any)));
-				//     })
-				//     .catch(error => {
-				//         console.log(error)
-				//     })
+				dispatch(uploadFile({ file, type: "video" }));
 			} else {
 				console.log("What");
 			}
 		} else {
 			console.log("Die");
 		}
-	}
-
-	async function mongoAddFile(URL: string, type: string) {
-		console.log("Posted ", URL, type);
-
-		await axios
-			.post(url, {
-				avatarUrl: user.profile.photoURL,
-				email: user.profile.email,
-				uid: user.profile.uid,
-				posts: URL,
-				type: type,
-				createdAt: new Date().toString(),
-			})
-			.then(() => {
-				console.log("Success", URL, type);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
 	}
 
 	return (

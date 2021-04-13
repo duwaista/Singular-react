@@ -2,8 +2,8 @@ import React from "react";
 
 export interface FeedTypes {
     _id: string,
-    id: string,
-    avatarUrl: string | '',
+    id?: string,
+    avatarUrl?: string | '',
     email: string | '',
     uid: string | '';
     posts: string | '';
@@ -64,4 +64,6 @@ export interface IUpload {
     file: File,
     type: 'image' | 'video'
 }
-
+export interface IMongoUpload {
+    
+}

@@ -1,11 +1,18 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import {useSelector} from 'react-redux';
 import { firebase } from "../plugins/firebase";
 import thunk from "redux-thunk";
 import axios from "axios";
 import { storage } from "../plugins/firebase";
-import { FeedTypes, FLogin, IBoolShitState, IFeedState, IPost, IUpload, IUserState } from "../types";
+import {
+	FeedTypes,
+	FLogin,
+	IBoolShitState,
+	IFeedState,
+	IPost,
+	IUpload,
+	IUserState,
+} from "../types";
 
 export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
 const fileRef = storage.ref();
@@ -52,8 +59,13 @@ export const uploadFile = createAsyncThunk("uploadFile", async ({ file, type }: 
 			await uploadImage
 				.put(file)
 				.then(async () => {
+					console.log("Promise working");
 					const URL = await uploadImage.getDownloadURL();
 					return URL;
+				})
+				.then((URL) => {
+					console.log("Promise end: ", URL);
+					mongoAddPost(URL)
 				})
 				.catch((error) => {
 					console.log(error);
@@ -74,10 +86,18 @@ export const uploadFile = createAsyncThunk("uploadFile", async ({ file, type }: 
 	}
 });
 
-export const mongoAddPost = createAsyncThunk('mongoAddPost', async ({URL, type}: IPost) => {
-    let post = {}
-    await axios.post(url, post);
-})
+export const mongoAddPost = createAsyncThunk("mongoAddPost", async ({ URL, type }: IPost) => {
+	try {
+		let post = {
+			posts: URL
+		};
+		console.log("Posted", post);
+		// await axios.post(url, post);
+	} catch (error) {
+		console.log(error);
+	}
+	
+});
 
 export const BoolShit = createSlice({
 	name: "boolshit",
