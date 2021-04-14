@@ -16,6 +16,7 @@ import {
 
 export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
 const fileRef = storage.ref();
+export type AppState = ReturnType<typeof store.getState>;
 
 export const fetchFeed = createAsyncThunk("fetchFeed", async () => {
 	try {
@@ -56,20 +57,11 @@ export const uploadFile = createAsyncThunk("uploadFile", async ({ file, type }: 
 		const uploadVideo = fileRef.child("videos/" + file.name);
 
 		if (file && type === "image") {
-			await uploadImage
-				.put(file)
-				.then(async () => {
-					console.log("Promise working");
-					const URL = await uploadImage.getDownloadURL();
-					return URL;
-				})
-				.then((URL) => {
-					console.log("Promise end: ", URL);
-					mongoAddPost(URL)
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+			await uploadImage.put(file);
+			console.log("Promise working");
+			const URL = await uploadImage.getDownloadURL();
+			console.log("Promise end: ", URL);
+			await mongoAddPost({ URL, type });
 		} else if (file && type === "video") {
 			await uploadVideo
 				.put(file)
@@ -86,18 +78,25 @@ export const uploadFile = createAsyncThunk("uploadFile", async ({ file, type }: 
 	}
 });
 
-export const mongoAddPost = createAsyncThunk("mongoAddPost", async ({ URL, type }: IPost) => {
-	try {
-		let post = {
-			posts: URL
-		};
-		console.log("Posted", post);
-		// await axios.post(url, post);
-	} catch (error) {
-		console.log(error);
+export const mongoAddPost = createAsyncThunk(
+	"mongoAddPost",
+	async ({ URL, type }: IPost, { getState }) => {
+		try {
+			const state = getState() as AppState;
+			let post = {
+				posts: URL,
+				type: type,
+				email: state.user.profile.email,
+				uid: state.user.profile.uid,
+				photoURL: state.user.profile.photoURL,
+			};
+			console.log("Posted", post);
+			// await axios.post(url, post);
+		} catch (error) {
+			console.log(error);
+		}
 	}
-	
-});
+);
 
 export const BoolShit = createSlice({
 	name: "boolshit",

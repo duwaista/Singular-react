@@ -17,6 +17,8 @@ export default function Upload() {
 		const maxImageSize: number = 5 * 1024 * 1024;
 		const maxVideoSize: number = 20 * 1024 * 1024;
 
+		console.log(file)
+
 		if (file) {
 			if (file.type.indexOf("image/") === 0 && file.size <= maxImageSize) {
 				const res = await dispatch(uploadFile({ file, type: "image" }));
