@@ -1,21 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createStore, combineReducers, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
 import { firebase } from "../plugins/firebase";
 import thunk from "redux-thunk";
+import logger from "redux-logger";
+import rootSaga from "./sagas";
 import axios from "axios";
-import { storage } from "../plugins/firebase";
-import {
-	FeedTypes,
-	FLogin,
-	IBoolShitState,
-	IFeedState,
-	IPost,
-	IUpload,
-	IUserState,
-} from "../types";
+import { FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState } from "../types";
 
+const sagaMiddleware = createSagaMiddleware();
 export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
-const fileRef = storage.ref();
 export type AppState = ReturnType<typeof store.getState>;
 
 export const fetchFeed = createAsyncThunk("fetchFeed", async () => {
@@ -51,53 +45,6 @@ export const fetchRegister = createAsyncThunk(
 	}
 );
 
-export const uploadFile = createAsyncThunk("uploadFile", async ({ file, type }: IUpload) => {
-	try {
-		const uploadImage = fileRef.child("images/" + file.name);
-		const uploadVideo = fileRef.child("videos/" + file.name);
-
-		if (file && type === "image") {
-			await uploadImage.put(file);
-			console.log("Promise working");
-			const URL = await uploadImage.getDownloadURL();
-			console.log("Promise end: ", URL);
-			await mongoAddPost({ URL, type });
-		} else if (file && type === "video") {
-			await uploadVideo
-				.put(file)
-				.then(async () => {
-					const URL = await uploadVideo.getDownloadURL();
-					return URL;
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-		}
-	} catch (err) {
-		console.log(err);
-	}
-});
-
-export const mongoAddPost = createAsyncThunk(
-	"mongoAddPost",
-	async ({ URL, type }: IPost, { getState }) => {
-		try {
-			const state = getState() as AppState;
-			let post = {
-				posts: URL,
-				type: type,
-				email: state.user.profile.email,
-				uid: state.user.profile.uid,
-				photoURL: state.user.profile.photoURL,
-			};
-			console.log("Posted", post);
-			// await axios.post(url, post);
-		} catch (error) {
-			console.log(error);
-		}
-	}
-);
-
 export const BoolShit = createSlice({
 	name: "boolshit",
 	initialState: {
@@ -108,6 +55,7 @@ export const BoolShit = createSlice({
 		upDialog: false,
 		bottomMenu: false,
 		uploadMenu: false,
+		loading: false,
 	} as IBoolShitState,
 	reducers: {
 		changeTheme: (state, action) => {
@@ -128,9 +76,15 @@ export const BoolShit = createSlice({
 		changeBottomMenu: (state, action) => {
 			state.bottomMenu = action.payload;
 		},
-		changeUploadMenu: (state, action) => {
-			state.uploadMenu = action.payload;
-		},
+	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchFeed.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(fetchFeed.fulfilled, (state) => {
+				state.loading = false;
+			});
 	},
 });
 
@@ -175,14 +129,22 @@ export const Feed = createSlice({
 	name: "feed",
 	initialState: {
 		all: [],
+		upload: {},
 		bottom: {},
 	} as IFeedState,
 	reducers: {
 		getData: (state, action) => {
 			state.all = action.payload;
+			console.error("ABOBA WHAT: " + action.payload);
 		},
 		setBottom: (state, action) => {
 			state.bottom = action.payload;
+		},
+		setUpload: (state, action) => {
+			state.upload = {
+				type: action.payload.type,
+				file: action.payload.file,
+			};
 		},
 	},
 	extraReducers: (builder) => {
@@ -199,7 +161,7 @@ const reducer = combineReducers({
 	feed: Feed.reducer,
 });
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(logger, thunk, sagaMiddleware));
 
 export default store;
 
@@ -208,3 +170,5 @@ export const actions = {
 	User: User.actions,
 	Feed: Feed.actions,
 };
+
+sagaMiddleware.run(rootSaga);

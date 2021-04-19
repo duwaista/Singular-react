@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, Suspense } from "react";
+import React, { useEffect, useMemo } from "react";
 import "./FeedListComponentStyle.css";
 import { FeedTypes } from "../../types";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,20 +9,24 @@ const FeedComponent = React.lazy(() => import("../FeedComponent/FeedComponent"))
 export function FeedListComponent() {
 	const dispatch = useDispatch();
 	const all: FeedTypes[] = useSelector((state) => (state as any).feed.all);
+	const loading: boolean = useSelector((state) => (state as any).boolshit.loading);
 
 	useEffect(() => {
 		dispatch(fetchFeed());
 	}, [dispatch]);
 
 	return (
-		<Suspense fallback={<Loading />}>
+		<>
 			<div className={"feed-list-container"}>
+				{useMemo(() => {
+					loading && <Loading />;
+				}, [loading])}
 				{useMemo(() => {
 					return all.map((feed: FeedTypes, index: number) => (
 						<FeedComponent key={feed._id} index={index} feed={feed} />
 					));
 				}, [all])}
 			</div>
-		</Suspense>
+		</>
 	);
 }

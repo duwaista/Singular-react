@@ -41,7 +41,8 @@ export interface IBoolShitState {
     inDialog: boolean,
     upDialog: boolean,
     bottomMenu: boolean,
-    uploadMenu: boolean
+    uploadMenu: boolean,
+    loading: boolean
 }
 export interface IUserState {
     logged: boolean,
@@ -55,6 +56,7 @@ export interface IUserState {
 export interface IFeedState {
     all: FeedTypes[]
     bottom?: {}
+    upload: {}
 }
 export interface IPost {
     URL: string,
@@ -62,7 +64,7 @@ export interface IPost {
 }
 export interface IUpload {
     file: File,
-    type: 'image' | 'video'
+    type: '' | 'image' | 'video'
 }
 export interface IMongoUpload {
     

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./UploadStyle.css";
 import { useSelector, useDispatch } from "react-redux";
 import CustomButton from "../BasicComponents/CustomButton/CustomButton";
-import { uploadFile } from "../../store/store";
+import { actions } from "../../store/store";
 
 export default function Upload() {
 	const logged: boolean = useSelector((state) => (state as any).user.logged);
@@ -17,14 +17,13 @@ export default function Upload() {
 		const maxImageSize: number = 5 * 1024 * 1024;
 		const maxVideoSize: number = 20 * 1024 * 1024;
 
-		console.log(file)
+		console.log(file);
 
 		if (file) {
 			if (file.type.indexOf("image/") === 0 && file.size <= maxImageSize) {
-				const res = await dispatch(uploadFile({ file, type: "image" }));
-				console.log("Result: ", res);
+				dispatch(actions.Feed.setUpload({ file, type: "image" }));
 			} else if (file.type.indexOf("video/") === 0 && file.size <= maxVideoSize) {
-				dispatch(uploadFile({ file, type: "video" }));
+				dispatch(actions.Feed.setUpload({ file, type: "video" }));
 			} else {
 				console.log("What");
 			}
