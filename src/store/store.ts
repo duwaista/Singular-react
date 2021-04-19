@@ -3,7 +3,6 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { firebase } from "../plugins/firebase";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
 import rootSaga from "./sagas";
 import axios from "axios";
 import { FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState } from "../types";
@@ -161,7 +160,7 @@ const reducer = combineReducers({
 	feed: Feed.reducer,
 });
 
-const store = createStore(reducer, applyMiddleware(logger, thunk, sagaMiddleware));
+const store = createStore(reducer, applyMiddleware(thunk, sagaMiddleware));
 
 export default store;
 
