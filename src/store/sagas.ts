@@ -1,8 +1,8 @@
-import { takeEvery, call, select } from "redux-saga/effects";
-import { actions } from "./store";
-import state from "./store";
+import { takeEvery, call, select, put } from "redux-saga/effects";
+import { actions, url } from "./store";
 import { storage } from "../plugins/firebase";
 import { IUserState } from "../types";
+import axios from 'axios';
 
 const fileRef = storage.ref();
 
@@ -27,10 +27,17 @@ async function fetchUpload(action: any) {
 	}
 }
 
-function fetchMongoAdd(URL: string, data: {}) {
+async function fetchMongoAdd(URL: string, user: IUserState) {
 	console.log("ABOBA LINK:", URL);
-	// @ts-ignore
-	console.log("ABOBA DATA:", data.user.profile);
+	console.log("ABOBA DATA: ", user);
+	let post = {
+		email: user.profile.email,
+		avatarUrl: user.profile.photoURL,
+		uid: user.profile.uid,
+		createdAt: new Date()
+	}
+	await axios.post(url, post);
+	return post;
 }
 
 export default function* rootSaga() {
@@ -39,6 +46,7 @@ export default function* rootSaga() {
 
 function* workerUpload(action: any) {
 	const URL: string = yield call(fetchUpload, action);
-	const data: {} = yield select(state.getState);
-	yield call(fetchMongoAdd, URL, data);
+	const user: IUserState = yield select((state) => state.user.profile);
+	console.log(user);
+	yield call(fetchMongoAdd, URL, user);
 }

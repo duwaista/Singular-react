@@ -4,12 +4,12 @@ import createSagaMiddleware from "redux-saga";
 import { firebase } from "../plugins/firebase";
 import thunk from "redux-thunk";
 import rootSaga from "./sagas";
+import logger from 'redux-logger';
 import axios from "axios";
 import { FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState } from "../types";
 
 const sagaMiddleware = createSagaMiddleware();
 export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
-export type AppState = ReturnType<typeof store.getState>;
 
 export const fetchFeed = createAsyncThunk("fetchFeed", async () => {
 	try {
@@ -160,9 +160,11 @@ const reducer = combineReducers({
 	feed: Feed.reducer,
 });
 
-const store = createStore(reducer, applyMiddleware(thunk, sagaMiddleware));
+const store = createStore(reducer, applyMiddleware(logger, thunk, sagaMiddleware));
 
 export default store;
+
+export type AppState = ReturnType<typeof store.getState>;
 
 export const actions = {
 	BoolShit: BoolShit.actions,

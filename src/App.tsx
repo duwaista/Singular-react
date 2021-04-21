@@ -25,7 +25,7 @@ function App() {
                         <Suspense fallback={<Loading />}>
                             <BottomMenuComponent/>
                         </Suspense>
-                        <HeaderComponent title='Главная' icon={true}/>
+                        <HeaderComponent title='Главная' icon={true} />
                         <Suspense fallback={<Loading/>}>
                             <Upload/>
                             <FeedListComponent/>

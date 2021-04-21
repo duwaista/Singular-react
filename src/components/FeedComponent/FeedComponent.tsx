@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { actions } from "../../store/store";
 import "./FeedComponentSyle.css";
 import { useDispatch } from "react-redux";
@@ -7,7 +7,9 @@ import dots from "../../assets/icons/dots-vertical.svg";
 
 export default function FeedComponent({ index, feed }: FeedProps) {
 	const dispatch = useDispatch();
-	dispatch(actions.Feed.getData);
+	useEffect(() => {
+		dispatch(actions.Feed.getData);
+	}, [dispatch]);
 
 	function openBottom(s: boolean) {
 		dispatch(actions.BoolShit.changeBottomMenu(s));
