@@ -23,7 +23,7 @@ export default function Upload() {
 			} else if (file.type.indexOf("video/") === 0 && file.size <= maxVideoSize) {
 				dispatch(actions.Feed.setUpload({ file, type: "video" }));
 			} else {
-				console.log("File too big", file.size/1024/1024 + ' of ' + maxVideoSize);
+				console.log("File too big");
 			}
 		} else {
 			console.log("Die");

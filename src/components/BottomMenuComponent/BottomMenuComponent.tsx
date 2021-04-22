@@ -10,7 +10,7 @@ import { FeedTypes } from "../../types";
 export default function BottomMenuComponent() {
 	const dispatch = useDispatch();
 	const bottom: boolean = useSelector((state) => (state as any).boolshit.bottomMenu);
-	const feed: FeedTypes = useSelector((state) => (state as any).feed.bottom);
+	const currentPost: FeedTypes = useSelector((state) => (state as any).feed.currentPost);
 	const logged: boolean = useSelector((state) => (state as any).user.logged);
 
 	function closeBottomMenu() {
@@ -27,13 +27,17 @@ export default function BottomMenuComponent() {
 
 	async function sharePic() {
 		const shareData = {
-			url: feed.posts,
+			url: currentPost.posts,
 		};
 		try {
 			await navigator.share(shareData);
 		} catch (err) {
 			console.log(err);
 		}
+	}
+
+	function deletePost() {
+		dispatch(actions.Feed.deletePost(currentPost));
 	}
 
 	return (
@@ -44,11 +48,7 @@ export default function BottomMenuComponent() {
 						<div className={"small-button-line"}></div>
 					</div>
 					{logged && (
-						<BasicElementBottom
-							onClick={closeBottomMenu}
-							text='Удалить (не работает)'
-							icon={deleteIcon}
-						/>
+						<BasicElementBottom onClick={deletePost} text='Удалить' icon={deleteIcon} />
 					)}
 					<BasicElementBottom onClick={sharePic} text='Поделиться' icon={share} />
 				</div>

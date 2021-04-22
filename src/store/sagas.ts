@@ -37,9 +37,8 @@ async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
 		posts: uploadRes.URL,
 		type: uploadRes.type,
 		uid: user.profile.uid,
-		createdAt: new Date().toDateString()
+		createdAt: new Date(),
 	};
-	console.log("ABOBA POST: ", post);
 	try {
 		await axios.post(url, post, options);
 		return post;
@@ -48,8 +47,17 @@ async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
 	}
 }
 
+async function deletePostFetch(action: any) {
+	try {
+		await axios.delete(url + action.payload.feed._id);
+	} catch (err) {
+		console.log(err);
+	}
+}
+
 export default function* rootSaga() {
 	yield takeEvery(actions.Feed.setUpload, workerUpload);
+	yield takeEvery(actions.Feed.deletePost, workerDelete);
 }
 
 function* workerUpload(action: any) {
@@ -57,4 +65,8 @@ function* workerUpload(action: any) {
 	const user: IUserState = yield select((state) => state.user);
 	const payload: FeedTypes = yield call(fetchMongoAdd, uploadRes, user);
 	yield put(actions.Feed.setPost(payload));
+}
+
+function* workerDelete(action: any) {
+	yield call(deletePostFetch, action);
 }

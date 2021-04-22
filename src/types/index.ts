@@ -56,7 +56,7 @@ export interface IUserState {
 }
 export interface IFeedState {
     all: FeedTypes[]
-    bottom?: {}
+    currentPost?: {}
     upload: {}
 }
 export interface IPost {

@@ -4,7 +4,6 @@ import createSagaMiddleware from "redux-saga";
 import { firebase } from "../plugins/firebase";
 import thunk from "redux-thunk";
 import rootSaga from "./sagas";
-import logger from "redux-logger";
 import axios from "axios";
 import { FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState } from "../types";
 
@@ -129,11 +128,11 @@ export const Feed = createSlice({
 	initialState: {
 		all: [],
 		upload: {},
-		bottom: {},
+		currentPost: {},
 	} as IFeedState,
 	reducers: {
 		setBottom: (state, action) => {
-			state.bottom = action.payload;
+			state.currentPost = action.payload;
 		},
 		setUpload: (state, action) => {
 			state.upload = {
@@ -144,6 +143,9 @@ export const Feed = createSlice({
 		setPost: (state, action) => {
 			state.all.unshift(action.payload);
 			console.log("ABOBA ADDED");
+		},
+		deletePost: (state, action) => {
+			state.all.splice(action.payload.index, 1);
 		},
 	},
 	extraReducers: (builder) => {
@@ -160,7 +162,7 @@ const reducer = combineReducers({
 	feed: Feed.reducer,
 });
 
-const store = createStore(reducer, applyMiddleware(logger, thunk, sagaMiddleware));
+const store = createStore(reducer, applyMiddleware(thunk, sagaMiddleware));
 
 export default store;
 
