@@ -23,7 +23,7 @@ export function FeedListComponent() {
 				}, [loading])}
 				{useMemo(() => {
 					return all.map((feed: FeedTypes, index: number) => (
-						<FeedComponent key={feed._id} index={index} feed={feed} />
+						<FeedComponent key={index} index={index} feed={feed} />
 					));
 				}, [all])}
 			</div>

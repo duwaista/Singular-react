@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../store/store";
 import { Link } from "react-router-dom";
 import { IUserState } from "../../types";
+import avatar from "../../assets/icons/account-circle-outline.svg";
 
 export default function DrawerComponent() {
 	const drawer: boolean = useSelector((state) => (state as any).boolshit.drawer);
@@ -28,12 +29,14 @@ export default function DrawerComponent() {
 			<div className='drawer-content'>
 				{logged && (
 					<div className='drawer-user-container'>
-						{user.profile.photoURL && (
+						{user.profile.photoURL !== null ? (
 							<img
 								alt='user avatar'
 								className='drawer-avatar'
 								src={user.profile.photoURL}
 							/>
+						) : (
+							<img alt='user avatar' className='drawer-avatar' src={avatar} />
 						)}
 						<span className='drawer-email'>{user.profile.email}</span>
 					</div>

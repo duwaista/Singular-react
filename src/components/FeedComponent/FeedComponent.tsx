@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { actions } from "../../store/store";
 import "./FeedComponentSyle.css";
 import { useDispatch } from "react-redux";
 import { FeedProps } from "../../types";
 import dots from "../../assets/icons/dots-vertical.svg";
+import avatar from "../../assets/icons/account-circle-outline.svg";
 
 export default function FeedComponent({ index, feed }: FeedProps) {
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(actions.Feed.getData);
-	}, [dispatch]);
 
 	function openBottom(s: boolean) {
 		dispatch(actions.BoolShit.changeBottomMenu(s));
@@ -19,7 +17,11 @@ export default function FeedComponent({ index, feed }: FeedProps) {
 	return (
 		<div className='feed-container'>
 			<div className='feed-info-container'>
-				<img alt={feed.avatarUrl} className='feed-avatar' src={feed.avatarUrl} />
+				{feed.avatarUrl !== null ? (
+					<img alt={feed.avatarUrl} className='feed-avatar' src={feed.avatarUrl} />
+				) : (
+					<img alt={feed.avatarUrl} className='feed-avatar' src={avatar} />
+				)}
 				<div className='feed-email'>
 					<b>{feed.email}</b>
 				</div>
@@ -32,7 +34,12 @@ export default function FeedComponent({ index, feed }: FeedProps) {
 					<img alt='icon' src={dots} />
 				</div>
 			</div>
-			<img alt={feed.posts} loading='lazy' className='feed-picture' src={feed.posts} />
+			{feed.type === "video" && (
+				<video className='feed-picture' preload='metadata' controls src={feed.posts}></video>
+			)}
+			{feed.type !== "video" && (
+				<img alt={feed.posts} loading='lazy' className='feed-picture' src={feed.posts} />
+			)}
 		</div>
 	);
 }

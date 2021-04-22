@@ -1,10 +1,13 @@
 import { takeEvery, call, select, put } from "redux-saga/effects";
 import { actions, url } from "./store";
 import { storage } from "../plugins/firebase";
-import { IUserState } from "../types";
-import axios from 'axios';
+import { FeedTypes, IPost, IUserState } from "../types";
+import axios from "axios";
 
 const fileRef = storage.ref();
+const options = {
+	headers: { "Access-Control-Allow-Origin": "*" },
+};
 
 async function fetchUpload(action: any) {
 	let file = action.payload.file;
@@ -16,28 +19,33 @@ async function fetchUpload(action: any) {
 		if (file && type === "image") {
 			await uploadImage.put(file);
 			const URL = await uploadImage.getDownloadURL();
-			return URL;
+			return { URL, type };
 		} else if (file && type === "video") {
 			await uploadVideo.put(file);
 			const URL = await uploadVideo.getDownloadURL();
-			return URL;
+			return { URL, type };
 		}
 	} catch (error) {
 		console.log(error);
 	}
 }
 
-async function fetchMongoAdd(URL: string, user: IUserState) {
-	console.log("ABOBA LINK:", URL);
-	console.log("ABOBA DATA: ", user);
+async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
 	let post = {
 		email: user.profile.email,
 		avatarUrl: user.profile.photoURL,
+		posts: uploadRes.URL,
+		type: uploadRes.type,
 		uid: user.profile.uid,
-		createdAt: new Date()
+		createdAt: new Date().toDateString()
+	};
+	console.log("ABOBA POST: ", post);
+	try {
+		await axios.post(url, post, options);
+		return post;
+	} catch (err) {
+		console.log(err);
 	}
-	await axios.post(url, post);
-	return post;
 }
 
 export default function* rootSaga() {
@@ -45,8 +53,8 @@ export default function* rootSaga() {
 }
 
 function* workerUpload(action: any) {
-	const URL: string = yield call(fetchUpload, action);
-	const user: IUserState = yield select((state) => state.user.profile);
-	console.log(user);
-	yield call(fetchMongoAdd, URL, user);
+	const uploadRes: IPost = yield call(fetchUpload, action);
+	const user: IUserState = yield select((state) => state.user);
+	const payload: FeedTypes = yield call(fetchMongoAdd, uploadRes, user);
+	yield put(actions.Feed.setPost(payload));
 }

@@ -7,6 +7,7 @@ export interface FeedTypes {
     email: string | '',
     uid: string | '';
     posts: string | '';
+    type: 'image' | 'video',
     createdAt: Date | '';
 }
 export type FeedProps = {
