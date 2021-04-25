@@ -43,6 +43,9 @@ export default function Upload() {
 					<CustomButton onClick={() => addFile()} height='30px' text={true}>
 						Upload
 					</CustomButton>
+					<div className='upload-progress-container'>
+						<div className='progress-line'></div>
+					</div>
 				</div>
 			)}
 		</>

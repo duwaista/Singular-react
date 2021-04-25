@@ -5,6 +5,8 @@ import { actions } from "../../store/store";
 import { Link } from "react-router-dom";
 import { IUserState } from "../../types";
 import avatar from "../../assets/icons/account-circle-outline.svg";
+import about from "../../assets/icons/information-outline.svg";
+import news from "../../assets/icons/newspaper-variant-outline.svg";
 
 export default function DrawerComponent() {
 	const drawer: boolean = useSelector((state) => (state as any).boolshit.drawer);
@@ -28,7 +30,7 @@ export default function DrawerComponent() {
 		return (
 			<div className='drawer-content'>
 				{logged && (
-					<div className='drawer-user-container'>
+					<div className='drawer-user-container drawer-item-container'>
 						{user.profile.photoURL !== null ? (
 							<img
 								alt='user avatar'
@@ -36,11 +38,25 @@ export default function DrawerComponent() {
 								src={user.profile.photoURL}
 							/>
 						) : (
-							<img alt='user avatar' className='drawer-avatar' src={avatar} />
+							<img
+								alt='user avatar'
+								className='start-icon drawer-avatar'
+								src={avatar}
+							/>
 						)}
-						<span className='drawer-email'>{user.profile.email}</span>
+						<span className='drawer-menu-text'>{user.profile.email}</span>
 					</div>
 				)}
+				<Link to='/'>
+					<div className='drawer-item-container'>
+						<img alt='feed icon' className='start-icon icon' src={news} />
+						<span className='drawer-menu-text'>Главная</span>
+					</div>
+				</Link>
+				<Link className='drawer-item-container' to='/about'>
+					<img alt='about icon' className='start-icon icon' src={about} />
+					<span className='drawer-menu-text'>О проекте</span>
+				</Link>
 				{!logged && (
 					<div className='buttons-container'>
 						<Link to='/sign-in' className='buttons'>
