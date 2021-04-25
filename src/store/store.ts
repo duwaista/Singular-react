@@ -161,7 +161,8 @@ const reducer = combineReducers({
 	user: User.reducer,
 	feed: Feed.reducer,
 });
-
+//ABOBA HOTFIX @see https://redux-toolkit.js.org/api/getDefaultMiddleware
+// Idk how to fix this lol
 const store = createStore(reducer, applyMiddleware(thunk, sagaMiddleware));
 
 export default store;

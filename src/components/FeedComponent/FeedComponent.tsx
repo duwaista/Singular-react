@@ -11,7 +11,7 @@ export default function FeedComponent({ index, feed }: FeedProps) {
 
 	function openBottom(s: boolean) {
 		dispatch(actions.BoolShit.changeBottomMenu(s));
-		dispatch(actions.Feed.setBottom({index, feed}));
+		dispatch(actions.Feed.setBottom({ index, feed }));
 	}
 
 	return (
@@ -20,7 +20,7 @@ export default function FeedComponent({ index, feed }: FeedProps) {
 				{feed.avatarUrl !== null ? (
 					<img alt={feed.avatarUrl} className='feed-avatar' src={feed.avatarUrl} />
 				) : (
-					<img alt={feed.avatarUrl} className='feed-avatar' src={avatar} />
+					<img alt='no-user-avatar' className='feed-avatar' src={avatar} />
 				)}
 				<div className='feed-email'>
 					<b>{feed.email}</b>
@@ -35,7 +35,13 @@ export default function FeedComponent({ index, feed }: FeedProps) {
 				</div>
 			</div>
 			{feed.type === "video" && (
-				<video className='feed-picture' loop={true} preload='none' controls src={feed.posts}></video>
+				<video
+					className='feed-picture'
+					loop={true}
+					preload='none'
+					controls
+					src={feed.posts}
+				></video>
 			)}
 			{feed.type !== "video" && (
 				<img alt={feed.posts} loading='lazy' className='feed-picture' src={feed.posts} />
