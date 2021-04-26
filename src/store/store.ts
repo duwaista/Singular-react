@@ -109,6 +109,9 @@ export const User = createSlice({
 				uid: payload.uid,
 			};
 		},
+		logoutUser: () => {
+			
+		}
 	},
 	extraReducers: (builder) => {
 		builder

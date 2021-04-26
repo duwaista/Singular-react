@@ -1,6 +1,6 @@
 import { takeEvery, call, select, put } from "redux-saga/effects";
 import { actions, url } from "./store";
-import { storage } from "../plugins/firebase";
+import { firebase, storage } from "../plugins/firebase";
 import { FeedTypes, IPost, IUserState } from "../types";
 import axios from "axios";
 
@@ -55,9 +55,14 @@ async function deletePostFetch(action: any) {
 	}
 }
 
+async function logoutUser() {
+	await firebase.auth().signOut();
+}
+
 export default function* rootSaga() {
 	yield takeEvery(actions.Feed.setUpload, workerUpload);
 	yield takeEvery(actions.Feed.deletePost, workerDelete);
+	yield takeEvery(actions.User.logoutUser, workerLogout);
 }
 
 function* workerUpload(action: any) {
@@ -69,4 +74,10 @@ function* workerUpload(action: any) {
 
 function* workerDelete(action: any) {
 	yield call(deletePostFetch, action);
+}
+
+function* workerLogout() {
+	yield call(logoutUser);
+	yield put(actions.User.enterChanges(false));
+	yield put(actions.User.authBuilder({}));
 }

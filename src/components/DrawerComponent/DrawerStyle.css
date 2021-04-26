@@ -68,7 +68,6 @@
 }
 .drawer-item-container:hover {
     background-color: #f1f1f1;
-    border-radius: 8px;
 }
 .drawer-avatar {
     width: 40px;

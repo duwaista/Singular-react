@@ -7,6 +7,7 @@ import { IUserState } from "../../types";
 import avatar from "../../assets/icons/account-circle-outline.svg";
 import about from "../../assets/icons/information-outline.svg";
 import news from "../../assets/icons/newspaper-variant-outline.svg";
+import logout from "../../assets/icons/logout.svg";
 
 export default function DrawerComponent() {
 	const drawer: boolean = useSelector((state) => (state as any).boolshit.drawer);
@@ -57,6 +58,13 @@ export default function DrawerComponent() {
 					<img alt='about icon' className='start-icon icon' src={about} />
 					<span className='drawer-menu-text'>О проекте</span>
 				</Link>
+				{logged && <div
+					onClick={() => dispatch(actions.User.logoutUser())}
+					className='drawer-item-container'
+				>
+					<img alt='feed icon' className='start-icon icon' src={logout} />
+					<span className='drawer-menu-text'>Выйти</span>
+				</div>}
 				{!logged && (
 					<div className='buttons-container'>
 						<Link to='/sign-in' className='buttons'>
