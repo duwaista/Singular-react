@@ -43,6 +43,23 @@ export const fetchRegister = createAsyncThunk(
 	}
 );
 
+export const logoutUserFetch = createAsyncThunk("logoutUserFetch", async () => {
+	try {
+		await firebase.auth().signOut();
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+export const deletePostFetch = createAsyncThunk("deletePostFetch", async ({ currentPost }: any) => {
+	try {
+		await axios.delete(url + currentPost.feed._id);
+		return currentPost;
+	} catch (error) {
+		console.log(error);
+	}
+});
+
 export const BoolShit = createSlice({
 	name: "boolshit",
 	initialState: {
@@ -109,9 +126,6 @@ export const User = createSlice({
 				uid: payload.uid,
 			};
 		},
-		logoutUser: () => {
-			
-		}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -122,6 +136,15 @@ export const User = createSlice({
 			.addCase(fetchRegister.fulfilled, (state, action: PayloadAction<any>) => {
 				User.caseReducers.authBuilder(state, action);
 				state.logged = true;
+			})
+			.addCase(logoutUserFetch.fulfilled, (state) => {
+				state.profile = {
+					email: "",
+					password: "",
+					photoURL: "",
+					uid: "",
+				};
+				state.logged = false;
 			});
 	},
 });
@@ -131,7 +154,10 @@ export const Feed = createSlice({
 	initialState: {
 		all: [],
 		upload: {},
-		currentPost: {},
+		currentPost: {
+			index: 0,
+			feed: {},
+		},
 	} as IFeedState,
 	reducers: {
 		setBottom: (state, action) => {
@@ -145,17 +171,17 @@ export const Feed = createSlice({
 		},
 		setPost: (state, action) => {
 			state.all.unshift(action.payload);
-			console.log("ABOBA ADDED");
-		},
-		deletePost: (state, action) => {
-			state.all.splice(action.payload.index, 1);
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(fetchFeed.fulfilled, (state, action: PayloadAction<FeedTypes[]>) => {
-			state.all = [...action.payload];
-			state.all.reverse();
-		});
+		builder
+			.addCase(fetchFeed.fulfilled, (state, action: PayloadAction<FeedTypes[]>) => {
+				state.all = [...action.payload];
+				state.all.reverse();
+			})
+			.addCase(deletePostFetch.fulfilled, (state, action: any) => {
+				state.all.splice(action.payload.index, 1);
+			});
 	},
 });
 

@@ -17,7 +17,7 @@
 }
 .drawer-open {
     transform: translate(0);
-    border-left: 1px solid #9c9c9c;
+    border-left: 1px solid #c5c2c2;
 }
 .drawer-content {
     display: flex;
@@ -57,7 +57,7 @@
     align-self: center;
 }
 .drawer-user-container {
-    border-bottom: 1px solid #acacac;
+    border-bottom: 1px solid #c5c2c2;
 }
 .drawer-item-container {
     display: flex;

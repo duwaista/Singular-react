@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./BottomMenuStyle.css";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../../store/store";
+import { actions, AppState, deletePostFetch } from "../../store/store";
 import BasicElementBottom from "../BasicComponents/BasicElementBottom/BasicElementBottom";
 import deleteIcon from "../../assets/icons/delete.svg";
 import share from "../../assets/icons/share-variant.svg";
@@ -9,9 +9,9 @@ import { FeedTypes } from "../../types";
 
 export default function BottomMenuComponent() {
 	const dispatch = useDispatch();
-	const bottom: boolean = useSelector((state) => (state as any).boolshit.bottomMenu);
+	const bottom: boolean = useSelector((state: AppState) => state.boolshit.bottomMenu);
 	const currentPost: FeedTypes = useSelector((state) => (state as any).feed.currentPost);
-	const logged: boolean = useSelector((state) => (state as any).user.logged);
+	const logged: boolean = useSelector((state: AppState) => state.user.logged);
 
 	function closeBottomMenu() {
 		dispatch(actions.BoolShit.changeBottomMenu(false));
@@ -37,7 +37,7 @@ export default function BottomMenuComponent() {
 	}
 
 	function deletePost() {
-		dispatch(actions.Feed.deletePost(currentPost));
+		dispatch(deletePostFetch({ currentPost }));
 	}
 
 	return (

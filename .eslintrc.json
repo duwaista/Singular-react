@@ -1,0 +1,43 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"react-app",
+		"react-app/jest",
+		"plugin:sonarjs/recommended",
+		"plugin:react/recommended",
+		"plugin:promise/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"plugins": ["react", "@typescript-eslint", "sonarjs", "promise"],
+	"rules": {
+		"sonarjs/cognitive-complexity": "error",
+		"sonarjs/no-identical-expressions": "error",
+		"react/jsx-uses-react": "error",
+		"react/jsx-uses-vars": "error",
+		"promise/always-return": "error",
+		"promise/no-return-wrap": "error",
+		"promise/param-names": "error",
+		"promise/catch-or-return": "error",
+		"promise/no-native": "off",
+		"promise/no-nesting": "warn",
+		"promise/no-promise-in-callback": "warn",
+		"promise/no-callback-in-promise": "warn",
+		"promise/avoid-new": "warn",
+		"promise/no-new-statics": "error",
+		"promise/no-return-in-finally": "warn",
+		"promise/valid-params": "warn"
+	}
+}

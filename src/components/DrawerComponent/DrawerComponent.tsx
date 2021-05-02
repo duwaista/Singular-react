@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./DrawerStyle.css";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../../store/store";
+import { actions, AppState, logoutUserFetch } from "../../store/store";
 import { Link } from "react-router-dom";
 import { IUserState } from "../../types";
 import avatar from "../../assets/icons/account-circle-outline.svg";
@@ -10,22 +10,14 @@ import news from "../../assets/icons/newspaper-variant-outline.svg";
 import logout from "../../assets/icons/logout.svg";
 
 export default function DrawerComponent() {
-	const drawer: boolean = useSelector((state) => (state as any).boolshit.drawer);
-	const logged: boolean = useSelector((state) => (state as any).user.logged);
-	const user: IUserState = useSelector((state) => (state as any).user);
+	const drawer: boolean = useSelector((state: AppState) => state.boolshit.drawer);
+	const logged: boolean = useSelector((state: AppState) => state.user.logged);
+	const user: IUserState = useSelector((state: AppState) => state.user);
 	const dispatch = useDispatch();
 
 	function closeDrawer() {
 		dispatch(actions.BoolShit.changeDrawer(false));
 	}
-
-	useEffect(() => {
-		if (drawer) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "auto";
-		}
-	}, [drawer]);
 
 	function DrawerContent() {
 		return (
@@ -58,13 +50,15 @@ export default function DrawerComponent() {
 					<img alt='about icon' className='start-icon icon' src={about} />
 					<span className='drawer-menu-text'>О проекте</span>
 				</Link>
-				{logged && <div
-					onClick={() => dispatch(actions.User.logoutUser())}
-					className='drawer-item-container'
-				>
-					<img alt='feed icon' className='start-icon icon' src={logout} />
-					<span className='drawer-menu-text'>Выйти</span>
-				</div>}
+				{logged && (
+					<div
+						onClick={() => dispatch(logoutUserFetch())}
+						className='drawer-item-container'
+					>
+						<img alt='feed icon' className='start-icon icon' src={logout} />
+						<span className='drawer-menu-text'>Выйти</span>
+					</div>
+				)}
 				{!logged && (
 					<div className='buttons-container'>
 						<Link to='/sign-in' className='buttons'>

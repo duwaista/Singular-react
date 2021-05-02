@@ -1,6 +1,6 @@
 import { takeEvery, call, select, put } from "redux-saga/effects";
 import { actions, url } from "./store";
-import { firebase, storage } from "../plugins/firebase";
+import { storage } from "../plugins/firebase";
 import { FeedTypes, IPost, IUserState } from "../types";
 import axios from "axios";
 
@@ -10,8 +10,8 @@ const options = {
 };
 
 async function fetchUpload(action: any) {
-	let file = action.payload.file;
-	let type = action.payload.type;
+	const file = action.payload.file;
+	const type = action.payload.type;
 	const uploadImage = fileRef.child("images/" + file.name);
 	const uploadVideo = fileRef.child("videos/" + file.name);
 
@@ -31,7 +31,7 @@ async function fetchUpload(action: any) {
 }
 
 async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
-	let post = {
+	const post = {
 		email: user.profile.email,
 		avatarUrl: user.profile.photoURL,
 		posts: uploadRes.URL,
@@ -47,22 +47,8 @@ async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
 	}
 }
 
-async function deletePostFetch(action: any) {
-	try {
-		await axios.delete(url + action.payload.feed._id);
-	} catch (err) {
-		console.log(err);
-	}
-}
-
-async function logoutUser() {
-	await firebase.auth().signOut();
-}
-
 export default function* rootSaga() {
 	yield takeEvery(actions.Feed.setUpload, workerUpload);
-	yield takeEvery(actions.Feed.deletePost, workerDelete);
-	yield takeEvery(actions.User.logoutUser, workerLogout);
 }
 
 function* workerUpload(action: any) {
@@ -70,14 +56,4 @@ function* workerUpload(action: any) {
 	const user: IUserState = yield select((state) => state.user);
 	const payload: FeedTypes = yield call(fetchMongoAdd, uploadRes, user);
 	yield put(actions.Feed.setPost(payload));
-}
-
-function* workerDelete(action: any) {
-	yield call(deletePostFetch, action);
-}
-
-function* workerLogout() {
-	yield call(logoutUser);
-	yield put(actions.User.enterChanges(false));
-	yield put(actions.User.authBuilder({}));
 }
