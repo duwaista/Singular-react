@@ -1,8 +1,15 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import {
+	createAsyncThunk,
+	createSlice,
+	PayloadAction,
+	getDefaultMiddleware,
+	configureStore,
+} from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { firebase } from "../plugins/firebase";
 import thunk from "redux-thunk";
+import logger from "redux-logger";
 import rootSaga from "./sagas";
 import axios from "axios";
 import { FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState } from "../types";
@@ -190,9 +197,27 @@ const reducer = combineReducers({
 	user: User.reducer,
 	feed: Feed.reducer,
 });
-//ABOBA HOTFIX @see https://redux-toolkit.js.org/api/getDefaultMiddleware
-// Idk how to fix this lol
-const store = createStore(reducer, applyMiddleware(thunk, sagaMiddleware));
+
+const devMode = process.env.NODE_ENV === "development";
+const middleware = [
+	...getDefaultMiddleware({
+		thunk: true,
+		serializableCheck: {
+			ignoredActions: ["user/authBuilder"],
+		},
+	}),
+	sagaMiddleware,
+];
+
+if (devMode) {
+	middleware.push(logger);
+}
+
+const store = configureStore({
+	reducer: reducer,
+	middleware: middleware,
+	devTools: devMode,
+});
 
 export default store;
 
