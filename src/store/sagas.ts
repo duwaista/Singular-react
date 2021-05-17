@@ -1,6 +1,6 @@
 import { takeEvery, call, select, put } from "redux-saga/effects";
 import { actions, url } from "./store";
-import { storage } from "../plugins/firebase";
+import { storage, db } from "../plugins/firebase";
 import { FeedTypes, IPost, IUserState } from "../types";
 import axios from "axios";
 
@@ -30,6 +30,23 @@ async function fetchUpload(action: any) {
 	}
 }
 
+async function fetchFirestoreAdd(uploadRes: IPost, user: IUserState) {
+	const post = {
+		email: user.profile.email,
+		avatarUrl: user.profile.photoURL,
+		posts: uploadRes.URL,
+		type: uploadRes.type,
+		uid: user.profile.uid,
+		createdAt: new Date(),
+	};
+	try {
+		await db.collection("feed").add(post);
+		return post;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
 	const post = {
 		email: user.profile.email,
@@ -54,6 +71,6 @@ export default function* rootSaga() {
 function* workerUpload(action: any) {
 	const uploadRes: IPost = yield call(fetchUpload, action);
 	const user: IUserState = yield select((state) => state.user);
-	const payload: FeedTypes = yield call(fetchMongoAdd, uploadRes, user);
+	const payload: FeedTypes = yield call(fetchFirestoreAdd, uploadRes, user);
 	yield put(actions.Feed.setPost(payload));
 }

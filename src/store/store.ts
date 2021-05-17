@@ -8,7 +8,6 @@ import {
 import { combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { firebase } from "../plugins/firebase";
-import thunk from "redux-thunk";
 import logger from "redux-logger";
 import rootSaga from "./sagas";
 import axios from "axios";
@@ -203,7 +202,10 @@ const middleware = [
 	...getDefaultMiddleware({
 		thunk: true,
 		serializableCheck: {
-			ignoredActions: ["user/authBuilder"],
+			ignoredActions: ["user/authBuilder", "feed/setUpload"],
+		},
+		immutableCheck: {
+			ignoredPaths: ["feed.upload.file"],
 		},
 	}),
 	sagaMiddleware,

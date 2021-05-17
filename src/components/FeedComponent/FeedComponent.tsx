@@ -38,7 +38,7 @@ export default function FeedComponent({ index, feed }: FeedProps) {
 				<video
 					className='feed-picture'
 					loop={true}
-					preload='none'
+					preload='metadata'
 					controls
 					src={feed.posts}
 				></video>
