@@ -9,8 +9,8 @@ import avatar from "../../assets/icons/account-circle-outline.svg";
 export default function FeedComponent({ index, feed }: FeedProps) {
 	const dispatch = useDispatch();
 
-	function openBottom(s: boolean) {
-		dispatch(actions.BoolShit.changeBottomMenu(s));
+	function openBottom(open: boolean) {
+		dispatch(actions.BoolShit.changeBottomMenu(open));
 		dispatch(actions.Feed.setBottom({ index, feed }));
 	}
 

@@ -11,7 +11,7 @@ import { firebase } from "../plugins/firebase";
 import logger from "redux-logger";
 import rootSaga from "./sagas";
 import axios from "axios";
-import { FeedTypes, FLogin, IBoolShitState, IFeedState, IUserState } from "../types";
+import { FLogin, IBoolShitState, IFeedState, IUserState } from "../types";
 
 const sagaMiddleware = createSagaMiddleware();
 export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
@@ -97,15 +97,9 @@ export const BoolShit = createSlice({
 		changeBottomMenu: (state, action) => {
 			state.bottomMenu = action.payload;
 		},
-	},
-	extraReducers: (builder) => {
-		builder
-			.addCase(fetchFeed.pending, (state) => {
-				state.loading = true;
-			})
-			.addCase(fetchFeed.fulfilled, (state) => {
-				state.loading = false;
-			});
+		changeLoading: (state, action) => {
+			state.loading = action.payload;
+		},
 	},
 });
 
@@ -181,9 +175,13 @@ export const Feed = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchFeed.fulfilled, (state, action: PayloadAction<FeedTypes[]>) => {
+			.addCase(fetchFeed.pending, (state) => {
+				BoolShit.actions.changeLoading(true);
+			})
+			.addCase(fetchFeed.fulfilled, (state, action: any) => {
 				state.all = [...action.payload];
 				state.all.reverse();
+				BoolShit.actions.changeLoading(false);
 			})
 			.addCase(deletePostFetch.fulfilled, (state, action: any) => {
 				state.all.splice(action.payload.index, 1);

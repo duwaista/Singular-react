@@ -71,6 +71,6 @@ export default function* rootSaga() {
 function* workerUpload(action: any) {
 	const uploadRes: IPost = yield call(fetchUpload, action);
 	const user: IUserState = yield select((state) => state.user);
-	const payload: FeedTypes = yield call(fetchFirestoreAdd, uploadRes, user);
+	const payload: FeedTypes = yield call(fetchMongoAdd, uploadRes, user);
 	yield put(actions.Feed.setPost(payload));
 }

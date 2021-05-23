@@ -23,22 +23,24 @@ export default function DrawerComponent() {
 		return (
 			<div className='drawer-content'>
 				{logged && (
-					<div className='drawer-user-container drawer-item-container'>
-						{user.profile.photoURL !== null ? (
-							<img
-								alt='user avatar'
-								className='drawer-avatar'
-								src={user.profile.photoURL}
-							/>
-						) : (
-							<img
-								alt='user avatar'
-								className='start-icon drawer-avatar'
-								src={avatar}
-							/>
-						)}
-						<span className='drawer-menu-text'>{user.profile.email}</span>
-					</div>
+					<Link to='/user'>
+						<div className='drawer-user-container drawer-item-container'>
+							{user.profile.photoURL !== null ? (
+								<img
+									alt='user avatar'
+									className='drawer-avatar'
+									src={user.profile.photoURL}
+								/>
+							) : (
+								<img
+									alt='user avatar'
+									className='start-icon drawer-avatar'
+									src={avatar}
+								/>
+							)}
+							<span className='drawer-menu-text'>{user.profile.email}</span>
+						</div>
+					</Link>
 				)}
 				<Link to='/'>
 					<div className='drawer-item-container'>

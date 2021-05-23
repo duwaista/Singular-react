@@ -4,12 +4,12 @@ import HeaderComponent from "../HeaderComponent/HeaderComponent";
 import CustomButton from "../BasicComponents/CustomButton/CustomButton";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLogin } from "../../store/store";
+import { AppState, fetchLogin } from "../../store/store";
 
 export default function SignIn() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const logged: boolean = useSelector((state) => (state as any).user.logged);
+	const logged: boolean = useSelector((state: AppState) => state.user.logged);
 	const dispatch = useDispatch();
 
 	function login() {

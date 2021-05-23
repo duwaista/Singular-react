@@ -16,6 +16,7 @@ const BottomMenuComponent = React.lazy(
 	() => import("./components/BottomMenuComponent/BottomMenuComponent")
 );
 const About = React.lazy(() => import("./components/About/AboutComponent"));
+const Profile = React.lazy(()=> import("./components/ProfileComponent/Profile"));
 
 function App() {
 	const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
 					<Route path='/sign-in' component={SignIn} />
 					<Route path='/sign-up' component={SignUp} />
 					<Route path='/about' component={About} />
+					<Route path='/user' component={Profile} />
 				</Suspense>
 			</Switch>
 		</Router>
