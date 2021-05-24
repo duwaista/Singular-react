@@ -6,7 +6,7 @@ import DrawerComponent from "../DrawerComponent/DrawerComponent";
 import { HeaderProps } from "../../types";
 import menu from "../../assets/icons/menu.svg";
 
-export default function HeaderComponent({ title, icon }: HeaderProps) {
+export default function HeaderComponent({ title, icon }: HeaderProps): JSX.Element {
 	const dispatch = useDispatch();
 
 	function openDrawer(drawer: boolean) {

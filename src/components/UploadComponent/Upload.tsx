@@ -4,13 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import CustomButton from "../BasicComponents/CustomButton/CustomButton";
 import { actions, AppState } from "../../store/store";
 
-export default function Upload() {
+export default function Upload(): JSX.Element {
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
 	const [file, setFile] = useState<File>();
 	const dispatch = useDispatch();
 
 	function changeHandler(event: any) {
-		setFile(event.target.files[0]);
+		const target = event.target as HTMLInputElement;
+		const file: File = (target.files as FileList)[0];
+		console.log(file);
+		setFile(file);
 	}
 
 	async function addFile() {
@@ -37,7 +40,7 @@ export default function Upload() {
 					<input
 						accept='image/*, video/*'
 						type='file'
-						onChange={(e) => changeHandler(e)}
+						onChange={(event) => changeHandler(event)}
 						className='upload-input'
 					/>
 					<CustomButton onClick={() => addFile()} height='30px' text={true}>

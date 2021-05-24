@@ -1,9 +1,9 @@
 import {
 	createAsyncThunk,
 	createSlice,
-	PayloadAction,
 	getDefaultMiddleware,
 	configureStore,
+	PayloadAction,
 } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
@@ -11,7 +11,7 @@ import { firebase } from "../plugins/firebase";
 import logger from "redux-logger";
 import rootSaga from "./sagas";
 import axios from "axios";
-import { FLogin, IBoolShitState, IFeedState, IUserState } from "../types";
+import { FLogin, IBoolShitState, ICurrentPost, IFeedState, IUserState } from "../types";
 
 const sagaMiddleware = createSagaMiddleware();
 export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
@@ -57,7 +57,7 @@ export const logoutUserFetch = createAsyncThunk("logoutUserFetch", async () => {
 	}
 });
 
-export const deletePostFetch = createAsyncThunk("deletePostFetch", async ({ currentPost }: any) => {
+export const deletePostFetch = createAsyncThunk("deletePostFetch", async ({ currentPost }: ICurrentPost) => {
 	try {
 		await axios.delete(url + currentPost.feed._id);
 		return currentPost;
@@ -129,11 +129,11 @@ export const User = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchLogin.fulfilled, (state, action: PayloadAction<any>) => {
+			.addCase(fetchLogin.fulfilled, (state, action) => {
 				User.caseReducers.authBuilder(state, action);
 				state.logged = true;
 			})
-			.addCase(fetchRegister.fulfilled, (state, action: PayloadAction<any>) => {
+			.addCase(fetchRegister.fulfilled, (state, action) => {
 				User.caseReducers.authBuilder(state, action);
 				state.logged = true;
 			})
@@ -153,10 +153,20 @@ export const Feed = createSlice({
 	name: "feed",
 	initialState: {
 		all: [],
-		upload: {},
+		upload: {
+			type: '',
+			file: []
+		},
 		currentPost: {
 			index: 0,
-			feed: {},
+			feed: {
+				_id: '',
+				email: '',
+				uid: '',
+				posts: '',
+				type: '',
+				createdAt: ''
+			},
 		},
 	} as IFeedState,
 	reducers: {
@@ -178,12 +188,12 @@ export const Feed = createSlice({
 			.addCase(fetchFeed.pending, (state) => {
 				BoolShit.actions.changeLoading(true);
 			})
-			.addCase(fetchFeed.fulfilled, (state, action: any) => {
+			.addCase(fetchFeed.fulfilled, (state, action) => {
 				state.all = [...action.payload];
 				state.all.reverse();
 				BoolShit.actions.changeLoading(false);
 			})
-			.addCase(deletePostFetch.fulfilled, (state, action: any) => {
+			.addCase(deletePostFetch.fulfilled, (state, action: PayloadAction<any>) => {
 				state.all.splice(action.payload.index, 1);
 			});
 	},

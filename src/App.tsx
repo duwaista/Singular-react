@@ -18,7 +18,7 @@ const BottomMenuComponent = React.lazy(
 const About = React.lazy(() => import("./components/About/AboutComponent"));
 const Profile = React.lazy(()=> import("./components/ProfileComponent/Profile"));
 
-function App() {
+function App(): JSX.Element {
 	const dispatch = useDispatch();
 
 	useEffect(() => {

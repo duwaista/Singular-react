@@ -7,7 +7,7 @@ export interface FeedTypes {
 	email: string | "";
 	uid: string | "";
 	posts: string | "";
-	type: "image" | "video";
+	type: "image" | "video" | "";
 	createdAt: Date | "";
 }
 export type FeedProps = {
@@ -56,18 +56,21 @@ export interface IUserState {
 }
 export interface IFeedState {
 	all: FeedTypes[];
-	currentPost: ICurrentPost;
-	upload: {};
+	currentPost: CurrentPostType;
+	upload: IUpload;
+}
+export interface CurrentPostType {
+	index: number;
+	feed: FeedTypes;
 }
 export interface ICurrentPost {
-	index: number;
-	feed: {};
+	currentPost: CurrentPostType;
 }
 export interface IPost {
 	URL: string;
 	type: "image" | "video";
 }
 export interface IUpload {
-	file: File;
+	file: File[] | [];
 	type: "" | "image" | "video";
 }

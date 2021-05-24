@@ -5,12 +5,11 @@ import { actions, AppState, deletePostFetch } from "../../store/store";
 import BasicElementBottom from "../BasicComponents/BasicElementBottom/BasicElementBottom";
 import deleteIcon from "../../assets/icons/delete.svg";
 import share from "../../assets/icons/share-variant.svg";
-import { FeedTypes } from "../../types";
 
-export default function BottomMenuComponent() {
+export default function BottomMenuComponent(): JSX.Element {
 	const dispatch = useDispatch();
 	const bottom: boolean = useSelector((state: AppState) => state.boolshit.bottomMenu);
-	const currentPost: FeedTypes = useSelector((state) => (state as any).feed.currentPost);
+	const currentPost = useSelector((state: AppState) => state.feed.currentPost);
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
 
 	function closeBottomMenu() {
@@ -27,7 +26,7 @@ export default function BottomMenuComponent() {
 
 	async function sharePic() {
 		const shareData = {
-			url: currentPost.posts,
+			url: currentPost.feed.posts,
 		};
 		try {
 			await navigator.share(shareData);

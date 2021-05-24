@@ -9,7 +9,7 @@ import about from "../../assets/icons/information-outline.svg";
 import news from "../../assets/icons/newspaper-variant-outline.svg";
 import logout from "../../assets/icons/logout.svg";
 
-export default function DrawerComponent() {
+export default function DrawerComponent(): JSX.Element {
 	const drawer: boolean = useSelector((state: AppState) => state.boolshit.drawer);
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
 	const user: IUserState = useSelector((state: AppState) => state.user);

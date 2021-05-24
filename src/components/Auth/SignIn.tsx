@@ -6,7 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, fetchLogin } from "../../store/store";
 
-export default function SignIn() {
+export default function SignIn(): JSX.Element {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);

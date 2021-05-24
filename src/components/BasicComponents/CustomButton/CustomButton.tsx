@@ -9,7 +9,7 @@ export default function CustomButton({
 	text = false,
 	children,
 	onClick,
-}: CustomButtonTypes) {
+}: CustomButtonTypes): JSX.Element {
 	return (
 		<div
 			onClick={onClick}

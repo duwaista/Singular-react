@@ -6,7 +6,7 @@ import { FeedProps } from "../../types";
 import dots from "../../assets/icons/dots-vertical.svg";
 import avatar from "../../assets/icons/account-circle-outline.svg";
 
-export default function FeedComponent({ index, feed }: FeedProps) {
+export default function FeedComponent({ index, feed }: FeedProps): JSX.Element {
 	const dispatch = useDispatch();
 
 	function openBottom(open: boolean) {

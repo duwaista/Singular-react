@@ -3,7 +3,7 @@ import "./AboutStyle.css";
 import version from "../../../package.json";
 import HeaderComponent from "../HeaderComponent/HeaderComponent";
 
-export default function About() {
+export default function About(): JSX.Element {
 	return (
 		<>
 			<HeaderComponent title='О проекте' icon={true} />

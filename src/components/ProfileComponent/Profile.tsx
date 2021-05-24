@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { AppState } from "../../store/store";
 import HeaderComponent from "../HeaderComponent/HeaderComponent";
 
-export default function ProfileComponent() {
+export default function ProfileComponent(): JSX.Element {
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
 
 	return (
