@@ -57,14 +57,17 @@ export const logoutUserFetch = createAsyncThunk("logoutUserFetch", async () => {
 	}
 });
 
-export const deletePostFetch = createAsyncThunk("deletePostFetch", async ({ currentPost }: ICurrentPost) => {
-	try {
-		await axios.delete(url + currentPost.feed._id);
-		return currentPost;
-	} catch (error) {
-		console.log(error);
+export const deletePostFetch = createAsyncThunk(
+	"deletePostFetch",
+	async ({ currentPost }: ICurrentPost) => {
+		try {
+			await axios.delete(url + currentPost.feed._id);
+			return currentPost;
+		} catch (error) {
+			console.log(error);
+		}
 	}
-});
+);
 
 export const BoolShit = createSlice({
 	name: "boolshit",
@@ -77,6 +80,7 @@ export const BoolShit = createSlice({
 		bottomMenu: false,
 		uploadMenu: false,
 		loading: false,
+		fullScreenDialog: false
 	} as IBoolShitState,
 	reducers: {
 		changeTheme: (state, action) => {
@@ -100,6 +104,9 @@ export const BoolShit = createSlice({
 		changeLoading: (state, action) => {
 			state.loading = action.payload;
 		},
+		changeFullScreenDialog: (state, action) => {
+			state.fullScreenDialog = action.payload;
+		}
 	},
 });
 
@@ -154,18 +161,19 @@ export const Feed = createSlice({
 	initialState: {
 		all: [],
 		upload: {
-			type: '',
-			file: []
+			type: "",
+			file: [],
 		},
+		picture: "",
 		currentPost: {
 			index: 0,
 			feed: {
-				_id: '',
-				email: '',
-				uid: '',
-				posts: '',
-				type: '',
-				createdAt: ''
+				_id: "",
+				email: "",
+				uid: "",
+				posts: "",
+				type: "",
+				createdAt: "",
 			},
 		},
 	} as IFeedState,
@@ -181,6 +189,9 @@ export const Feed = createSlice({
 		},
 		setPost: (state, action) => {
 			state.all.unshift(action.payload);
+		},
+		setPicture: (state, action) => {
+			state.picture = action.payload;
 		},
 	},
 	extraReducers: (builder) => {

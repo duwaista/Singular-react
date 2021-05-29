@@ -17,6 +17,8 @@ const BottomMenuComponent = React.lazy(
 );
 const About = React.lazy(() => import("./components/About/AboutComponent"));
 const Profile = React.lazy(()=> import("./components/ProfileComponent/Profile"));
+const FullScreenDialog = React.lazy(()=> import("./components/FullScreenPictureComponent/FullScreenDialog"));
+
 
 function App(): JSX.Element {
 	const dispatch = useDispatch();
@@ -37,6 +39,7 @@ function App(): JSX.Element {
 					<div className='App'>
 						<Suspense fallback={<Loading />}>
 							<BottomMenuComponent />
+							<FullScreenDialog />
 						</Suspense>
 						<HeaderComponent title='Главная' icon={true} />
 						<Suspense fallback={<Loading />}>

@@ -14,6 +14,11 @@ export default function FeedComponent({ index, feed }: FeedProps): JSX.Element {
 		dispatch(actions.Feed.setBottom({ index, feed }));
 	}
 
+	function openFullScreen(open: boolean, picture: string) {
+		dispatch(actions.BoolShit.changeFullScreenDialog(open));
+		dispatch(actions.Feed.setPicture(picture));
+	}
+
 	return (
 		<div className='feed-container'>
 			<div className='feed-info-container'>
@@ -44,7 +49,13 @@ export default function FeedComponent({ index, feed }: FeedProps): JSX.Element {
 				></video>
 			)}
 			{feed.type !== "video" && (
-				<img alt={feed.posts} loading='lazy' className='feed-picture' src={feed.posts} />
+				<img
+					alt={feed.posts}
+					loading='lazy'
+					onClick={() => openFullScreen(true, feed.posts)}
+					className='feed-picture'
+					src={feed.posts}
+				/>
 			)}
 		</div>
 	);

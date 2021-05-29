@@ -12,7 +12,6 @@ export default function Upload(): JSX.Element {
 	function changeHandler(event: any) {
 		const target = event.target as HTMLInputElement;
 		const file: File = (target.files as FileList)[0];
-		console.log(file);
 		setFile(file);
 	}
 

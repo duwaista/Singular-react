@@ -44,6 +44,7 @@ export interface IBoolShitState {
 	bottomMenu: boolean;
 	uploadMenu: boolean;
 	loading: boolean;
+	fullScreenDialog: boolean;
 }
 export interface IUserState {
 	logged: boolean;
@@ -58,6 +59,7 @@ export interface IFeedState {
 	all: FeedTypes[];
 	currentPost: CurrentPostType;
 	upload: IUpload;
+	picture: string;
 }
 export interface CurrentPostType {
 	index: number;
@@ -74,3 +76,4 @@ export interface IUpload {
 	file: File[] | [];
 	type: "" | "image" | "video";
 }
+
