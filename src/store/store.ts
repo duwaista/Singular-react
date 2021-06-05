@@ -80,7 +80,7 @@ export const BoolShit = createSlice({
 		bottomMenu: false,
 		uploadMenu: false,
 		loading: false,
-		fullScreenDialog: false
+		fullScreenDialog: false,
 	} as IBoolShitState,
 	reducers: {
 		changeTheme: (state, action) => {
@@ -106,7 +106,7 @@ export const BoolShit = createSlice({
 		},
 		changeFullScreenDialog: (state, action) => {
 			state.fullScreenDialog = action.payload;
-		}
+		},
 	},
 });
 
@@ -176,6 +176,11 @@ export const Feed = createSlice({
 				createdAt: "",
 			},
 		},
+		uploadProgress: {
+			progress: 0,
+			uploading: false,
+			done: false,
+		},
 	} as IFeedState,
 	reducers: {
 		setBottom: (state, action) => {
@@ -192,6 +197,10 @@ export const Feed = createSlice({
 		},
 		setPicture: (state, action) => {
 			state.picture = action.payload;
+		},
+		setProgress: (state, action) => {
+			state.uploadProgress = action.payload;
+			console.log("PROGRESS: ", action.payload.progress);
 		},
 	},
 	extraReducers: (builder) => {
@@ -224,7 +233,7 @@ const middleware = [
 			ignoredActions: ["user/authBuilder", "feed/setUpload"],
 		},
 		immutableCheck: {
-			ignoredPaths: ["feed.upload.file"],
+			ignoredPaths: ["feed.upload"],
 		},
 	}),
 	sagaMiddleware,

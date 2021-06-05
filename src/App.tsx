@@ -52,7 +52,7 @@ function App(): JSX.Element {
 					<Route path='/sign-in' component={SignIn} />
 					<Route path='/sign-up' component={SignUp} />
 					<Route path='/about' component={About} />
-					<Route path='/user' component={Profile} />
+					<Route path='/user/:id' component={Profile} />
 				</Suspense>
 			</Switch>
 		</Router>

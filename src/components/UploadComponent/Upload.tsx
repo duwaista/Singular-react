@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UploadStyle.css";
 import { useSelector, useDispatch } from "react-redux";
 import CustomButton from "../BasicComponents/CustomButton/CustomButton";
@@ -6,7 +6,8 @@ import { actions, AppState } from "../../store/store";
 
 export default function Upload(): JSX.Element {
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
-	const [file, setFile] = useState<File>();
+	const progress = useSelector((state: AppState) => state.feed.uploadProgress);
+	const [file, setFile] = useState<File | null>();
 	const dispatch = useDispatch();
 
 	function changeHandler(event: any) {
@@ -14,6 +15,12 @@ export default function Upload(): JSX.Element {
 		const file: File = (target.files as FileList)[0];
 		setFile(file);
 	}
+
+	useEffect(() => {
+		if (progress.done && !progress.uploading) {
+			setFile(null);
+		}
+	}, [progress]);
 
 	async function addFile() {
 		const maxImageSize: number = 5 * 1024 * 1024;
@@ -42,11 +49,18 @@ export default function Upload(): JSX.Element {
 						onChange={(event) => changeHandler(event)}
 						className='upload-input'
 					/>
-					<CustomButton onClick={() => addFile()} height='30px' text={true}>
-						Upload
-					</CustomButton>
+					{!progress.uploading && (
+						<CustomButton onClick={() => addFile()} height='30px' text={true}>
+							Upload
+						</CustomButton>
+					)}
 					<div className='upload-progress-container'>
-						<div className='progress-line'></div>
+						{progress.uploading && (
+							<div
+								style={{ width: progress.progress + "%" }}
+								className='progress-line'
+							></div>
+						)}
 					</div>
 				</div>
 			)}

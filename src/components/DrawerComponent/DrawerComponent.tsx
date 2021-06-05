@@ -12,7 +12,7 @@ import logout from "../../assets/icons/logout.svg";
 export default function DrawerComponent(): JSX.Element {
 	const drawer: boolean = useSelector((state: AppState) => state.boolshit.drawer);
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
-	const user: IUserState = useSelector((state: AppState) => state.user);
+	const user = useSelector((state: AppState) => state.user.profile);
 	const dispatch = useDispatch();
 
 	function closeDrawer() {
@@ -23,13 +23,13 @@ export default function DrawerComponent(): JSX.Element {
 		return (
 			<div className='drawer-content'>
 				{logged && (
-					<Link to='/user'>
+					<Link to={`user/${user.uid}`}>
 						<div className='drawer-user-container drawer-item-container'>
-							{user.profile.photoURL !== null ? (
+							{user.photoURL !== null ? (
 								<img
 									alt='user avatar'
 									className='drawer-avatar'
-									src={user.profile.photoURL}
+									src={user.photoURL}
 								/>
 							) : (
 								<img
@@ -38,7 +38,7 @@ export default function DrawerComponent(): JSX.Element {
 									src={avatar}
 								/>
 							)}
-							<span className='drawer-menu-text'>{user.profile.email}</span>
+							<span className='drawer-menu-text'>{user.email}</span>
 						</div>
 					</Link>
 				)}

@@ -60,6 +60,11 @@ export interface IFeedState {
 	currentPost: CurrentPostType;
 	upload: IUpload;
 	picture: string;
+	uploadProgress: {
+		progress: number,
+		uploading: boolean,
+		done: boolean
+	}
 }
 export interface CurrentPostType {
 	index: number;
@@ -76,4 +81,6 @@ export interface IUpload {
 	file: File[] | [];
 	type: "" | "image" | "video";
 }
-
+export interface IdType {
+	id: string;
+}

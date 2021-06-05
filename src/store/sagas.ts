@@ -31,25 +31,6 @@ async function fetchUpload(action: any) {
 	}
 }
 
-//========== Will used later ==========//
-
-// async function fetchFirestoreAdd(uploadRes: IPost, user: IUserState) {
-// 	const post = {
-// 		email: user.profile.email,
-// 		avatarUrl: user.profile.photoURL,
-// 		posts: uploadRes.URL,
-// 		type: uploadRes.type,
-// 		uid: user.profile.uid,
-// 		createdAt: new Date(),
-// 	};
-// 	try {
-// 		await db.collection("feed").add(post);
-// 		return post;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// }
-
 async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
 	const post = {
 		email: user.profile.email,
@@ -72,8 +53,18 @@ export default function* rootSaga(): Generator {
 }
 
 function* workerUpload(action: PayloadAction) {
+	//======== Lol it's progress bar ========//
+	yield put(actions.Feed.setProgress({ progress: 10, done: false, uploading: true }));
+
 	const uploadRes: IPost = yield call(fetchUpload, action);
+	yield put(actions.Feed.setProgress({ progress: 25, done: false, uploading: true }));
+
 	const user: IUserState = yield select((state) => state.user);
+	yield put(actions.Feed.setProgress({ progress: 50, done: false, uploading: true }));
+
 	const payload: FeedTypes = yield call(fetchMongoAdd, uploadRes, user);
+	yield put(actions.Feed.setProgress({ progress: 75, done: false, uploading: true }));
+
 	yield put(actions.Feed.setPost(payload));
+	yield put(actions.Feed.setProgress({ progress: 100, done: true, uploading: false }));
 }
