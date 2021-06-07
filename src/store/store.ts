@@ -20,8 +20,8 @@ export const fetchFeed = createAsyncThunk("fetchFeed", async () => {
 	try {
 		const response = await axios.get(url);
 		return await response.data;
-	} catch (err) {
-		console.log(err);
+	} catch (error) {
+		console.log(error);
 		return null;
 	}
 });
@@ -30,8 +30,8 @@ export const fetchLogin = createAsyncThunk("fetchLogin", async ({ email, passwor
 	try {
 		const response = await firebase.auth().signInWithEmailAndPassword(email, password);
 		return response.user;
-	} catch (err) {
-		console.log(err);
+	} catch (error) {
+		console.log(error);
 		return null;
 	}
 });
@@ -42,8 +42,8 @@ export const fetchRegister = createAsyncThunk(
 		try {
 			const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
 			return response.user;
-		} catch (e) {
-			console.log(e);
+		} catch (error) {
+			console.log(error);
 			return null;
 		}
 	}
@@ -200,7 +200,6 @@ export const Feed = createSlice({
 		},
 		setProgress: (state, action) => {
 			state.uploadProgress = action.payload;
-			console.log("PROGRESS: ", action.payload.progress);
 		},
 	},
 	extraReducers: (builder) => {

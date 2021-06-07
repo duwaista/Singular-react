@@ -3,7 +3,6 @@ import "./DrawerStyle.css";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, AppState, logoutUserFetch } from "../../store/store";
 import { Link } from "react-router-dom";
-import { IUserState } from "../../types";
 import avatar from "../../assets/icons/account-circle-outline.svg";
 import about from "../../assets/icons/information-outline.svg";
 import news from "../../assets/icons/newspaper-variant-outline.svg";

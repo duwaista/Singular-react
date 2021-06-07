@@ -39,12 +39,15 @@ async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
 		type: uploadRes.type,
 		uid: user.profile.uid,
 		createdAt: new Date(),
-	};
+	} as FeedTypes;
 	try {
-		await axios.post(url, post, options);
+		await axios.post(url, post, options).then((response) => {
+			post._id = response.data.insertedId;
+			return null;
+		});
 		return post;
-	} catch (err) {
-		console.log(err);
+	} catch (error) {
+		console.error(error);
 	}
 }
 

@@ -49,11 +49,9 @@ export default function Upload(): JSX.Element {
 						onChange={(event) => changeHandler(event)}
 						className='upload-input'
 					/>
-					{!progress.uploading && (
-						<CustomButton onClick={() => addFile()} height='30px' text={true}>
-							Upload
-						</CustomButton>
-					)}
+					<CustomButton onClick={() => addFile()} height='30px' text={true}>
+						Upload
+					</CustomButton>
 					<div className='upload-progress-container'>
 						{progress.uploading && (
 							<div
