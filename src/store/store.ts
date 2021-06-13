@@ -11,7 +11,7 @@ import { firebase } from "../plugins/firebase";
 import logger from "redux-logger";
 import rootSaga from "./sagas";
 import axios from "axios";
-import { FLogin, IBoolShitState, ICurrentPost, IFeedState, IUserState } from "../types";
+import { FLogin, IBoolShitState, ICurrentPost, IFeedState, ISnack, IUserState } from "../types";
 
 const sagaMiddleware = createSagaMiddleware();
 export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
@@ -32,7 +32,7 @@ export const fetchLogin = createAsyncThunk("fetchLogin", async ({ email, passwor
 		return response.user;
 	} catch (error) {
 		console.log(error);
-		return null;
+		return error;
 	}
 });
 
@@ -204,13 +204,9 @@ export const Feed = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchFeed.pending, (state) => {
-				BoolShit.actions.changeLoading(true);
-			})
 			.addCase(fetchFeed.fulfilled, (state, action) => {
 				state.all = [...action.payload];
 				state.all.reverse();
-				BoolShit.actions.changeLoading(false);
 			})
 			.addCase(deletePostFetch.fulfilled, (state, action: PayloadAction<any>) => {
 				state.all.splice(action.payload.index, 1);
@@ -218,10 +214,32 @@ export const Feed = createSlice({
 	},
 });
 
+export const SnackBar = createSlice({
+	name: "snackBar",
+	initialState: {
+		toasts: [],
+	} as ISnack,
+	reducers: {
+		add: (state, action) => {
+			console.log("TOAST ADDED", action);
+			state.toasts = [...action.payload];
+		},
+		removeOne: (state, action) => {
+			state.toasts.splice(action.payload.index, 1);
+			console.log("TOAST DELETED", action.payload.index);
+		},
+		clear: (state) => {
+			state.toasts = [];
+			console.log("TOAST CLEARED");
+		},
+	},
+});
+
 const reducer = combineReducers({
 	boolshit: BoolShit.reducer,
 	user: User.reducer,
 	feed: Feed.reducer,
+	snackBar: SnackBar.reducer,
 });
 
 const devMode = process.env.NODE_ENV === "development";
@@ -256,6 +274,7 @@ export const actions = {
 	BoolShit: BoolShit.actions,
 	User: User.actions,
 	Feed: Feed.actions,
+	SnackBar: SnackBar.actions,
 };
 
 sagaMiddleware.run(rootSaga);
