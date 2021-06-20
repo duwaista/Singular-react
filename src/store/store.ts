@@ -75,8 +75,6 @@ export const BoolShit = createSlice({
 		dark: false,
 		drawer: false,
 		isMobile: false,
-		inDialog: false,
-		upDialog: false,
 		bottomMenu: false,
 		uploadMenu: false,
 		loading: false,
@@ -88,24 +86,51 @@ export const BoolShit = createSlice({
 		},
 		changeDrawer: (state, action) => {
 			state.drawer = action.payload;
+			if (action.payload) {
+				document.body.style.overflow = "hidden";
+				if (!state.isMobile) {
+					document.body.style.marginRight = "17px";
+				} else {
+					document.body.style.marginRight = "0";
+				}
+			} else {
+				document.body.style.overflow = "auto";
+				document.body.style.marginRight = "0";
+			}
 		},
 		setMobile: (state, action) => {
 			state.isMobile = action.payload;
 		},
-		changeInDialog: (state, action) => {
-			state.inDialog = action.payload;
-		},
-		changeUpDialog: (state, action) => {
-			state.upDialog = action.payload;
-		},
 		changeBottomMenu: (state, action) => {
 			state.bottomMenu = action.payload;
+			if (action.payload) {
+				document.body.style.overflow = "hidden";
+				if (!state.isMobile) {
+					document.body.style.marginRight = "17px";
+				} else {
+					document.body.style.marginRight = "0";
+				}
+			} else {
+				document.body.style.overflow = "auto";
+				document.body.style.marginRight = "0";
+			}
 		},
 		changeLoading: (state, action) => {
 			state.loading = action.payload;
 		},
 		changeFullScreenDialog: (state, action) => {
 			state.fullScreenDialog = action.payload;
+			if (action.payload) {
+				document.body.style.overflow = "hidden";
+				if (!state.isMobile) {
+					document.body.style.marginRight = "17px";
+				} else {
+					document.body.style.marginRight = "0";
+				}
+			} else {
+				document.body.style.overflow = "auto";
+				document.body.style.marginRight = "0";
+			}
 		},
 	},
 });

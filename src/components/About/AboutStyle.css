@@ -37,6 +37,10 @@
     background-color: #4080FF;
 }
 
+.about-content-block > span > a {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 700px) {
     .about-content {
         width: 90%;

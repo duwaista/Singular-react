@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./FullScreenDialogStyle.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, actions } from "../../store/store";
@@ -12,23 +12,18 @@ export default function FullScreenDialog(): JSX.Element {
 		dispatch(actions.BoolShit.changeFullScreenDialog(false));
 	}
 
-	useEffect(() => {
-		if (!open) {
-			document.body.style.overflow = "auto";
-		} else {
-			document.body.style.overflow = "hidden";
-		}
-	}, [open]);
-
 	return (
 		<>
-			{open && (
-				<div className={`fullscreen-container${open && '-open'}`} onClick={closeFullScreen}>
+			<div
+				className={`fullscreen-container ${open && "fullscreen-container-open"}`}
+				onClick={closeFullScreen}
+			>
+				{open && (
 					<div className='fullscreen-content'>
 						<img src={picture} className='fullscreen-picture' alt='Full screen' />
 					</div>
-				</div>
-			)}
+				)}
+			</div>
 		</>
 	);
 }

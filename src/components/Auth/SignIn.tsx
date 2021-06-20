@@ -27,7 +27,7 @@ export default function SignIn(): JSX.Element {
 
 	return (
 		<>
-			<HeaderComponent title='Вход' />
+			<HeaderComponent title='Вход' icon={true}/>
 			<div className='auth-container'>
 				<form className='auth-form'>
 					<input
