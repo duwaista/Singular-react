@@ -66,14 +66,6 @@ export interface IFeedState {
 		done: boolean
 	}
 }
-export type SnackTypes = {
-	type: 'error' | 'warning' | 'success',
-	massege: string,
-	index?: number
-}
-export interface ISnack {
-	toasts: SnackTypes[];
-}
 export interface CurrentPostType {
 	index: number;
 	feed: FeedTypes;
@@ -91,4 +83,12 @@ export interface IUpload {
 }
 export interface IdType {
 	id: string;
+}
+export type SnackTypes = {
+	type: 'error' | 'warning' | 'success',
+	massege: string,
+	index?: number
+}
+export interface ISnack {
+	toasts: SnackTypes[];
 }

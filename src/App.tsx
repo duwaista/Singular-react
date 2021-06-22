@@ -59,6 +59,7 @@ function App(): JSX.Element {
 					<Route path='/about' component={About} />
 					<Route path='/user/:id' component={FullScreenDialog} />
 					<Route path='/user/:id' component={Profile} />
+					<Route path='/user/:id' component={BottomMenuComponent} />
 				</Suspense>
 			</Switch>
 		</Router>

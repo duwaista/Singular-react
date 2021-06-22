@@ -13,7 +13,7 @@
 	top: 0;
 	left: 0;
 	position: fixed;
-	backdrop-filter: brightness(90%);
+	backdrop-filter: brightness(80%);
 	transform: translate(0);
 }
 
@@ -22,12 +22,17 @@
 	height: 100%;
 	border-radius: 2px;
 	position: relative;
+	object-fit: contain;
+}
+
+.fullscreen-content {
+	max-height: 97%;
 }
 
 @media screen and (min-width: 700px) {
 	.fullscreen-content {
 		position: relative;
-		max-width: 96%;
+		max-width: 70%;
 		margin-right: 17px;
 		max-height: 96%;
 	}
