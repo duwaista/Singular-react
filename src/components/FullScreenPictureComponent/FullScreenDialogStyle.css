@@ -42,4 +42,7 @@
 	.fullscreen-container-open {
 		background-color: white;
 	}
+	.fullscreen-content {
+		min-width: 80%;
+	}
 }

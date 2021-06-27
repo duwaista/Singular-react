@@ -1,9 +1,10 @@
 .drawer {
     height: 100%;
-    width: 250px;
+    width: 249px;
     background-color: #ffff;
-    transition: all 0.19s ease-in-out;
+    transition: all 0.2s ease-in-out;
     transform: translate(+250px);
+    border-left: 1px solid #c5c2c2;
     position: fixed;
     z-index: 3;
     top: 0;
@@ -11,13 +12,12 @@
 }
 @media screen and (min-width: 700px) {
     .drawer {
-        width: 300px;
+        width: 299px;
         transform: translate(+300px);
     }
 }
 .drawer-open {
     transform: translate(0);
-    border-left: 1px solid #c5c2c2;
 }
 .drawer-content {
     display: flex;

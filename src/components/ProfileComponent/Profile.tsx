@@ -13,8 +13,8 @@ export default function ProfileComponent(): JSX.Element {
 	const all: FeedTypes[] = useSelector((state: AppState) => state.feed.all);
 
 	//========== Dw i'm fine ==========//
-	const filteredAll: FeedTypes[] = all.filter(al => al.uid === id);
-	const avatar = 'https://sun9-65.userapi.com/impg/2cF_5ozpq0NeV1V8ezFij6KVKri10Fl27kEhKA/pyKgzAl19bU.jpg?size=1098x1002&quality=96&sign=c741277fe2a8ce690444ff8c2ddf030a&type=album'
+	const filteredAll: FeedTypes[] = all.filter((al) => al.uid === id);
+	const avatar = "https://sun9-65.userapi.com/impg/2cF_5ozpq0NeV1V8ezFij6KVKri10Fl27kEhKA/pyKgzAl19bU.jpg?size=1098x1002&quality=96&sign=c741277fe2a8ce690444ff8c2ddf030a&type=album";
 	const dispatch = useDispatch();
 
 	function openFullScreen(open: boolean, picture: string) {
@@ -23,9 +23,7 @@ export default function ProfileComponent(): JSX.Element {
 	}
 
 	useEffect(() => {
-		if (all.length === 0) {
-			dispatch(fetchFeed());
-		}
+		if (all.length === 0) dispatch(fetchFeed());
 	}, []);
 
 	return (
@@ -47,10 +45,10 @@ export default function ProfileComponent(): JSX.Element {
 				<div className='profile-bottom-line'></div>
 			</div>
 			{useMemo(() => {
-					return filteredAll.map((feed: FeedTypes, index: number) => (
-						<FeedComponent key={index} index={index} feed={feed} />
-					));
-				}, [filteredAll])}
+				return filteredAll.map((feed: FeedTypes, index: number) => (
+					<FeedComponent key={index} index={index} feed={feed} />
+				));
+			}, [filteredAll])}
 		</>
 	);
 }

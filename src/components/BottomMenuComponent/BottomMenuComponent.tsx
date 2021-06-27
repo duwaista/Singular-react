@@ -11,7 +11,7 @@ export default function BottomMenuComponent(): JSX.Element {
 	const dispatch = useDispatch();
 	const bottom: boolean = useSelector((state: AppState) => state.boolshit.bottomMenu);
 	const currentPost = useSelector((state: AppState) => state.feed.currentPost);
-	const logged: boolean = useSelector((state: AppState) => state.user.logged);
+	const user = useSelector((state: AppState) => state.user);
 
 	function closeBottomMenu() {
 		dispatch(actions.BoolShit.changeBottomMenu(false));
@@ -39,26 +39,32 @@ export default function BottomMenuComponent(): JSX.Element {
 	return (
 		<div onClick={closeBottomMenu} className={`bottom-menu ${bottom && "bottom-menu-open"}`}>
 			<div className={`bottom-menu-content ${bottom && "bottom-menu-content-open"}`}>
-				{ bottom &&<>
-					<div className={"bottom-line-container"}>
-						<div className={"small-button-line"}></div>
-					</div>
-					{logged && (
-						<>
-							<BasicElementBottom
-								onClick={deletePost}
-								text='Удалить'
-								icon={deleteIcon}
-							/>
-							<BasicElementBottom
-								onClick={editPost}
-								text='Редактировать (не работает)'
-								icon={edit}
-							/>
-						</>
-					)}
-					<BasicElementBottom onClick={sharePic} text='Поделиться' icon={share} />
-				</>}
+				{bottom && (
+					<>
+						<div className={"bottom-line-container"}>
+							<div className={"small-button-line"}></div>
+						</div>
+						{user.logged && (
+							<>
+								{user.profile.uid === currentPost.feed.uid && (
+									<>
+										<BasicElementBottom
+											onClick={deletePost}
+											text='Удалить'
+											icon={deleteIcon}
+										/>
+										<BasicElementBottom
+											onClick={editPost}
+											text='Редактировать'
+											icon={edit}
+										/>
+									</>
+								)}
+							</>
+						)}
+						<BasicElementBottom onClick={sharePic} text='Поделиться' icon={share} />
+					</>
+				)}
 			</div>
 		</div>
 	);
