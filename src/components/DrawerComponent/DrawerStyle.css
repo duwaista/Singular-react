@@ -1,85 +1,85 @@
 .drawer {
-    height: 100%;
-    width: 249px;
-    background-color: #ffff;
-    transition: all 0.2s ease-in-out;
-    transform: translate(+250px);
-    border-left: 1px solid #c5c2c2;
-    position: fixed;
-    z-index: 3;
-    top: 0;
-    right: 0;
+	height: 100%;
+	width: 249px;
+	background-color: #ffff;
+	transition: all 0.2s ease-in-out;
+	transform: translate(+250px);
+	border-left: 1px solid #c5c2c2;
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	right: 0;
 }
 @media screen and (min-width: 700px) {
-    .drawer {
-        width: 299px;
-        transform: translate(+300px);
-    }
+	.drawer {
+		width: 299px;
+		transform: translate(+300px);
+	}
 }
 .drawer-open {
-    transform: translate(0);
+	transform: translate(0);
 }
 .drawer-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 .buttons-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: flex-end;
-    justify-self: center;
-    align-self: flex-end;
-    bottom: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: flex-end;
+	justify-self: center;
+	align-self: flex-end;
+	bottom: 0;
 }
 .buttons {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    width: 70%;
-    height: 30px;
-    border-radius: 16px;
-    background-color: #ffff;
-    border: 1px solid #4080FF;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 8px;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	width: 70%;
+	height: 30px;
+	border-radius: 16px;
+	background-color: #ffff;
+	border: 1px solid #4080ff;
+	cursor: pointer;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 8px;
 }
 .buttons:hover {
-    background-color: #4080FF;
-    color: white;
+	background-color: #4080ff;
+	color: white;
 }
 .drawer-auth-text {
-    align-self: center;
+	align-self: center;
 }
 .drawer-user-container {
-    border-bottom: 1px solid #c5c2c2;
+	border-bottom: 1px solid #c5c2c2;
 }
 .drawer-item-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 47px;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 47px;
+	cursor: pointer;
 }
 .drawer-item-container:hover {
-    background-color: #f1f1f1;
+	background-color: #f1f1f1;
 }
 .drawer-avatar {
-    width: 40px;
-    height: 40px;
+	width: 40px;
+	height: 40px;
 }
 .start-icon {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    margin-left: 10px;
-    border-radius: 40px;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	margin-left: 10px;
+	border-radius: 40px;
 }
 .drawer-menu-text {
-    margin-left: 10px;
-    font-size: 17px;
+	margin-left: 10px;
+	font-size: 17px;
 }

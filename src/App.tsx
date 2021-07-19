@@ -14,9 +14,8 @@ const SignIn = React.lazy(() => import("./components/Auth/SignIn"));
 const SignUp = React.lazy(() => import("./components/Auth/SignUp"));
 const BottomMenuComponent = React.lazy(() => import("./components/BottomMenuComponent/BottomMenuComponent"));
 const About = React.lazy(() => import("./components/About/AboutComponent"));
-const Profile = React.lazy(()=> import("./components/ProfileComponent/Profile"));
-const FullScreenDialog = React.lazy(()=> import("./components/FullScreenPictureComponent/FullScreenDialog"));
-
+const Profile = React.lazy(() => import("./components/ProfileComponent/Profile"));
+const FullScreenDialog = React.lazy(() => import("./components/FullScreenPictureComponent/FullScreenDialog"));
 
 function App(): JSX.Element {
 	const dispatch = useDispatch();
@@ -32,7 +31,7 @@ function App(): JSX.Element {
 
 	useEffect(() => {
 		const width = window.innerWidth;
-		if(width <= 700) {
+		if (width <= 700) {
 			dispatch(actions.BoolShit.setMobile(true));
 		} else {
 			dispatch(actions.BoolShit.setMobile(false));

@@ -17,7 +17,7 @@ export default function CustomButton({
 			className='custom-button-container'
 		>
 			{text && <span className='button-text'>{children}</span>}
-			{icon && <div className={"button-text"}>{children}</div>}
+			{icon && <div className='button-text'>{children}</div>}
 		</div>
 	);
 }

@@ -29,7 +29,7 @@ export default function SignUp(): JSX.Element {
 
 	return (
 		<>
-			<HeaderComponent title='Регистрация' icon={true}/>
+			<HeaderComponent title='Регистрация' icon={true} />
 			<div className='auth-container'>
 				<form className='auth-form'>
 					<input

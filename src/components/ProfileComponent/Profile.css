@@ -11,7 +11,7 @@
 	width: 100px;
 	height: 100px;
 	border-radius: 100px;
-    margin-left: 5%;
+	margin-left: 5%;
 	cursor: pointer;
 }
 
@@ -20,8 +20,8 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-    margin-right: 5%;
-    margin-left: 5%;
+	margin-right: 5%;
+	margin-left: 5%;
 }
 
 .user-profile-email {
@@ -30,20 +30,20 @@
 }
 
 .user-edit-profile-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 6px;
-    border: 1px solid #4080FF;
-    margin-top: 5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	width: 100%;
+	cursor: pointer;
+	border-radius: 6px;
+	border: 1px solid #4080ff;
+	margin-top: 5%;
 }
 
 .user-edit-profile-button:hover {
-    background-color: #4080FF;
-    color: white;
+	background-color: #4080ff;
+	color: white;
 }
 
 .profile-bottom-line {
@@ -74,15 +74,15 @@
 		margin-top: 4%;
 	}
 	.user-profile-info {
-        display: flex;
+		display: flex;
 		flex-direction: row;
 		align-items: flex-start;
 		justify-content: space-between;
-        margin: 0;
-        width: 50%;
+		margin: 0;
+		width: 50%;
 	}
-    .user-edit-profile-button {
-        margin-top: 4%;
-        width: auto;
-    }
+	.user-edit-profile-button {
+		margin-top: 4%;
+		width: auto;
+	}
 }

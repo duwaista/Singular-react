@@ -61,10 +61,10 @@ export interface IFeedState {
 	upload: IUpload;
 	picture: string;
 	uploadProgress: {
-		progress: number,
-		uploading: boolean,
-		done: boolean
-	}
+		progress: number;
+		uploading: boolean;
+		done: boolean;
+	};
 }
 export interface CurrentPostType {
 	index: number;
@@ -85,10 +85,10 @@ export interface IdType {
 	id: string;
 }
 export type SnackTypes = {
-	type: 'error' | 'warning' | 'success',
-	massege: string,
-	index?: number
-}
+	type: "error" | "warning" | "success";
+	massege: string;
+	index?: number;
+};
 export interface ISnack {
 	toasts: SnackTypes[];
 }

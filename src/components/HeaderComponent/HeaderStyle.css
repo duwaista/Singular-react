@@ -1,48 +1,48 @@
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 48px;
-    position: fixed;
-    z-index: 2;
-    top: -1px;
-    background-color: #ffff;
-    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 48px;
+	position: fixed;
+	z-index: 2;
+	top: -1px;
+	background-color: #ffff;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 .header-title-text {
-    align-self: center;
-    cursor: pointer;
-    margin-left: 24px;
-    font-size: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	align-self: center;
+	cursor: pointer;
+	margin-left: 24px;
+	font-size: 20px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 .header-menu {
-    margin-right: 20px;
-    position: relative;
+	margin-right: 20px;
+	position: relative;
 }
 .header-menu-icon:hover {
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.2);
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 .header-logout-button {
-    height: 24px;
-    width: 24px;
-    margin: 20px;
-    cursor: pointer;
-    justify-self: flex-end;
-    background-image: url("../../assets/icons/logout.svg");
+	height: 24px;
+	width: 24px;
+	margin: 20px;
+	cursor: pointer;
+	justify-self: flex-end;
+	background-image: url("../../assets/icons/logout.svg");
 }
 .header-logout-button:hover {
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.2);
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 .header-scroll-top-button {
-    height: 99%;
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
+	height: 99%;
+	width: 50%;
+	margin-right: auto;
+	margin-left: auto;
 }
 .spacer-up {
-    height: 56px;
+	height: 56px;
 }
