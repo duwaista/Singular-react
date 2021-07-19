@@ -59,6 +59,9 @@
 .drawer-user-container {
 	border-bottom: 1px solid #c5c2c2;
 }
+.drawer-select-hidden-item{
+	display: none;
+}
 .drawer-item-container {
 	display: flex;
 	align-items: center;

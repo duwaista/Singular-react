@@ -34,6 +34,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 30px;
+	min-width: 80px;
 	width: 100%;
 	cursor: pointer;
 	border-radius: 6px;

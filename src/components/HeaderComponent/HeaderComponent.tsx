@@ -5,9 +5,11 @@ import { actions } from "../../store/store";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 import { HeaderProps } from "../../types";
 import menu from "../../assets/icons/menu.svg";
+import { useTranslation } from "react-i18next";
 
 export default function HeaderComponent({ title, icon }: HeaderProps): JSX.Element {
 	const dispatch = useDispatch();
+	const [t, i18n] = useTranslation();
 
 	function openDrawer(drawer: boolean) {
 		dispatch(actions.BoolShit.changeDrawer(drawer));
@@ -24,7 +26,7 @@ export default function HeaderComponent({ title, icon }: HeaderProps): JSX.Eleme
 		<div>
 			<header className={"header"}>
 				<div onClick={() => scrollOnTop()} className='header-title-text'>
-					<b>{title}</b>
+					<b>{t(title)}</b>
 				</div>
 				<div className={"header-scroll-top-button"} onClick={() => scrollOnTop()}></div>
 				{icon && (

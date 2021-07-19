@@ -43,7 +43,7 @@ function App(): JSX.Element {
 			<Switch>
 				<Route exact path='/'>
 					<div className='App'>
-						<HeaderComponent title='Главная' icon={true} />
+						<HeaderComponent title='home' icon={true} />
 						<Suspense fallback={<Loading />}>
 							<FullScreenDialog />
 							<BottomMenuComponent />

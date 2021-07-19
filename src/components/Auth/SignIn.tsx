@@ -5,11 +5,13 @@ import CustomButton from "../BasicComponents/CustomButton/CustomButton";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, fetchLogin } from "../../store/store";
+import { useTranslation } from "react-i18next";
 
 export default function SignIn(): JSX.Element {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
+	const [t, i18n] = useTranslation();
 	const dispatch = useDispatch();
 
 	function login() {
@@ -27,37 +29,37 @@ export default function SignIn(): JSX.Element {
 
 	return (
 		<>
-			<HeaderComponent title='Вход' icon={true} />
-			<div className='auth-container'>
-				<form className='auth-form'>
+			<HeaderComponent title="signIn" icon={true} />
+			<div className="auth-container">
+				<form className="auth-form">
 					<input
 						value={email}
 						onChange={(event) => setEmail(event.target.value)}
-						type='email'
-						placeholder='Email'
+						type="email"
+						placeholder="Email"
 					/>
 					<input
 						value={password}
 						onChange={(event) => setPassword(event.target.value)}
-						type='password'
-						placeholder='Password'
+						type="password"
+						placeholder="Password"
 					/>
 					<CustomButton
 						text={true}
 						icon={false}
-						width='100%'
-						height='34px'
+						width="100%"
+						height="34px"
 						onClick={login}
 					>
-						Войти
+						{t("enter")}
 					</CustomButton>
-					<span className='form-text-description'>Нет аккаунта?</span>
-					<Link to='/sign-up'>
-						<CustomButton text={true} width='100%' height='34px'>
-							Зарегистрироваться
+					<span className="form-text-description">{t("noAccount")}</span>
+					<Link to="/sign-up">
+						<CustomButton text={true} width="100%" height="34px">
+							{t("register")}
 						</CustomButton>
 					</Link>
-					{logged && <Redirect to='/'></Redirect>}
+					{logged && <Redirect to="/"></Redirect>}
 				</form>
 			</div>
 		</>

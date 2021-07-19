@@ -5,12 +5,14 @@ import CustomButton from "../BasicComponents/CustomButton/CustomButton";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, fetchRegister } from "../../store/store";
+import { useTranslation } from "react-i18next";
 
 export default function SignUp(): JSX.Element {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirm, setConfirm] = useState("");
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
+	const [t, i18n] = useTranslation();
 	const dispatch = useDispatch();
 
 	function register() {
@@ -29,43 +31,43 @@ export default function SignUp(): JSX.Element {
 
 	return (
 		<>
-			<HeaderComponent title='Регистрация' icon={true} />
-			<div className='auth-container'>
-				<form className='auth-form'>
+			<HeaderComponent title="signUp" icon={true} />
+			<div className="auth-container">
+				<form className="auth-form">
 					<input
 						value={email}
 						onChange={(event) => setEmail(event.target.value)}
-						type='email'
-						placeholder='Email'
+						type="email"
+						placeholder="Email"
 					/>
 					<input
 						value={password}
 						onChange={(event) => setPassword(event.target.value)}
-						type='password'
-						placeholder='Password'
+						type="password"
+						placeholder="Password"
 					/>
 					<input
 						value={confirm}
 						onChange={(event) => setConfirm(event.target.value)}
-						type='password'
-						placeholder='Confirm password'
+						type="password"
+						placeholder="Confirm password"
 					/>
 					<CustomButton
 						text={true}
 						icon={false}
-						width='100%'
-						height='34px'
+						width="100%"
+						height="34px"
 						onClick={register}
 					>
-						Зарегистрироваться
+						{t("register")}
 					</CustomButton>
-					<span className='form-text-description'>Уже есть аккаунт?</span>
-					<Link to='/sign-in'>
-						<CustomButton text={true} width='100%' height='34px'>
-							Войти
+					<span className="form-text-description">{t("haveAccount")}</span>
+					<Link to="/sign-in">
+						<CustomButton text={true} width="100%" height="34px">
+							{t("enter")}
 						</CustomButton>
 					</Link>
-					{logged && <Redirect to='/'></Redirect>}
+					{logged && <Redirect to="/"></Redirect>}
 				</form>
 			</div>
 		</>

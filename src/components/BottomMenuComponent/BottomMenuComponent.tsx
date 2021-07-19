@@ -6,12 +6,14 @@ import BasicElementBottom from "../BasicComponents/BasicElementBottom/BasicEleme
 import deleteIcon from "../../assets/icons/delete.svg";
 import share from "../../assets/icons/share-variant.svg";
 import edit from "../../assets/icons/edit.svg";
+import { useTranslation } from "react-i18next";
 
 export default function BottomMenuComponent(): JSX.Element {
 	const dispatch = useDispatch();
 	const bottom: boolean = useSelector((state: AppState) => state.boolshit.bottomMenu);
 	const currentPost = useSelector((state: AppState) => state.feed.currentPost);
 	const user = useSelector((state: AppState) => state.user);
+	const [t, i18n] = useTranslation();
 
 	function closeBottomMenu() {
 		dispatch(actions.BoolShit.changeBottomMenu(false));
@@ -50,19 +52,19 @@ export default function BottomMenuComponent(): JSX.Element {
 									<>
 										<BasicElementBottom
 											onClick={deletePost}
-											text='Удалить'
+											text={t("delete")}
 											icon={deleteIcon}
 										/>
 										<BasicElementBottom
 											onClick={editPost}
-											text='Редактировать'
+											text={t("edit")}
 											icon={edit}
 										/>
 									</>
 								)}
 							</>
 						)}
-						<BasicElementBottom onClick={sharePic} text='Поделиться' icon={share} />
+						<BasicElementBottom onClick={sharePic} text={t("share")} icon={share} />
 					</>
 				)}
 			</div>
