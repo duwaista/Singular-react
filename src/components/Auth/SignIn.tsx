@@ -11,7 +11,7 @@ export default function SignIn(): JSX.Element {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
-	const [t, i18n] = useTranslation();
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
 	function login() {

@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 export default function HeaderComponent({ title, icon }: HeaderProps): JSX.Element {
 	const dispatch = useDispatch();
-	const [t, i18n] = useTranslation();
+	const { t } = useTranslation();
 
 	function openDrawer(drawer: boolean) {
 		dispatch(actions.BoolShit.changeDrawer(drawer));

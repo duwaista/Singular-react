@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-const browserLanguage = navigator.language.split('-')[0];
+const browserLanguage = navigator.language.split("-")[0];
 const resources = {
 	en: {
 		translation: {
@@ -19,7 +19,10 @@ const resources = {
 			upload: "Upload",
 			delete: "Delete",
 			edit: "Edit",
-			share: "Share"
+			share: "Share",
+			version: "Version",
+			developer: "Developer",
+			source: "Source",
 		},
 	},
 	ru: {
@@ -38,7 +41,10 @@ const resources = {
 			upload: "Загрузить",
 			delete: "Удалить",
 			edit: "Редактировать",
-			share: "Поделиться"
+			share: "Поделиться",
+			version: "Версия",
+			developer: "Разработчик",
+			source: "Исходный код",
 		},
 	},
 };

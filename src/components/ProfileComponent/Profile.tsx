@@ -12,10 +12,10 @@ export default function ProfileComponent(): JSX.Element {
 	const { id }: IdType = useParams();
 	const currentUser = useSelector((state: AppState) => state.user.profile);
 	const all: FeedTypes[] = useSelector((state: AppState) => state.feed.all);
-	const [t, i18n] = useTranslation();
+	const { t } = useTranslation();
 
 	//========== Dw i'm fine ==========//
-	const filteredAll: FeedTypes[] = all.filter((al) => al.uid === id);
+	const filteredAll = all.filter((al) => al.uid === id);
 	const avatar =
 		"https://sun9-65.userapi.com/impg/2cF_5ozpq0NeV1V8ezFij6KVKri10Fl27kEhKA/pyKgzAl19bU.jpg?size=1098x1002&quality=96&sign=c741277fe2a8ce690444ff8c2ddf030a&type=album";
 	const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function ProfileComponent(): JSX.Element {
 
 	useEffect(() => {
 		if (all.length === 0) dispatch(fetchFeed());
-	}, []);
+	}, [all.length, dispatch]);
 
 	return (
 		<>

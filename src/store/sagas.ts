@@ -10,7 +10,7 @@ const options = {
 	headers: { "Access-Control-Allow-Origin": "*" },
 };
 
-async function fetchUpload(action: any) {
+async function fetchUpload(action: PayloadAction<any>) {
 	const file = action.payload.file;
 	const type = action.payload.type;
 	const uploadImage = fileRef.child("images/" + file.name);
@@ -28,6 +28,7 @@ async function fetchUpload(action: any) {
 		}
 	} catch (error) {
 		console.log(error);
+		return null;
 	}
 }
 
@@ -40,6 +41,7 @@ async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
 		uid: user.profile.uid,
 		createdAt: new Date(),
 	} as FeedTypes;
+
 	try {
 		await axios.post(url, post, options).then((response) => {
 			post._id = response.data.insertedId;

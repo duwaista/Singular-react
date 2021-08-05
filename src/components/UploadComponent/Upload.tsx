@@ -10,7 +10,7 @@ export default function Upload(): JSX.Element {
 	const progress = useSelector((state: AppState) => state.feed.uploadProgress);
 	const [file, setFile] = useState<File | null>();
 	const [fileName, setFileName] = useState("");
-	const [t, i18n] = useTranslation();
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
 	function changeHandler(event: any) {

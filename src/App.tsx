@@ -36,7 +36,7 @@ function App(): JSX.Element {
 		} else {
 			dispatch(actions.BoolShit.setMobile(false));
 		}
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<Router>

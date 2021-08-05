@@ -13,7 +13,7 @@ export default function BottomMenuComponent(): JSX.Element {
 	const bottom: boolean = useSelector((state: AppState) => state.boolshit.bottomMenu);
 	const currentPost = useSelector((state: AppState) => state.feed.currentPost);
 	const user = useSelector((state: AppState) => state.user);
-	const [t, i18n] = useTranslation();
+	const { t } = useTranslation();
 
 	function closeBottomMenu() {
 		dispatch(actions.BoolShit.changeBottomMenu(false));

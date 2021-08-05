@@ -2,7 +2,6 @@ import React from "react";
 
 export interface FeedTypes {
 	_id: string;
-	id?: string;
 	avatarUrl?: string | "";
 	email: string | "";
 	uid: string | "";
@@ -86,7 +85,7 @@ export interface IdType {
 }
 export type SnackTypes = {
 	type: "error" | "warning" | "success";
-	massege: string;
+	massage: string;
 	index?: number;
 };
 export interface ISnack {

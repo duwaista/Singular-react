@@ -12,7 +12,7 @@ export default function SignUp(): JSX.Element {
 	const [password, setPassword] = useState("");
 	const [confirm, setConfirm] = useState("");
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
-	const [t, i18n] = useTranslation();
+	const { t }= useTranslation();
 	const dispatch = useDispatch();
 
 	function register() {

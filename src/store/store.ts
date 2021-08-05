@@ -3,7 +3,6 @@ import {
 	createSlice,
 	getDefaultMiddleware,
 	configureStore,
-	PayloadAction,
 } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
@@ -11,7 +10,16 @@ import { firebase } from "../plugins/firebase";
 import logger from "redux-logger";
 import rootSaga from "./sagas";
 import axios from "axios";
-import { FLogin, IBoolShitState, ICurrentPost, IFeedState, ISnack, IUserState } from "../types";
+import {
+	FeedProps,
+	FeedTypes,
+	FLogin,
+	IBoolShitState,
+	ICurrentPost,
+	IFeedState,
+	ISnack,
+	IUserState,
+} from "../types";
 
 const sagaMiddleware = createSagaMiddleware();
 export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
@@ -26,21 +34,28 @@ export const fetchFeed = createAsyncThunk("fetchFeed", async () => {
 	}
 });
 
-export const fetchLogin = createAsyncThunk("fetchLogin", async ({ email, password }: FLogin) => {
-	try {
-		const response = await firebase.auth().signInWithEmailAndPassword(email, password);
-		return response.user;
-	} catch (error) {
-		console.log(error);
-		return error;
+export const fetchLogin = createAsyncThunk(
+	"fetchLogin",
+	async ({ email, password }: FLogin) => {
+		try {
+			const response = await firebase
+				.auth()
+				.signInWithEmailAndPassword(email, password);
+			return response.user;
+		} catch (error) {
+			console.log(error);
+			return error;
+		}
 	}
-});
+);
 
 export const fetchRegister = createAsyncThunk(
 	"fetchRegister",
 	async ({ email, password }: FLogin) => {
 		try {
-			const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+			const response = await firebase
+				.auth()
+				.createUserWithEmailAndPassword(email, password);
 			return response.user;
 		} catch (error) {
 			console.log(error);
@@ -65,6 +80,7 @@ export const deletePostFetch = createAsyncThunk(
 			return currentPost;
 		} catch (error) {
 			console.log(error);
+			return null;
 		}
 	}
 );
@@ -233,8 +249,8 @@ export const Feed = createSlice({
 				state.all = [...action.payload];
 				state.all.reverse();
 			})
-			.addCase(deletePostFetch.fulfilled, (state, action: PayloadAction<any>) => {
-				state.all.splice(action.payload.index, 1);
+			.addCase(deletePostFetch.fulfilled, (state, action) => {
+				if (action.payload) state.all.splice(action.payload.index, 1);
 			});
 	},
 });
