@@ -11,8 +11,6 @@ import logger from "redux-logger";
 import rootSaga from "./sagas";
 import axios from "axios";
 import {
-	FeedProps,
-	FeedTypes,
 	FLogin,
 	IBoolShitState,
 	ICurrentPost,

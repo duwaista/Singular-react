@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { actions } from "../../store/store";
 import "./FeedComponentSyle.css";
 import { useDispatch } from "react-redux";
@@ -6,57 +6,79 @@ import { FeedProps } from "../../types";
 import dots from "../../assets/icons/dots-vertical.svg";
 import avatar from "../../assets/icons/account-circle-outline.svg";
 
-export default function FeedComponent({ index, feed }: FeedProps): JSX.Element {
+const FeedComponent = ({ index, feed }: FeedProps): JSX.Element => {
 	const dispatch = useDispatch();
 
-	function openBottom(open: boolean) {
+	const openBottom = (open: boolean) => {
 		dispatch(actions.BoolShit.changeBottomMenu(open));
 		dispatch(actions.Feed.setBottom({ index, feed }));
 	}
 
-	function openFullScreen(open: boolean, picture: string) {
+	const openFullScreen = (open: boolean, picture: string) => {
 		dispatch(actions.BoolShit.changeFullScreenDialog(open));
 		dispatch(actions.Feed.setPicture(picture));
 	}
 
+	const feedContent = useMemo(() => {
+		switch (feed.type) {
+			case '':
+			case 'image': {
+				return (
+					<img
+						alt={feed.posts}
+						loading='lazy'
+						onClick={() => openFullScreen(true, feed.posts)}
+						className='feed-picture'
+						src={feed.posts}
+					/>
+				)
+			}
+			case 'video': {
+				return (
+					<video
+						className='feed-picture'
+						loop={true}
+						preload='metadata'
+						controls
+						src={feed.posts}
+					></video>
+				)
+			}
+			default: {
+				return (
+					<img
+						alt={feed.posts}
+						loading='lazy'
+						onClick={() => openFullScreen(true, feed.posts)}
+						className='feed-picture'
+						src={feed.posts}
+					/>
+				);
+			}
+		} 
+	}, [feed]);
+
 	return (
 		<div className='feed-container'>
 			<div className='feed-info-container'>
-				{feed.avatarUrl !== null ? (
-					<img alt={feed.avatarUrl} className='feed-avatar' src={feed.avatarUrl} />
-				) : (
-					<img alt='no-user-avatar' className='feed-avatar' src={avatar} />
-				)}
+				<img
+					alt={feed.avatarUrl || 'No avatar'}
+					className='feed-avatar'
+					src={feed.avatarUrl ? feed.avatarUrl : avatar}
+				/>
 				<div className='feed-email'>
 					<b>{feed.email}</b>
 				</div>
 				<div
 					className='icon dots-menu'
-					onClick={() => {
-						openBottom(true);
-					}}
+					onClick={() => openBottom(true)}
 				>
 					<img alt='icon' src={dots} />
 				</div>
 			</div>
-			{feed.type === "video" && (
-				<video
-					className='feed-picture'
-					loop={true}
-					preload='metadata'
-					controls
-					src={feed.posts}
-				></video>
-			)}
-			{feed.type !== "video" && (
-				<img
-					alt={feed.posts}
-					loading='lazy'
-					onClick={() => openFullScreen(true, feed.posts)}
-					className='feed-picture'
-					src={feed.posts}
-				/>
-			)}
+			{feedContent}
 		</div>
 	);
 }
+
+export default FeedComponent;

@@ -2,22 +2,24 @@ import React from "react";
 import "./CustomBottomStyle.css";
 import { CustomButtonTypes } from "../../../types";
 
-export default function CustomButton({
+const CustomButton = ({
 	height = "34px",
 	width = "80px",
-	icon = false,
+	icon = null,
 	text = false,
 	children,
 	onClick,
-}: CustomButtonTypes): JSX.Element {
+}: CustomButtonTypes): JSX.Element => {
 	return (
 		<div
 			onClick={onClick}
 			style={{ height: height, width: width }}
 			className='custom-button-container'
 		>
+			{icon}
 			{text && <span className='button-text'>{children}</span>}
-			{icon && <div className='button-text'>{children}</div>}
 		</div>
 	);
 }
+
+export default CustomButton;

@@ -3,12 +3,12 @@ import "./FullScreenDialogStyle.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, actions } from "../../store/store";
 
-export default function FullScreenDialog(): JSX.Element {
+const FullScreenDialog = (): JSX.Element => {
 	const open: boolean = useSelector((state: AppState) => state.boolshit.fullScreenDialog);
 	const picture: string = useSelector((state: AppState) => state.feed.picture);
 	const dispatch = useDispatch();
 
-	function closeFullScreen() {
+	const closeFullScreen = () => {
 		dispatch(actions.BoolShit.changeFullScreenDialog(false));
 	}
 
@@ -27,3 +27,5 @@ export default function FullScreenDialog(): JSX.Element {
 		</>
 	);
 }
+
+export default FullScreenDialog;

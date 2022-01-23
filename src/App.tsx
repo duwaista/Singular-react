@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
-import { FeedListComponent } from "./components/FeedListComponent/FeedListComponent";
+import FeedListComponent from "./components/FeedListComponent/FeedListComponent";
 import { firebase } from "./plugins/firebase";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./assets/styles/main.css";
@@ -17,7 +17,7 @@ const About = React.lazy(() => import("./components/About/AboutComponent"));
 const Profile = React.lazy(() => import("./components/ProfileComponent/Profile"));
 const FullScreenDialog = React.lazy(() => import("./components/FullScreenPictureComponent/FullScreenDialog"));
 
-function App(): JSX.Element {
+const App = (): JSX.Element => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -27,7 +27,7 @@ function App(): JSX.Element {
 				dispatch(actions.User.enterChanges(true));
 			}
 		});
-	}, [dispatch]);
+	}, []);
 
 	useEffect(() => {
 		const width = window.innerWidth;
@@ -36,7 +36,7 @@ function App(): JSX.Element {
 		} else {
 			dispatch(actions.BoolShit.setMobile(false));
 		}
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<Router>

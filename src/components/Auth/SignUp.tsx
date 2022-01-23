@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState, fetchRegister } from "../../store/store";
 import { useTranslation } from "react-i18next";
 
-export default function SignUp(): JSX.Element {
+const SignUp = (): JSX.Element => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirm, setConfirm] = useState("");
@@ -15,7 +15,7 @@ export default function SignUp(): JSX.Element {
 	const { t }= useTranslation();
 	const dispatch = useDispatch();
 
-	function register() {
+	const register = () => {
 		if (email !== "" && password.length >= 6 && password === confirm) {
 			dispatch(fetchRegister({ email, password }));
 		}
@@ -53,8 +53,7 @@ export default function SignUp(): JSX.Element {
 						placeholder="Confirm password"
 					/>
 					<CustomButton
-						text={true}
-						icon={false}
+						text
 						width="100%"
 						height="34px"
 						onClick={register}
@@ -63,7 +62,7 @@ export default function SignUp(): JSX.Element {
 					</CustomButton>
 					<span className="form-text-description">{t("haveAccount")}</span>
 					<Link to="/sign-in">
-						<CustomButton text={true} width="100%" height="34px">
+						<CustomButton text width="100%" height="34px">
 							{t("enter")}
 						</CustomButton>
 					</Link>
@@ -73,3 +72,5 @@ export default function SignUp(): JSX.Element {
 		</>
 	);
 }
+
+export default SignUp;

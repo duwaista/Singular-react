@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState, fetchLogin } from "../../store/store";
 import { useTranslation } from "react-i18next";
 
-export default function SignIn(): JSX.Element {
+const SignIn = (): JSX.Element => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
-	function login() {
+	const login = () => {
 		if (email !== "" && password.length >= 6) {
 			dispatch(fetchLogin({ email, password }));
 		}
@@ -45,8 +45,7 @@ export default function SignIn(): JSX.Element {
 						placeholder="Password"
 					/>
 					<CustomButton
-						text={true}
-						icon={false}
+						text
 						width="100%"
 						height="34px"
 						onClick={login}
@@ -55,13 +54,15 @@ export default function SignIn(): JSX.Element {
 					</CustomButton>
 					<span className="form-text-description">{t("noAccount")}</span>
 					<Link to="/sign-up">
-						<CustomButton text={true} width="100%" height="34px">
+						<CustomButton text width="100%" height="34px">
 							{t("register")}
 						</CustomButton>
 					</Link>
-					{logged && <Redirect to="/"></Redirect>}
+					{logged && <Redirect to="/" />}
 				</form>
 			</div>
 		</>
 	);
 }
+
+export default SignIn;

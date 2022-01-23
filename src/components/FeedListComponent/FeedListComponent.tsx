@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState, fetchFeed } from "../../store/store";
 const FeedComponent = React.lazy(() => import("../FeedComponent/FeedComponent"));
 
-export function FeedListComponent(): JSX.Element {
+const FeedListComponent = (): JSX.Element => {
 	const dispatch = useDispatch();
 	const all: FeedTypes[] = useSelector((state: AppState) => state.feed.all);
 
 	useEffect(() => {
 		dispatch(fetchFeed());
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<>
@@ -25,3 +25,5 @@ export function FeedListComponent(): JSX.Element {
 		</>
 	);
 }
+
+export default FeedListComponent;

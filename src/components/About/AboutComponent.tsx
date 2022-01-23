@@ -4,7 +4,7 @@ import version from "../../../package.json";
 import HeaderComponent from "../HeaderComponent/HeaderComponent";
 import { useTranslation } from "react-i18next";
 
-export default function About(): JSX.Element {
+const About = (): JSX.Element => {
 	const { t } = useTranslation();
 
 	return (
@@ -40,3 +40,5 @@ export default function About(): JSX.Element {
 		</>
 	);
 }
+
+export default About;

@@ -7,15 +7,15 @@ import { HeaderProps } from "../../types";
 import menu from "../../assets/icons/menu.svg";
 import { useTranslation } from "react-i18next";
 
-export default function HeaderComponent({ title, icon }: HeaderProps): JSX.Element {
+const HeaderComponent = ({ title, icon }: HeaderProps): JSX.Element => {
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
 
-	function openDrawer(drawer: boolean) {
+	const openDrawer = (drawer: boolean) => {
 		dispatch(actions.BoolShit.changeDrawer(drawer));
 	}
 
-	function scrollOnTop() {
+	const scrollOnTop = () => {
 		window.scroll({
 			top: 0,
 			left: 0,
@@ -40,3 +40,5 @@ export default function HeaderComponent({ title, icon }: HeaderProps): JSX.Eleme
 		</div>
 	);
 }
+
+export default HeaderComponent;

@@ -32,7 +32,7 @@ export type CustomButtonTypes = {
 	height?: string | "" | undefined;
 	width?: string | "" | undefined;
 	text?: boolean | undefined;
-	icon?: boolean | undefined;
+	icon?: null | string;
 };
 export interface IBoolShitState {
 	dark: boolean;

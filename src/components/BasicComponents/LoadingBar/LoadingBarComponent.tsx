@@ -1,7 +1,7 @@
 import React from "react";
 import "./LoadingBarStyle.css";
 
-export default function Loading(): JSX.Element {
+const Loading = (): JSX.Element => {
 	return (
 		<div className='center'>
 			<div className='lds-ring'>
@@ -13,3 +13,5 @@ export default function Loading(): JSX.Element {
 		</div>
 	);
 }
+
+export default Loading;

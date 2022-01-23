@@ -5,7 +5,10 @@ import CustomButton from "../BasicComponents/CustomButton/CustomButton";
 import { actions, AppState } from "../../store/store";
 import { useTranslation } from "react-i18next";
 
-export default function Upload(): JSX.Element {
+const maxImageSize: number = 5 * 1024 * 1024;
+const maxVideoSize: number = 20 * 1024 * 1024;
+
+const Upload = (): JSX.Element => {
 	const logged: boolean = useSelector((state: AppState) => state.user.logged);
 	const progress = useSelector((state: AppState) => state.feed.uploadProgress);
 	const [file, setFile] = useState<File | null>();
@@ -13,7 +16,7 @@ export default function Upload(): JSX.Element {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
-	function changeHandler(event: any) {
+	const changeHandler = (event: any) => {
 		const target = event.target as HTMLInputElement;
 		const file: File = (target.files as FileList)[0];
 		setFile(file);
@@ -27,23 +30,17 @@ export default function Upload(): JSX.Element {
 		}
 	}, [progress]);
 
-	async function addFile() {
-		const maxImageSize: number = 5 * 1024 * 1024;
-		const maxVideoSize: number = 20 * 1024 * 1024;
-
-		if (file) {
-			if (file.type.indexOf("image/") === 0 && file.size <= maxImageSize) {
-				dispatch(actions.Feed.setUpload({ file, type: "image" }));
-			} else if (
-				file.type.indexOf("video/") === 0 &&
-				file.size <= maxVideoSize
-			) {
-				dispatch(actions.Feed.setUpload({ file, type: "video" }));
-			} else {
-				console.log("File too big");
-			}
+	const addFile = async () => {
+		if (!file) return;
+		if (file.type.indexOf("image/") === 0 && file.size <= maxImageSize) {
+			dispatch(actions.Feed.setUpload({ file, type: "image" }));
+		} else if (
+			file.type.indexOf("video/") === 0 &&
+			file.size <= maxVideoSize
+		) {
+			dispatch(actions.Feed.setUpload({ file, type: "video" }));
 		} else {
-			console.log("Die");
+			console.log("File too big");
 		}
 	}
 
@@ -58,7 +55,7 @@ export default function Upload(): JSX.Element {
 						onChange={(event) => changeHandler(event)}
 						className="upload-input"
 					/>
-					<CustomButton onClick={() => addFile()} height="30px" text={true}>
+					<CustomButton onClick={() => addFile()} height="30px" text>
 						{t("upload")}
 					</CustomButton>
 					<div className="upload-progress-container">
@@ -74,3 +71,5 @@ export default function Upload(): JSX.Element {
 		</>
 	);
 }
+
+export default Upload;

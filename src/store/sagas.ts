@@ -10,7 +10,7 @@ const options = {
 	headers: { "Access-Control-Allow-Origin": "*" },
 };
 
-async function fetchUpload(action: PayloadAction<any>) {
+const fetchUpload = async (action: PayloadAction<any>) => {
 	const file = action.payload.file;
 	const type = action.payload.type;
 	const uploadImage = fileRef.child("images/" + file.name);
@@ -32,7 +32,7 @@ async function fetchUpload(action: PayloadAction<any>) {
 	}
 }
 
-async function fetchMongoAdd(uploadRes: IPost, user: IUserState) {
+const fetchMongoAdd = async (uploadRes: IPost, user: IUserState) => {
 	const post = {
 		email: user.profile.email,
 		avatarUrl: user.profile.photoURL,
