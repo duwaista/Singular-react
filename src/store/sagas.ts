@@ -1,9 +1,10 @@
 import { takeEvery, call, select, put } from "redux-saga/effects";
-import { actions, url } from "./store";
+import { actions } from "./store";
 import { storage } from "../plugins/firebase";
 import { FeedTypes, IPost, IUserState } from "../types";
 import axios from "axios";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { baseUrl } from "../api";
 
 const fileRef = storage.ref();
 const options = {
@@ -43,10 +44,8 @@ const fetchMongoAdd = async (uploadRes: IPost, user: IUserState) => {
 	} as FeedTypes;
 
 	try {
-		await axios.post(url, post, options).then((response) => {
-			post._id = response.data.insertedId;
-			return null;
-		});
+		const response = await axios.post(`${baseUrl}/feed`, post, options);
+		post._id = response.data.insertedId;
 		return post;
 	} catch (error) {
 		console.error(error);

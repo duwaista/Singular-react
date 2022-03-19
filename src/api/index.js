@@ -1,0 +1,1 @@
+export const baseUrl = "https://quiet-ridge-83792.herokuapp.com/api";

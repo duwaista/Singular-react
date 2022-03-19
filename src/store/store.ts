@@ -6,10 +6,12 @@ import {
 } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { firebase } from "../plugins/firebase";
-import logger from "redux-logger";
-import rootSaga from "./sagas";
 import axios from "axios";
+import logger from "redux-logger";
+
+import rootSaga from "./sagas";
+import { firebase } from "../plugins/firebase";
+import { baseUrl } from "../api";
 import {
 	FLogin,
 	IBoolShitState,
@@ -20,11 +22,10 @@ import {
 } from "../types";
 
 const sagaMiddleware = createSagaMiddleware();
-export const url = "https://quiet-ridge-83792.herokuapp.com/api/feed/";
 
 export const fetchFeed = createAsyncThunk("fetchFeed", async () => {
 	try {
-		const response = await axios.get(url);
+		const response = await axios.get(`${baseUrl}/feed`);
 		return await response.data;
 	} catch (error) {
 		console.log(error);
@@ -74,7 +75,7 @@ export const deletePostFetch = createAsyncThunk(
 	"deletePostFetch",
 	async ({ currentPost }: ICurrentPost) => {
 		try {
-			await axios.delete(url + currentPost.feed._id);
+			await axios.delete(`${baseUrl}/feed/${currentPost.feed._id}`);
 			return currentPost;
 		} catch (error) {
 			console.log(error);
@@ -244,6 +245,7 @@ export const Feed = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchFeed.fulfilled, (state, action) => {
+				if (!action.payload) return
 				state.all = [...action.payload];
 				state.all.reverse();
 			})
