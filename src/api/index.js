@@ -1,1 +1,1 @@
-export const baseUrl = "https://quiet-ridge-83792.herokuapp.com/api";
+export const baseUrl = 'http://localhost:5000/api' || "https://quiet-ridge-83792.herokuapp.com/api";

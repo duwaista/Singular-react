@@ -75,7 +75,7 @@ export const deletePostFetch = createAsyncThunk(
 	"deletePostFetch",
 	async ({ currentPost }: ICurrentPost) => {
 		try {
-			await axios.delete(`${baseUrl}/feed/${currentPost.feed._id}`);
+			await axios.delete(`${baseUrl}/feed/${currentPost.feed.id}`);
 			return currentPost;
 		} catch (error) {
 			console.log(error);
@@ -208,7 +208,7 @@ export const Feed = createSlice({
 		currentPost: {
 			index: 0,
 			feed: {
-				_id: "",
+				id: "",
 				email: "",
 				uid: "",
 				posts: "",
@@ -298,7 +298,7 @@ const middleware = [
 ];
 
 if (devMode) {
-	middleware.push(logger);
+	// middleware.push(logger);
 }
 
 const store = configureStore({

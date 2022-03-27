@@ -50,7 +50,7 @@ const ProfileComponent = (): JSX.Element => {
 			</div>
 			{useMemo(() => {
 				return filteredAll.map((feed: FeedTypes, index: number) => (
-					<FeedComponent key={index} index={index} feed={feed} />
+					<FeedComponent key={feed.id} index={index} feed={feed} />
 				));
 			}, [filteredAll])}
 		</>

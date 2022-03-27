@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface FeedTypes {
-	_id: string;
+	id: string;
 	avatarUrl?: string | "";
 	email: string | "";
 	uid: string | "";

@@ -1,28 +1,29 @@
 import React, { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import "./FeedListComponentStyle.css";
 import { FeedTypes } from "../../types";
-import { useDispatch, useSelector } from "react-redux";
 import { AppState, fetchFeed } from "../../store/store";
-const FeedComponent = React.lazy(() => import("../FeedComponent/FeedComponent"));
+import FeedComponent from "../FeedComponent/FeedComponent";
 
 const FeedListComponent = (): JSX.Element => {
 	const dispatch = useDispatch();
-	const all: FeedTypes[] = useSelector((state: AppState) => state.feed.all);
+	const feed: FeedTypes[] = useSelector((state: AppState) => state.feed.all);
 
 	useEffect(() => {
 		dispatch(fetchFeed());
 	}, []);
 
+	const feedList = useMemo(() => {
+		return feed.map((feed: FeedTypes, index: number) => (
+			<FeedComponent key={feed.id} index={index} feed={feed} />
+		));
+	}, [feed]);
+
 	return (
-		<>
-			<div className={"feed-list-container"}>
-				{useMemo(() => {
-					return all.map((feed: FeedTypes, index: number) => (
-						<FeedComponent key={index} index={index} feed={feed} />
-					));
-				}, [all])}
-			</div>
-		</>
+		<div className={"feed-list-container"}>
+			{feedList}
+		</div>
 	);
 }
 

@@ -45,7 +45,7 @@ const fetchMongoAdd = async (uploadRes: IPost, user: IUserState) => {
 
 	try {
 		const response = await axios.post(`${baseUrl}/feed`, post, options);
-		post._id = response.data.insertedId;
+		post.id = response.data[0]?.id || Math.random().toString();
 		return post;
 	} catch (error) {
 		console.error(error);
