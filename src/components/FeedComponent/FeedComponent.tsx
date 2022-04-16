@@ -6,7 +6,7 @@ import { FeedProps } from "../../types";
 import dots from "../../assets/icons/dots-vertical.svg";
 import avatar from "../../assets/icons/account-circle-outline.svg";
 
-const FeedComponent = ({ index, feed }: FeedProps): JSX.Element => {
+const FeedComponent = ({ index, feed, style }: FeedProps): JSX.Element => {
 	const dispatch = useDispatch();
 
 	const openBottom = (open: boolean) => {
@@ -59,7 +59,7 @@ const FeedComponent = ({ index, feed }: FeedProps): JSX.Element => {
 	}, [feed]);
 
 	return (
-		<div className='feed-container'>
+		<div className='feed-container' style={style}>
 			<div className='feed-info-container'>
 				<img
 					alt={feed.avatarUrl || 'No avatar'}

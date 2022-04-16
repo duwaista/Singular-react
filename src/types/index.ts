@@ -12,6 +12,7 @@ export interface FeedTypes {
 export type FeedProps = {
 	index: number;
 	feed: FeedTypes;
+	style?: any;
 };
 export type BasicElementProps = {
 	text: string;
