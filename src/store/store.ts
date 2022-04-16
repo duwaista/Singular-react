@@ -235,6 +235,9 @@ export const Feed = createSlice({
 		setPost: (state, action) => {
 			state.all.unshift(action.payload);
 		},
+		setPosts: (state, action) => {
+			state.all = action.payload;
+		},
 		setPicture: (state, action) => {
 			state.picture = action.payload;
 		},
@@ -246,8 +249,9 @@ export const Feed = createSlice({
 		builder
 			.addCase(fetchFeed.fulfilled, (state, action) => {
 				if (!action.payload) return
-				state.all = [...action.payload];
-				state.all.reverse();
+				const posts = [...action.payload];
+				posts.reverse();
+				Feed.caseReducers.setPosts(state, { ...action, payload: posts })
 			})
 			.addCase(deletePostFetch.fulfilled, (state, action) => {
 				if (action.payload) state.all.splice(action.payload.index, 1);

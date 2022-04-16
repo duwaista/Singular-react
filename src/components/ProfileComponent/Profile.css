@@ -55,6 +55,17 @@
 	background-color: #737373;
 }
 
+.no-content-text-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.no-content-text {
+	opacity: 0.8;
+	font-weight: 500;
+}
+
 @media screen and (min-width: 700px) {
 	.user-profile-info-container {
 		display: flex;
