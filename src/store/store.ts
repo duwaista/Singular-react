@@ -35,7 +35,7 @@ export const fetchFeed = createAsyncThunk("fetchFeed", async () => {
 
 export const fetchLogin = createAsyncThunk(
 	"fetchLogin",
-	async ({ email, password }: FLogin) => {
+	async ({ email, password }: any) => {
 		try {
 			const response = await firebase
 				.auth()
