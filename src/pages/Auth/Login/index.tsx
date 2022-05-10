@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./Auth.css";
-import HeaderComponent from "../HeaderComponent/HeaderComponent";
-import CustomButton from "../BasicComponents/CustomButton/CustomButton";
-import { Link, Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState, fetchLogin } from "../../store/store";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+
+import "../styles.css";
+import HeaderComponent from "../../../components/HeaderComponent/HeaderComponent";
+import CustomButton from "../../../components/BasicComponents/CustomButton/CustomButton";
+import { AppState, fetchLogin } from "../../../store/store";
 
 const SignIn = (): JSX.Element => {
 	const [email, setEmail] = useState("");
@@ -29,6 +30,7 @@ const SignIn = (): JSX.Element => {
 
 	return (
 		<>
+			{logged && <Redirect to="/" />}
 			<HeaderComponent title="signIn" icon={true} />
 			<div className="auth-container">
 				<form className="auth-form">
@@ -58,7 +60,6 @@ const SignIn = (): JSX.Element => {
 							{t("register")}
 						</CustomButton>
 					</Link>
-					{logged && <Redirect to="/" />}
 				</form>
 			</div>
 		</>

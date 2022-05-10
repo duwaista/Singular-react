@@ -1,21 +1,19 @@
 import React, { Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
-import FeedListComponent from "./components/FeedListComponent/FeedListComponent";
-import { firebase } from "./plugins/firebase";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./assets/styles/main.css";
-import "./App.css";
-import Loading from "./components/BasicComponents/LoadingBar/LoadingBarComponent";
-import Upload from "./components/UploadComponent/Upload";
-import { actions } from "./store/store";
 
-const SignIn = React.lazy(() => import("./components/Auth/SignIn"));
-const SignUp = React.lazy(() => import("./components/Auth/SignUp"));
-const BottomMenuComponent = React.lazy(() => import("./components/BottomMenuComponent/BottomMenuComponent"));
-const About = React.lazy(() => import("./components/About/AboutComponent"));
-const Profile = React.lazy(() => import("./components/ProfileComponent/Profile"));
-const FullScreenDialog = React.lazy(() => import("./components/FullScreenPictureComponent/FullScreenDialog"));
+import { actions } from "./store/store";
+import "./App.css";
+import { firebase } from "./plugins/firebase";
+import "./assets/styles/main.css";
+import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
+import Loading from "./components/BasicComponents/LoadingBar/LoadingBarComponent";
+import Login from "./pages/Auth/Login";
+import Feed from "./pages/Feed";
+
+const SignUp = React.lazy(() => import("./pages/Auth/Register"));
+const About = React.lazy(() => import("./pages/About"));
+const Profile = React.lazy(() => import("./pages/Profile"));
 
 const App = (): JSX.Element => {
 	const dispatch = useDispatch();
@@ -39,30 +37,23 @@ const App = (): JSX.Element => {
 	}, []);
 
 	return (
-		<Router>
-			<Switch>
-				<Route exact path='/'>
-					<div className='App'>
+		<div className="App">
+			<Router>
+				<Switch>
+					<Route exact path='/'>
 						<HeaderComponent title='home' icon={true} />
-						<Suspense fallback={<Loading />}>
-							<FullScreenDialog />
-							<BottomMenuComponent />
-							<Upload />
-							<FeedListComponent />
-						</Suspense>
-					</div>
-				</Route>
-				<Suspense fallback={<Loading />}>
-					<Route path='/sign-in' component={SignIn} />
-					<Route path='/sign-up' component={SignUp} />
-					<Route path='/about' component={About} />
-					<Route path='/user/:id' component={FullScreenDialog} />
-					<Route path='/user/:id' component={Profile} />
-					<Route path='/user/:id' component={BottomMenuComponent} />
-				</Suspense>
-			</Switch>
-		</Router>
-	);
+						<Feed />
+					</Route>
+					<Suspense fallback={<Loading />}>
+						<Route path='/sign-in' component={Login} />
+						<Route path='/sign-up' component={SignUp} />
+						<Route path='/about' component={About} />
+						<Route path='/user/:id' component={Profile} />
+					</Suspense>
+				</Switch>
+			</Router>
+		</div>
+	)
 }
 
 export default App;

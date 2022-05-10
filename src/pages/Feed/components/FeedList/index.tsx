@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { List } from "react-virtualized/dist/commonjs/List";
 import { AutoSizer } from "react-virtualized/dist/commonjs/AutoSizer";
 
-import "./FeedListComponentStyle.css";
-import { FeedTypes } from "../../types";
-import { AppState, fetchFeed } from "../../store/store";
-import FeedComponent from "../FeedComponent/FeedComponent";
+import "./styles.css";
+import { FeedTypes } from "../../../../types";
+import { AppState } from "../../../../store/store";
+import FeedComponent from "../../../../components/FeedComponent/FeedComponent";
 
 type IPostItemGetter = {
 	index: number;
@@ -15,11 +15,7 @@ type IPostItemGetter = {
 
 const FeedListComponent = (): JSX.Element => {
 	const dispatch = useDispatch();
-	const feed: FeedTypes[] = useSelector((state: AppState) => state.feed.all);
-
-	useEffect(() => {
-		dispatch(fetchFeed());
-	}, []);
+	const feed: FeedTypes[] = useSelector((state: AppState) => state.feed.posts);
 
 	const getListItem = ({ index, style }: IPostItemGetter) => {
 		return (

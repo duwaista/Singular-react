@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./Auth.css";
-import HeaderComponent from "../HeaderComponent/HeaderComponent";
-import CustomButton from "../BasicComponents/CustomButton/CustomButton";
+import { useTranslation } from "react-i18next";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState, fetchRegister } from "../../store/store";
-import { useTranslation } from "react-i18next";
+
+import "../styles.css";
+import HeaderComponent from "../../../components/HeaderComponent/HeaderComponent";
+import CustomButton from "../../../components/BasicComponents/CustomButton/CustomButton";
+import { AppState, fetchRegister } from "../../../store/store";
 
 const SignUp = (): JSX.Element => {
 	const [email, setEmail] = useState("");

@@ -19,19 +19,23 @@ const FeedComponent = ({ index, feed, style }: FeedProps): JSX.Element => {
 		dispatch(actions.Feed.setPicture(picture));
 	}
 
+	const postImage = useMemo(() => {
+		return (
+			<img
+				alt={feed.posts}
+				loading='lazy'
+				onClick={() => openFullScreen(true, feed.posts)}
+				className='feed-picture'
+				src={feed.posts}
+			/>
+		)
+	}, [feed]);
+
 	const feedContent = useMemo(() => {
 		switch (feed.type) {
 			case '':
 			case 'image': {
-				return (
-					<img
-						alt={feed.posts}
-						loading='lazy'
-						onClick={() => openFullScreen(true, feed.posts)}
-						className='feed-picture'
-						src={feed.posts}
-					/>
-				)
+				return postImage;
 			}
 			case 'video': {
 				return (
@@ -41,43 +45,37 @@ const FeedComponent = ({ index, feed, style }: FeedProps): JSX.Element => {
 						preload='metadata'
 						controls
 						src={feed.posts}
-					></video>
-				)
-			}
-			default: {
-				return (
-					<img
-						alt={feed.posts}
-						loading='lazy'
-						onClick={() => openFullScreen(true, feed.posts)}
-						className='feed-picture'
-						src={feed.posts}
 					/>
 				);
+			}
+			default: {
+				return postImage;
 			}
 		} 
 	}, [feed]);
 
 	return (
-		<div className='feed-container' style={style}>
-			<div className='feed-info-container'>
-				<img
-					alt={feed.avatarUrl || 'No avatar'}
-					className='feed-avatar'
-					src={feed.avatarUrl ? feed.avatarUrl : avatar}
-				/>
-				<div className='feed-email'>
-					<b>{feed.email}</b>
+		<>
+			<div className='feed-container' style={style}>
+				<div className='feed-info-container'>
+					<img
+						alt={feed.avatarUrl || 'No avatar'}
+						className='feed-avatar'
+						src={feed.avatarUrl ? feed.avatarUrl : avatar}
+					/>
+					<div className='feed-email'>
+						<b>{feed.email}</b>
+					</div>
+					<div
+						className='icon dots-menu'
+						onClick={() => openBottom(true)}
+					>
+						<img alt='icon' src={dots} />
+					</div>
 				</div>
-				<div
-					className='icon dots-menu'
-					onClick={() => openBottom(true)}
-				>
-					<img alt='icon' src={dots} />
-				</div>
+				{feedContent}
 			</div>
-			{feedContent}
-		</div>
+		</>
 	);
 }
 

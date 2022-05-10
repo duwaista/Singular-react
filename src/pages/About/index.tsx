@@ -1,7 +1,7 @@
 import React from "react";
-import "./AboutStyle.css";
+import "./styles.css";
 import version from "../../../package.json";
-import HeaderComponent from "../HeaderComponent/HeaderComponent";
+import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
 import { useTranslation } from "react-i18next";
 
 const About = (): JSX.Element => {

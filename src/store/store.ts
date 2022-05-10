@@ -17,70 +17,45 @@ import {
 	IBoolShitState,
 	ICurrentPost,
 	IFeedState,
-	ISnack,
 	IUserState,
 } from "../types";
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const fetchFeed = createAsyncThunk("fetchFeed", async () => {
-	try {
-		const response = await axios.get(`${baseUrl}/feed`);
-		return await response.data;
-	} catch (error) {
-		console.log(error);
-		return null;
-	}
+	const response = await axios.get(`${baseUrl}/feed`);
+	return await response.data;
 });
 
 export const fetchLogin = createAsyncThunk(
 	"fetchLogin",
 	async ({ email, password }: any) => {
-		try {
-			const response = await firebase
-				.auth()
-				.signInWithEmailAndPassword(email, password);
-			return response.user;
-		} catch (error) {
-			console.log(error);
-			return error;
-		}
+		const response = await firebase
+			.auth()
+			.signInWithEmailAndPassword(email, password);
+		return response.user;
 	}
 );
 
 export const fetchRegister = createAsyncThunk(
 	"fetchRegister",
 	async ({ email, password }: FLogin) => {
-		try {
-			const response = await firebase
-				.auth()
-				.createUserWithEmailAndPassword(email, password);
-			return response.user;
-		} catch (error) {
-			console.log(error);
-			return null;
-		}
+		const response = await firebase
+			.auth()
+			.createUserWithEmailAndPassword(email, password);
+		return response.user;
 	}
 );
 
 export const logoutUserFetch = createAsyncThunk("logoutUserFetch", async () => {
-	try {
-		await firebase.auth().signOut();
-	} catch (error) {
-		console.log(error);
-	}
+	await firebase.auth().signOut();
 });
 
 export const deletePostFetch = createAsyncThunk(
 	"deletePostFetch",
 	async ({ currentPost }: ICurrentPost) => {
-		try {
-			await axios.delete(`${baseUrl}/feed/${currentPost.feed.id}`);
-			return currentPost;
-		} catch (error) {
-			console.log(error);
-			return null;
-		}
+		await axios.delete(`${baseUrl}/feed/${currentPost.feed.id}`);
+		return currentPost;
 	}
 );
 
@@ -199,7 +174,8 @@ export const User = createSlice({
 export const Feed = createSlice({
 	name: "feed",
 	initialState: {
-		all: [],
+		posts: [],
+		loading: false,
 		upload: {
 			type: "",
 			file: [],
@@ -233,10 +209,10 @@ export const Feed = createSlice({
 			};
 		},
 		setPost: (state, action) => {
-			state.all.unshift(action.payload);
+			state.posts.unshift(action.payload);
 		},
 		setPosts: (state, action) => {
-			state.all = action.payload;
+			state.posts = action.payload;
 		},
 		setPicture: (state, action) => {
 			state.picture = action.payload;
@@ -244,39 +220,30 @@ export const Feed = createSlice({
 		setProgress: (state, action) => {
 			state.uploadProgress = action.payload;
 		},
+		setLoading: (state, action) => {
+			state.loading = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
+			.addCase(fetchFeed.pending, (state, action) => {
+				Feed.caseReducers.setLoading(state, { ...action, payload: true });
+			})
+			.addCase(fetchFeed.rejected, (state, action) => {
+				// Reject? Nope
+				Feed.caseReducers.setLoading(state, { ...action, payload: false });
+			})
 			.addCase(fetchFeed.fulfilled, (state, action) => {
 				if (!action.payload) return
 				const posts = [...action.payload];
+				// Why..?
 				posts.reverse();
 				Feed.caseReducers.setPosts(state, { ...action, payload: posts })
+				Feed.caseReducers.setLoading(state, { ...action, payload: false });
 			})
 			.addCase(deletePostFetch.fulfilled, (state, action) => {
-				if (action.payload) state.all.splice(action.payload.index, 1);
+				if (action.payload) state.posts.splice(action.payload.index, 1);
 			});
-	},
-});
-
-export const SnackBar = createSlice({
-	name: "snackBar",
-	initialState: {
-		toasts: [],
-	} as ISnack,
-	reducers: {
-		add: (state, action) => {
-			console.log("TOAST ADDED", action);
-			state.toasts = [...action.payload];
-		},
-		removeOne: (state, action) => {
-			state.toasts.splice(action.payload.index, 1);
-			console.log("TOAST DELETED", action.payload.index);
-		},
-		clear: (state) => {
-			state.toasts = [];
-			console.log("TOAST CLEARED");
-		},
 	},
 });
 
@@ -284,7 +251,6 @@ const reducer = combineReducers({
 	boolshit: BoolShit.reducer,
 	user: User.reducer,
 	feed: Feed.reducer,
-	snackBar: SnackBar.reducer,
 });
 
 const devMode = process.env.NODE_ENV === "development";
@@ -319,7 +285,6 @@ export const actions = {
 	BoolShit: BoolShit.actions,
 	User: User.actions,
 	Feed: Feed.actions,
-	SnackBar: SnackBar.actions,
 };
 
 sagaMiddleware.run(rootSaga);

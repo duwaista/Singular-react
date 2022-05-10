@@ -56,7 +56,8 @@ export interface IUserState {
 	};
 }
 export interface IFeedState {
-	all: FeedTypes[];
+	posts: FeedTypes[];
+	loading: boolean;
 	currentPost: CurrentPostType;
 	upload: IUpload;
 	picture: string;
@@ -84,11 +85,10 @@ export interface IUpload {
 export interface IdType {
 	id: string;
 }
-export type SnackTypes = {
-	type: "error" | "warning" | "success";
-	massage: string;
-	index?: number;
-};
-export interface ISnack {
-	toasts: SnackTypes[];
+
+export interface IBottomPostMenu {
+	children: React.ReactNode;
+	showMenu: boolean;
+	closeOnOutsideClick?: boolean;
+	onClose: () => void;
 }
