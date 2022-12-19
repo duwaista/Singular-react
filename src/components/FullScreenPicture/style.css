@@ -1,5 +1,6 @@
 .fullscreen-container {
-	transform: translate(0);
+	transform: scale(0.9);
+  transition: all 0.1s linear;
 }
 
 .fullscreen-container.open {
@@ -8,13 +9,13 @@
 	display: flex;
 	align-content: center;
 	justify-content: center;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	z-index: 6;
 	top: 0;
 	left: 0;
 	position: fixed;
 	backdrop-filter: blur(6px);
-	transform: translate(0);
+	transform: scale(1);
 }
 
 .fullscreen-picture {

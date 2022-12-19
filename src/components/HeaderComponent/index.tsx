@@ -1,16 +1,19 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import "./HeaderStyle.css";
-import { actions } from "../../store/store";
+import "./style.css";
 import Drawer from "../DrawerComponent";
-import { HeaderProps } from "../../types";
-import menu from "../../assets/icons/menu.svg";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import { setShowAppDrawer } from "../../store/app";
 
-const HeaderComponent = ({ title, icon }: HeaderProps): JSX.Element => {
+import menu from "../../assets/icons/menu.svg";
+
+type Props = {
+  title: string;
+  showDrawer?: boolean;
+};
+
+const HeaderComponent = ({ title, showDrawer }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
@@ -19,7 +22,7 @@ const HeaderComponent = ({ title, icon }: HeaderProps): JSX.Element => {
     dispatch(setShowAppDrawer(isOpen));
   };
 
-  const scrollOnTop = () => {
+  const scrollToTop = () => {
     window.scroll({
       top: 0,
       left: 0,
@@ -29,17 +32,23 @@ const HeaderComponent = ({ title, icon }: HeaderProps): JSX.Element => {
   return (
     <>
       <header className="header">
-        <div onClick={() => scrollOnTop()} className="header-title-text">
+        <div
+          className="header-title-text"
+          onClick={() => scrollToTop()}
+        >
           <b>{t(title)}</b>
         </div>
-        <div className="header-scroll-top-button" onClick={() => scrollOnTop()} />
-        {icon && (
+        <div
+          className="header-scroll-top-button"
+          onClick={() => scrollToTop()}
+        />
+        {showDrawer && (
           <div onClick={() => openDrawer(true)} className="icon header-menu">
             <img alt="icon" src={menu} />
           </div>
         )}
       </header>
-      <Drawer />
+      {showDrawer && <Drawer />}
       <div className="spacer-up" />
     </>
   );

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link, Redirect } from "react-router-dom";
 
 import "../styles.css";
-import HeaderComponent from "../../../components/HeaderComponent/HeaderComponent";
+import HeaderComponent from "../../../components/HeaderComponent";
 import CustomButton from "../../../common/CustomButton";
 import useAppSelector from "../../../hooks/useAppSelector";
 import useAppDispatch from "../../../hooks/useAppDispatch";

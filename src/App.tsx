@@ -10,7 +10,7 @@ import "./App.css";
 import { actions } from "./store/store";
 import { firebase } from "./plugins/firebase";
 import "./assets/styles/main.css";
-import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
+import HeaderComponent from "./components/HeaderComponent";
 import Loading from "./common/LoadingBar";
 import Login from "./pages/Auth/Login";
 import Feed from "./pages/Feed";
@@ -71,7 +71,7 @@ const App = (): JSX.Element => {
         {!isLoading && !isAuthFail && isLogged && (
           <Switch>
             <Route exact path="/">
-              <HeaderComponent title="home" icon />
+              <HeaderComponent title="home" showDrawer />
               <Feed />
             </Route>
             <Suspense fallback={<Loading />}>

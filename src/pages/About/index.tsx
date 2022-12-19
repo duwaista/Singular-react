@@ -2,14 +2,14 @@ import React from "react";
 import "./styles.css";
 import { useTranslation } from "react-i18next";
 import version from "../../../package.json";
-import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
+import HeaderComponent from "../../components/HeaderComponent";
 
 const About = (): JSX.Element => {
   const { t } = useTranslation();
 
   return (
     <>
-      <HeaderComponent title="О проекте" icon />
+      <HeaderComponent title="О проекте" showDrawer />
       <div className="about-container">
         <div className="title-container">
           <span className="about-title center">Singular</span>

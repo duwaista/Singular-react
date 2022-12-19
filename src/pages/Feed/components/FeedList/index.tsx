@@ -4,7 +4,7 @@ import { List, AutoSizer } from "react-virtualized";
 
 import "./styles.css";
 import { AppState } from "../../../../store/store";
-import FeedComponent from "../../../../components/FeedComponent/FeedComponent";
+import FeedComponent from "../../../../components/FeedComponent";
 
 type IPostItemGetter = {
   index: number;

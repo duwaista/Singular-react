@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import "./style.css";
 import { actions } from "../../store/store";
-import "./FeedComponentSyle.css";
 import { FeedProps } from "../../types";
 
 import dots from "../../assets/icons/dots-vertical.svg";

@@ -2,14 +2,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
-import deleteIcon from "../../../assets/icons/delete.svg";
-import share from "../../../assets/icons/share-variant.svg";
-import edit from "../../../assets/icons/edit.svg";
+import deleteIcon from "../../../../assets/icons/delete.svg";
+import share from "../../../../assets/icons/share-variant.svg";
+import edit from "../../../../assets/icons/edit.svg";
 
-import { actions, AppState, deletePostFetch } from "../../../store/store";
-import BasicElementBottom from "../../BasicComponents/BasicElementBottom/BasicElementBottom";
-import BottomMenuComponent from "../../BottomMenuComponent/BottomMenuComponent";
-import useAppSelector from "../../../hooks/useAppSelector";
+import { actions, AppState, deletePostFetch } from "../../../../store/store";
+import BasicElementBottom from "../../../../components/BasicComponents/BasicElementBottom/BasicElementBottom";
+import BottomMenuComponent from "../../../../components/BottomMenuComponent/BottomMenuComponent";
+import useAppSelector from "../../../../hooks/useAppSelector";
 
 const BottomPostMenu = (): JSX.Element => {
   const dispatch = useDispatch();

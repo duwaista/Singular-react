@@ -6,10 +6,10 @@ import "./styles.css";
 import { IdType, FeedTypes } from "../../types";
 import { baseUrl } from "../../api";
 import Loading from "../../common/LoadingBar";
-import FeedComponent from "../../components/FeedComponent/FeedComponent";
-import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
-import FullScreenPicture from "../../components/FullScreenPictureComponent";
-import BottomPostMenu from "../../components/FeedComponent/components/BottomPostMenu";
+import FeedComponent from "../../components/FeedComponent";
+import HeaderComponent from "../../components/HeaderComponent";
+import FullScreenPicture from "../../components/FullScreenPicture";
+import BottomPostMenu from "../Feed/components/BottomPostMenu";
 import UserInfo from "./components/UserInfo";
 import PageWrapper from "../../common/PageWrapper";
 
@@ -48,7 +48,7 @@ const Profile = (): JSX.Element => {
     <>
       <FullScreenPicture />
       <BottomPostMenu />
-      <HeaderComponent title="profile" icon />
+      <HeaderComponent title="profile" showDrawer />
       <UserInfo />
       <PageWrapper>
         {userPostsList}

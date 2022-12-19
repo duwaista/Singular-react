@@ -1,14 +1,13 @@
-import React, { Suspense, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../common/LoadingBar";
 
-import BottomPostMenu from "../../components/FeedComponent/components/BottomPostMenu";
+import BottomPostMenu from "./components/BottomPostMenu";
 import FeedListComponent from "./components/FeedList";
 import Upload from "../../components/UploadComponent/Upload";
 import { AppState, fetchFeed } from "../../store/store";
 import PageWrapper from "../../common/PageWrapper";
-
-const FullScreenPicture = React.lazy(() => import("../../components/FullScreenPictureComponent"));
+import FullScreenPicture from "../../components/FullScreenPicture";
 
 const Feed = (): JSX.Element => {
   const loading: boolean = useSelector((state: AppState) => state.feed.loading);
@@ -21,9 +20,7 @@ const Feed = (): JSX.Element => {
 
   return (
     <PageWrapper>
-      <Suspense fallback={<Loading />}>
-        <FullScreenPicture />
-      </Suspense>
+      <FullScreenPicture />
       <Upload />
       {loading && <Loading />}
       {!loading && <FeedListComponent />}
