@@ -3,6 +3,7 @@
 }
 .bottom-menu-open {
 	display: flex;
+	justify-content: center;
 	position: fixed;
 	z-index: 3;
 	left: 0;
@@ -29,6 +30,17 @@
 	transition: all 0.2s;
 	transform: translateY(0);
 }
+
+@media screen and (min-width: 700px) {
+	.bottom-menu-content {
+		margin-right: 17px;
+	}
+	.bottom-menu-content-open {
+		width: 45%;
+    max-width: 650px;
+	}
+}
+
 .bottom-line-container {
 	display: flex;
 	justify-content: center;

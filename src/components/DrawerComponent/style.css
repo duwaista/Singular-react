@@ -62,16 +62,7 @@
 .drawer-select-hidden-item{
 	display: none;
 }
-.drawer-item-container {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	height: 47px;
-	cursor: pointer;
-}
-.drawer-item-container:hover {
-	background-color: #f1f1f1;
-}
+
 .drawer-avatar {
 	width: 40px;
 	height: 40px;

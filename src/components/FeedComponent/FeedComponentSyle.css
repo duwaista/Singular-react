@@ -5,16 +5,12 @@
 	position: relative;
 	background-color: #ffff;
 	justify-self: center;
-	margin-top: 1px;
-	margin-right: auto;
-	margin-left: auto;
-	margin-bottom: 7px;
+	margin: 1px auto 7px auto;
 	border-radius: 6px;
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
 @media screen and (min-width: 700px) {
 	.feed-container {
-		width: 45%;
 		height: 400px;
 	}
 }
